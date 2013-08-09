@@ -1,0 +1,27 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+
+# TEAM
+
+  Developer: Olaf Gleba
+  Site: http://
+  Contact: og [at] olafgleba.de
+  Twitter: @olafgleba
+  Location: Cologne, Germany
+
+
+# THANKS
+
+  http://grundjs.com/
+  http://sass-lang.com/
+
+
+# SITE
+
+  Last update: 2013/03/01
+  Language: Deutsch / German
+  Standards: HTML5, CSS3
+  Build: sass, gruntjs
+  CMS: Welcompose, https://github.com/ogwcom/welcompose
+  

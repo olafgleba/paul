@@ -1,0 +1,159 @@
+@charset "UTF-8";
+/*------------------------------------*\
+    $STYLES.CSS
+\*------------------------------------*/
+
+/**
+ * The compiled sass output of this file is the main 
+ * (and - beside of the lazy dated.css for IE < 9 - the only)
+ * css stylesheet to adress in your HTML.
+ * The declaration goes like that:
+ *
+    <!--[if (gt IE 8) | (IEMobile)]><!-->
+    <link rel="stylesheet" href="css/styles.css">
+    <!--<![endif]-->
+
+    ...
+    
+ *
+ * @ref http://nicolasgallagher.com/mobile-first-css-sass-and-ie/
+ */
+
+ 
+
+/**
+ * Import base styles
+ *
+ * In _project.scss all base variables are declared such typos,
+ * font/size, vertical rhythm measuring and some other stuff.
+ * Change their values to fit your needs.
+ */
+@import "base";
+
+
+
+/**
+ * Include media queries / recalculate widths/views
+ *
+ * When our `$responsive` project variable is set to `true`,
+ * we import some a mixin to respect the markup appendix classes
+ * which tracks different widths for different views.
+ *
+ * Examples:
+ 
+  // This takes a quarter of the horizontal space on all sizes
+  // but is only half width when being in `mobile` mode
+  
+   <div class="gi one-quarter mob-one-half"> 
+   
+   
+   // This takes half of the horizontal space on all sizes
+   // but gets full width when being at a `mobile`
+
+    <div class="gi one-half mob-one-whole">
+ *
+ */
+@if $responsive == true {
+
+  @include media-query(mob) {
+    @include grid-setup("mob-");
+  }
+
+  @include media-query(tab) {
+    @include grid-setup("tab-");
+  }
+
+  @include media-query(desk) {
+    @include grid-setup("desk-");
+  }
+
+  @include media-query(desk-wide) {
+    @include grid-setup("deskwide-");
+  }
+} /* endif */
+
+
+
+
+/**
+ * Individual media query styling
+ */
+
+//@media only screen and (max-width:$mob-end) { 
+//  ...
+//}
+
+
+
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+
+@media print {
+
+    * {
+        background: transparent !important;
+        color: #000000 !important; /* Black prints faster: h5bp.com/s */
+        box-shadow:none !important;
+        text-shadow: none !important;
+    }
+    
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links for img, or javascript/internal links
+     */
+
+    .ir a:after,
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group; /* h5bp.com/t */
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}

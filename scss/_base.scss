@@ -1,0 +1,88 @@
+@charset "UTF-8";
+/*------------------------------------*\
+    $BASE.CSS
+\*------------------------------------*/
+
+/**
+ * Import project vars
+ *
+ * In _project.scss all base variables are declared such
+ * font/size, vertical rhythm measuring and some other stuff.
+ * Change their values to fit your needs.
+ *
+ * These variables are widely used troughout the framework we'll
+ * imported in the next step. So, DO NOT DELETE any of them to
+ * avoid breaking things, s. also _project.scss.
+ *
+ * This file do NOT include any variables for visual appearance
+ * (like colors a.s.o). To preserve the ability to apply different
+ * themes on one structural ground, these variables are included
+ * within the "ui" folder, s. below.
+ *  
+ */
+@import "project";
+
+
+
+/**
+ * Import our framework
+ * 
+ * Stacks our framework in. Given VARIABLES declared within the former
+ * included _project.scss are used within. So, DO NOT DELETE any of 
+ * them to avoid to break things...
+*/
+@import "paul.css/init";
+
+
+
+/**
+ * Import our color theme stuff.
+ *
+ * We provide an example _colors.scss file as a start to get the idea.
+ */
+@import "ui/colors";
+
+
+
+/**
+ * Import our user interface stuff.
+ *
+ * Include the main ui stuff. This is the main folder, you'll touch
+ * on a regular basis (beside the _project.scss where you declare
+ * your main variables). There is no required structure how to
+ * organize your (s)css here. Some like the compact approach by only
+ * using one file, others (like me) usually splits page related stuff
+ * in several chunks to relieve my brain.
+ *
+ * Uncomment to use. 
+ */
+// @import ui/<file-to-import>
+// ...
+// a.s.o.
+
+
+
+/**
+ * Import own stack of functions/mixins. Empty folder by default.
+ *
+ * To leave our framework untouched (which is a main rule!)
+ * this folder and order of includes might be useful.
+ *
+ * Uncomment to use. 
+ */
+// @import "func/functions";
+// @import "func/mixins";
+
+
+
+/**
+ * Import vendor styles. Empty folder by default.
+ *
+ * When working with vendor libs, we should separate depending
+ * styles from our own ui stuff. Imported on bottom to enable
+ * overwrites. Or most of the time at least,- there's nothing
+ * wrong with "!important" on vendor styles when needed.
+ *
+ * Uncomment to use.
+ */
+// @ímport vendor/...

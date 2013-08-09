@@ -1,0 +1,35 @@
+/*------------------------------------*\
+    $FIXES
+\*------------------------------------*/
+
+/**
+ * Micro clearfix, as per: css-101.org/articles/clearfix/latest-new-clearfix-so-far.php
+ */
+.cf {
+    &:after {
+        content:"";
+        display:table;
+        clear:both;
+    }
+}
+
+/**
+ * Inline block fix
+ */
+.ibf {
+    letter-spacing: -0.25em;
+}
+
+/**
+ * Neutralize inline block fix 
+ */
+.ibn {
+    letter-spacing: normal;
+}
+
+/**
+ * Inline block fix for IE which needs a differently calculated value
+ */
+.ie .ibf {
+    letter-spacing: -0.34em;
+}

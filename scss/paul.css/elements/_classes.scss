@@ -1,0 +1,28 @@
+/*------------------------------------*\
+    $CLASSES
+\*------------------------------------*/
+ /**
+  * A series of classes for setting massive type; for use in heroes, mastheads,
+  * promos, etc.
+  */
+ .giga {
+     @include font-size($giga-size);
+ }
+ .mega {
+     @include font-size($mega-size);
+ }
+ .kilo {
+     @include font-size($kilo-size);
+ }
+
+
+ 
+/**
+ * A series of classes for setting tiny type; for use in smallprint etc.
+ */
+.milli {
+    @include font-size($milli-size);
+}
+.micro {
+    @include font-size($micro-size);
+}
