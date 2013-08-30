@@ -1,0 +1,145 @@
+/**
+ * Sometimes we want to use flex box ordinal source ordering.
+ * To achive this we establish a modifier for the `grid` wrapper class and
+ * append the desired order helper class to the grid items. 
+ *
+   <div class=grid grid--ordinal>
+
+       <div class="grid__item one-half ordinal-two">
+           <p>One half grid</p>
+       </div>
+
+        <div class="grid__item one-half ordinal-one">
+            <p>One half grid</p>
+        </div>
+
+   </div>
+ *
+ * Nested grids are also possible without breaking the ordinals, e.g.
+ * 
+	<div class="grid grid--ordinal">
+		<div class="grid__item one-whole ordinal-two">
+			<p>First</p>
+		</div>
+		<div class="grid__item one-whole ordinal-three">
+			<div class="grid">
+				<div class="grid__item one-quarter">
+					<p>first quarter</p>
+				</div>
+				<div class="grid__item one-quarter">
+					<p>second quarter</p>
+				</div>
+				<div class="grid__item one-quarter">
+					<p>third quarter</p>
+				</div>
+				<div class="grid__item one-quarter">
+					<p>fourth quarter</p>
+				</div>
+			</div>
+		</div>
+		<div class="grid__item one-whole ordinal-one">
+			<p>Third</p>
+		</div>
+	</div>
+ *
+ */
+
+
+ .grid__item {    
+     background-color: orange;
+ }
+ 
+ .grid__item .grid__item {    
+     background-color: purple;
+ }
+ 
+ 
+ /**
+  * Ordinal grid Modifier
+  */
+.grid--ordinal {    
+    display: box;
+    display: -webkit-box;
+    box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-box-orient: vertical;
+}
+
+
+
+/**
+ * Ordinal grid row
+ */
+.grid--ordinal > .grid__item {
+    background-color: red;
+    display: inherit;
+}
+
+.grid--ordinal > .grid__item > .grid {
+    background-color: green;
+    width: 100%;
+    
+    
+}
+
+
+.grid--ordinal .grid > .grid__item {
+    background-color: yellow;
+    
+}
+
+
+
+/**
+ * Change source order of inline grid rows. Override in media queries.
+ */
+.ordinal-one {
+    box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;
+    -webkit-box-ordinal-group: 1;
+}
+.ordinal-two {
+    box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    -webkit-box-ordinal-group: 2;
+}
+.ordinal-three {
+    box-ordinal-group: 3;
+    -moz-box-ordinal-group: 3;
+    -webkit-box-ordinal-group: 3;
+}
+.ordinal-four {
+    box-ordinal-group: 4;
+    -moz-box-ordinal-group: 4;
+    -webkit-box-ordinal-group: 4;
+}
+.ordinal-five {
+    box-ordinal-group: 5;
+    -moz-box-ordinal-group: 5;
+    -webkit-box-ordinal-group: 5;
+}
+.ordinal-six {
+    box-ordinal-group: 6;
+    -moz-box-ordinal-group: 6;
+    -webkit-box-ordinal-group: 6;
+}
+.ordinal-seven {
+    box-ordinal-group: 7;
+    -moz-box-ordinal-group: 7;
+    -webkit-box-ordinal-group: 7;
+}
+.ordinal-eight {
+    box-ordinal-group: 8;
+    -moz-box-ordinal-group: 8;
+    -webkit-box-ordinal-group: 8;
+}
+.ordinal-nine {
+    box-ordinal-group: 9;
+    -moz-box-ordinal-group: 9;
+    -webkit-box-ordinal-group: 9;
+}
+.ordinal-ten {
+    box-ordinal-group: 10;
+    -moz-box-ordinal-group: 10;
+    -webkit-box-ordinal-group: 10;
+}
