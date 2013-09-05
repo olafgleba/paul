@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="css/dated.css">
 <![endif]-->
 
-<script src="libs/vendor/modernizr-latest.js"></script>
+<script src="bower_components/modernizr/modernizr.js"></script>
 <!-- <script type="text/javascript" src="//use.typekit.net/tos1rrw.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
 </head>
@@ -182,14 +182,14 @@
 		<h3>Different icons .s (sprite)</h3>
 		
 		<style type="text/css" media="screen">
-			.s--questionmark {
+			.sprite--questionmark {
 				background-position: 0 0;
 				background-color: red;
 			}
-			.s--user {
+			.sprite--user {
 				background-position: 0 -16px;
 			}
-			.s--bullet {
+			.sprite--bullet {
 				background-position: 0 -32px;
 			}
 		</style>
@@ -197,13 +197,13 @@
 		<div class="grid">
 			<div class="grid__item one-whole">
 				<a href="#">
-					<i class="s s--questionmark"></i> questionsmark
+					<i class="sprite sprite--questionmark"></i> questionsmark
 				</a>
 				<a href="#">
-					<i class="s s--user"></i> user
+					<i class="sprite sprite--user"></i> user
 				</a>
 				<a href="#">
-					<i class="s s--bullet"></i> bullet
+					<i class="sprite sprite--bullet"></i> bullet
 				</a>
 			</div>
 		</div>
@@ -211,10 +211,10 @@
 		<div class="grid">
 			<div class="grid__item one-whole">
 				<a href="#" class="icon-text">
-					<i class="icon-text__icon s s--questionmark"></i> questionsmark
+					<i class="icon-text__icon sprite sprite--questionmark"></i> questionsmark
 				</a>
 				<a href="#" class="icon-text--rev">
-					questionsmark <i class="icon-text__icon s s--questionmark"></i>
+					questionsmark <i class="icon-text__icon sprite sprite--questionmark"></i>
 				</a>
 			</div>
 		</div>
@@ -476,9 +476,9 @@
 
 	<!-- <a id="backToTop" href="#totop">top</a>  -->
 
-	<script src="libs/vendor/jquery.js"></script>
-	<script src="libs/plugins.js"></script>
-	<script src="libs/base.js"></script>
+	<script src="bower_components/jquery/jquery.js"></script>
+	<script src="libs/app/plugins.js"></script>
+	<script src="libs/app/base.js"></script>
 
 </body>
 </html>

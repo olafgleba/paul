@@ -6,7 +6,7 @@
 /**
  * Import project vars
  *
- * In _project.scss all base variables are declared such
+ * In _vars.scss all base variables are declared such
  * font/size, vertical rhythm measuring and some other stuff.
  * Change their values to fit your needs.
  *
@@ -20,7 +20,7 @@
  * within the "ui" folder, s. below.
  *  
  */
-@import "project";
+@import "vars";
 
 
 
@@ -30,8 +30,35 @@
  * Stacks our framework in. Given VARIABLES declared within the former
  * included _project.scss are used within. So, DO NOT DELETE any of 
  * them to avoid to break things...
-*/
-@import "paul.css/init";
+ */
+@import "inuit.css/inuit";
+
+
+
+
+// Do we want to use bourbon.io lib?
+@import "libs/bourbon/bourbon";
+
+
+
+/**
+ * Import own stack of functions/mixins. Empty folder by default.
+ *
+ * To leave our framework untouched (which is a main rule!)
+ * this folder and order of includes might be useful.
+ *
+ * Uncomment to use. 
+ */
+// @import "func/functions";
+// @import "func/mixins";
+
+
+
+/**
+ * Import either extended objects of the inuit.css framework
+ * or completely new objects which stands on their own
+ */
+@import "extend/grids--ordinal";
 
 
 
@@ -59,19 +86,6 @@
 // @import ui/<file-to-import>
 // ...
 // a.s.o.
-
-
-
-/**
- * Import own stack of functions/mixins. Empty folder by default.
- *
- * To leave our framework untouched (which is a main rule!)
- * this folder and order of includes might be useful.
- *
- * Uncomment to use. 
- */
-// @import "func/functions";
-// @import "func/mixins";
 
 
 
