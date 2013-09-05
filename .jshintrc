@@ -1,9 +1,0 @@
-{
-  "bitwise": true,
-  "curly": true,
-  "eqnull": false,
-  "eqeqeq": true,
-  "undef": false,
-  "asi": true,
-  "jquery": false
-}

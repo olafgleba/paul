@@ -1,0 +1,22 @@
+{
+  "name": "paul.framework",
+  "description": "Skeleton to start with",
+  "version": "1.0.0",
+  "authors": [
+    "Olaf Gleba <og@olafgleba.de>"
+  ],
+  "homepage": "http://olafgleba.de",
+  "dependencies": {
+    "jquery": "~2.0.0",
+    "jquery.transit": "~0.9.9",
+    "jquery.smooth-scroll": "~1.4",
+    "modernizr": "~2.6.2"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
