@@ -1,3 +1,5 @@
+@if $use-own-extends-grid--ordinal == true {
+
 /**
  * Sometimes we want to use flex box ordinal source ordering.
  * To achive this we establish a modifier for the `grid` wrapper class and
@@ -43,15 +45,6 @@
 	</div>
  *
  */
-
-
- .grid__item {    
-     background-color: orange;
- }
- 
- .grid__item .grid__item {    
-     background-color: purple;
- }
  
  
  /**
@@ -66,28 +59,12 @@
 }
 
 
-
 /**
  * Ordinal grid row
  */
 .grid--ordinal > .grid__item {
-    background-color: red;
     display: inherit;
 }
-
-.grid--ordinal > .grid__item > .grid {
-    background-color: green;
-    width: 100%;
-    
-    
-}
-
-
-.grid--ordinal .grid > .grid__item {
-    background-color: yellow;
-    
-}
-
 
 
 /**
@@ -143,3 +120,6 @@
     -moz-box-ordinal-group: 10;
     -webkit-box-ordinal-group: 10;
 }
+
+
+} // end condition

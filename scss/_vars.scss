@@ -22,38 +22,6 @@
  * and introducing objects and abstractions is as simple as switching the
  * following variables to `true`.
  */
-//$use-grids:         false;
-//$use-flexbox:       false;
-//$use-columns:       false;
-//$use-nav:           false;
-//$use-options:       false;
-//$use-pagination:    false;
-//$use-breadcrumb:    false;
-//$use-media:         false;
-//$use-marginalia:    false;
-//$use-island:        false;
-//$use-block-list:    false;
-//$use-matrix:        false;
-//$use-split:         false;
-//$use-this-or-this:  false;
-//$use-link-complex:  false;
-//$use-flyout:        false;
-//$use-arrows:        false;
-//$use-sprite:        false;
-//$use-icon-text:     false;
-//$use-beautons:      false;
-//$use-lozenges:      false;
-//$use-rules:         false;
-//$use-stats:         false;
-//$use-greybox:       false;
-
-
-
-/**
- * Just for testing purposes
- *
- * Commented out by default
- */
 $use-grids:         true;
 $use-flexbox:       true;
 $use-columns:       true;
@@ -82,8 +50,6 @@ $use-greybox:       true;
 
 
 
-
-
 /*------------------------------------*\
     $OVERRIDES
 \*------------------------------------*/
@@ -94,11 +60,50 @@ $use-greybox:       true;
  
 
 
-
 /*------------------------------------*\
     $CUSTOM
 \*------------------------------------*/
 /**
  * Place any of your own variables that sit on top of inuit.css here.
- */ 
-$use-bourbon:      false;
+ */
+
+
+/**
+ * Switch on/off the include of declaration parts
+ *
+ * As sass do not allow to use conditions with `@imports`,
+ * we must deal with 
+ 
+ */
+ 
+
+
+
+/**
+ * Switch on/off extended objects
+ *
+ * Define them each, e.g.
+ *
+    `$use-own-extends-<NAME-OF-OBJECT>`:          true|false;`
+    `$use-own-extends-<NAME-OF-SECOND-OBJECT>`:   true|false;`
+    ... a.s.o. ...  
+ *
+ */
+// This particular object is included only as
+// an example. It is not intended for real usage.
+// So set it to `false` by default.
+$use-own-extends-grid--ordinal:     false;
+
+// Do we have own functions and/or mixins?
+$use-own-functions:                 false;
+$use-own-mixins:                    false;
+
+
+// default border radius
+$border-radius:    5px!default;
+
+
+
+
+
+

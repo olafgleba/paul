@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--[if lte IE 9 ]><html class="ie"> <![endif]-->
 <html lang="de">
 <head>
 <meta charset="utf-8">
@@ -27,8 +26,6 @@
 <![endif]-->
 
 <script src="bower_components/modernizr/modernizr.js"></script>
-<!-- <script type="text/javascript" src="//use.typekit.net/tos1rrw.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
 </head>
 
 <body id="totop">
@@ -162,19 +159,19 @@
 		<div class="grid">
 			<div class="grid__item one-whole">
 				<a href="#">
-					<i class="i" data-icon="&#xF171;"></i> .icon-text
+					<i aria-hidden="true" class="i" data-icon="&#xF171;"></i> .icon-text
 				</a>
 				<a href="#">
-					<i class="i i--natural" data-icon="&#xF0D2;"></i> .icon-text
+					<i aria-hidden="true" class="i i--natural" data-icon="&#xF0D2;"></i> .icon-text
 				</a>
 				<a href="#">
-					<i class="i i--large" data-icon="&#xF137;"></i> .icon-text
+					<i aria-hidden="true" class="i i--large" data-icon="&#xF137;"></i> .icon-text
 				</a>
 				<a href="#">
-					<i class="i i--huge" data-icon="&#xF009;"></i> .icon-text
+					<i aria-hidden="true" class="i i--huge" data-icon="&#xF009;"></i> .icon-text
 				</a>
 				<a href="#">
-					<i class="i i--giant" data-icon="&#xF09D;"></i> .icon-text
+					<i aria-hidden="true" class="i i--giant" data-icon="&#xF09D;"></i> .icon-text
 				</a>
 			</div>
 		</div>
@@ -422,10 +419,10 @@
 		<h3>Flex box ordinal test</h3>
 		
 		<div class="grid grid--ordinal">
-			<div class="grid__item one-whole ordinal-two">
+			<div class="grid__item one-whole ordinal-four">
 				<p>first</p>
 			</div>
-			<div class="grid__item one-whole ordinal-three">
+			<div class="grid__item one-whole ordinal-two">
 				<p>second</p>
 			</div>
 			<div class="grid__item one-whole ordinal-four">
@@ -435,46 +432,8 @@
 				<p>fourth</p>
 			</div>
 		</div>
-		
-		<h3>Flex box ordinal test (nested grid)</h3>	
-		
-		<div class="grid grid--ordinal">
-			<div class="grid__item one-whole ordinal-two">
-				<p>First</p>
-			</div><!--
-			--><div class="grid__item one-whole ordinal-three">
-				<div class="grid">
-					<div class="grid__item one-third">
-						<ul>
-							<li><a href="#">link</a></li>
-							<li><a href="#">link</a></li>
-							<li><a href="#">link</a></li>
-						</ul>
-					</div><!--
-					--><div class="grid__item one-third">
-						<ul class="block-list">
-							<li><a class="block-list__link" href="#">link</a></li>
-							<li><a href="#">link</a></li>
-							<li><a href="#">link</a></li>
-						</ul>
-					</div><!--
-					--><div class="grid__item one-third">
-						<ul>
-							<li><a href="#">link</a></li>
-							<li><a href="#">link</a></li>
-							<li><a href="#">link</a></li>
-						</ul>
-					</div>
-				</div>
-							</div><!--
-			--><div class="grid__item one-whole ordinal-one">
-				<p>third</p>
-			</div>
-		</div>
       
 	</div> <!-- .page -->
-
-	<!-- <a id="backToTop" href="#totop">top</a>  -->
 
 	<script src="bower_components/jquery/jquery.js"></script>
 	<script src="libs/app/plugins.js"></script>

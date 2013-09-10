@@ -108,7 +108,8 @@ module.exports = function(grunt) {
           unixNewlines: false,
           lineNumbers: true,
           debugInfo: false,
-          style: 'expanded'
+          style: 'expanded',
+          require: 'sass-globbing'
         },
         files : {
           'css/styles.css': 'scss/styles.scss',
@@ -118,7 +119,8 @@ module.exports = function(grunt) {
       deploy : {
         options: {
           lineNumbers: false,
-          style: 'compressed'
+          style: 'compressed',
+          require: 'sass-globbing'
         },
         files : {
           'dist/css/styles.css': 'scss/styles.scss',
@@ -131,13 +133,13 @@ module.exports = function(grunt) {
         files: {
           src: [
           '*.html',
-          '.htaccess',
+          'htaccess',
           'humans.txt',
           'robots.txt',
           'favicon.ico',
-          'icons/**',
-          'img/**',
-          'assets/**'
+          'icons/',
+          'img/',
+          'assets/'
           ],
           dest: 'dist/' 
         }

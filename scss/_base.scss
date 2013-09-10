@@ -17,8 +17,7 @@
  * This file do NOT include any variables for visual appearance
  * (like colors a.s.o). To preserve the ability to apply different
  * themes on one structural ground, these variables are included
- * within the "ui" folder, s. below.
- *  
+ * within the "ui" folder, s. below. 
  */
 @import "vars";
 
@@ -35,39 +34,38 @@
 
 
 
+/**
+ * Import either extended objects of the inuit.css framework
+ * or completely new objects which stands on their own
+ */
+@import "extend/*";
 
-// Do we want to use bourbon.io lib?
+
+
+/**
+ * Import bourbon lib
+ * 
+ * Do we want to use bourbon.io lib in our project?
+ *  
+ * To keep the lib files untouched (so we can update
+ * the whole thing without any hassle), we must 
+ * comment out/in the lib in here.
+ */
 @import "libs/bourbon/bourbon";
 
 
 
 /**
- * Import own stack of functions/mixins. Empty folder by default.
+ * Import own stack of functions/mixins.
  *
- * To leave our framework untouched (which is a main rule!)
- * this folder and order of includes might be useful.
- *
- * Uncomment to use. 
+ * Add your own function and/or mixins, leaving
+ * the unuit.css framework untouched.
+ *  
+ * Switch on/off in _vars.scss
+ * Default both `false`
  */
-// @import "func/functions";
-// @import "func/mixins";
-
-
-
-/**
- * Import either extended objects of the inuit.css framework
- * or completely new objects which stands on their own
- */
-@import "extend/grids--ordinal";
-
-
-
-/**
- * Import our color theme stuff.
- *
- * We provide an example _colors.scss file as a start to get the idea.
- */
-@import "ui/colors";
+@import "func/functions";
+@import "func/mixins";
 
 
 
@@ -75,28 +73,25 @@
  * Import our user interface stuff.
  *
  * Include the main ui stuff. This is the main folder, you'll touch
- * on a regular basis (beside the _project.scss where you declare
- * your main variables). There is no required structure how to
+ * on a regular basis (beside the _vars.scss where you declare
+ * your project variables). There is no required structure how to
  * organize your (s)css here. Some like the compact approach by only
  * using one file, others (like me) usually splits page related stuff
  * in several chunks to relieve my brain.
- *
- * Uncomment to use. 
  */
-// @import ui/<file-to-import>
-// ...
-// a.s.o.
+
+@import "ui/colors/colors";
+
+@import "ui/*";
 
 
 
 /**
- * Import vendor styles. Empty folder by default.
+ * Import vendor styles.
  *
  * When working with vendor libs, we should separate depending
  * styles from our own ui stuff. Imported on bottom to enable
  * overwrites. Or most of the time at least,- there's nothing
  * wrong with "!important" on vendor styles when needed.
- *
- * Uncomment to use.
  */
-// @ímport vendor/...
+@import "vendor/*";
