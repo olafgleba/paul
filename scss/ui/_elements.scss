@@ -1,0 +1,20 @@
+/**
+ * Single elements without any special context
+ *
+ * Description
+ *
+    ... Markup/Usage Example ... 
+ *
+ */
+
+a {
+  color: red;
+  @include hoverActiveFocus('text-decoration', none);
+}
+
+
+.sprite { 
+  background-image: url(../img/sprite.png);
+  background-repeat: no-repeat;
+  color: red;
+}

@@ -38,7 +38,7 @@
  * Import either extended objects of the inuit.css framework
  * or completely new objects which stands on their own
  */
-@import "extend/*";
+@import "objects/**/*";
 
 
 
@@ -79,9 +79,6 @@
  * using one file, others (like me) usually splits page related stuff
  * in several chunks to relieve my brain.
  */
-
-@import "ui/colors/colors";
-
 @import "ui/*";
 
 

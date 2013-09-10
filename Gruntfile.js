@@ -59,7 +59,7 @@ module.exports = function(grunt) {
     },
     
     clean : {
-      deploy: ['dist']
+      deploy: 'dist'
     },
     
 		modernizr: {
@@ -90,14 +90,16 @@ module.exports = function(grunt) {
     },
 		
     concat: {
-      files: {
+      all: {
         /**
          * Add whatever bower components we have installed
          */
-        'libs/app/plugins.js': [
+        src: [
+          'bower_components/fastclick/lib/fastclick.js',
           'bower_components/jquery.smooth-scroll/jquery.smooth-scroll.js',
           'bower_components/jquery.transit/jquery.transit.js'
-        ]
+        ],
+        dest: 'libs/app/plugins.js'
       }
     },
     
@@ -263,9 +265,9 @@ module.exports = function(grunt) {
   
   // development
   grunt.registerTask('dev', [
-    'jshint', 
-    'sass:dev', 
-    'concat'
+    'jshint',
+    'concat',
+    'sass:dev'
     ]
   );
   

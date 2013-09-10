@@ -2,4 +2,5 @@
 .DS_Store
 css
 dist
+libs/app/plugins.js
 *.tmproj

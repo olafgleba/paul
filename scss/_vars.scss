@@ -11,8 +11,6 @@
  */
 
 
-
-
 /*------------------------------------*\
     $OBJECTS-AND-ABSTRACTIONS
 \*------------------------------------*/
@@ -60,47 +58,17 @@ $use-greybox:       true;
  
 
 
+
+
+
+
 /*------------------------------------*\
     $CUSTOM
 \*------------------------------------*/
 /**
- * Place any of your own variables that sit on top of inuit.css here.
+ * Import the project specific variables
  */
-
-
-/**
- * Switch on/off the include of declaration parts
- *
- * As sass do not allow to use conditions with `@imports`,
- * we must deal with 
- 
- */
- 
-
-
-
-/**
- * Switch on/off extended objects
- *
- * Define them each, e.g.
- *
-    `$use-own-extends-<NAME-OF-OBJECT>`:          true|false;`
-    `$use-own-extends-<NAME-OF-SECOND-OBJECT>`:   true|false;`
-    ... a.s.o. ...  
- *
- */
-// This particular object is included only as
-// an example. It is not intended for real usage.
-// So set it to `false` by default.
-$use-own-extends-grid--ordinal:     false;
-
-// Do we have own functions and/or mixins?
-$use-own-functions:                 false;
-$use-own-mixins:                    false;
-
-
-// default border radius
-$border-radius:    5px!default;
+@import "project";
 
 
 

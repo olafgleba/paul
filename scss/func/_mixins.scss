@@ -1,5 +1,3 @@
-@if $use-own-mixins == true {
-  
 /**
  * Mixin description
  *
@@ -12,6 +10,8 @@
  */
 
 
-// content here
-
-} // end condition
+@mixin hoverActiveFocus($property, $value) {
+   &:hover, &:active, &:focus {
+       #{$property}: $value;
+   }
+}

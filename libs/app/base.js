@@ -10,6 +10,8 @@ Application = (function($) {
     // öffentliche Methoden, API
     init: function() {
     // ...
+    
+      FastClick.attach(document.body);
     }
   };
   

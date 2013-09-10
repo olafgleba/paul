@@ -1,0 +1,73 @@
+/*------------------------------------*\
+    $PROJECT
+\*------------------------------------*/
+/**
+ * Here we define and handle all specific project variables.
+ * This is divided into two sections,- `project includes` and
+ * `project user interface` just to keep the readability on
+ * a sane level. 
+ * 
+ * DO NOT PUT INUIT.CSS VARIABLES IN HERE!
+ * To change those vars please use the appropriate directive
+ * within the `_vars.scss`, which handles ONLY inuit.css specific
+ * variables, e.g. only within this file we overwrite inuit.css defaults. 
+ */
+
+
+/*------------------------------------*\
+    $PROJECT-INCLUDES
+\*------------------------------------*/
+
+/**
+ * Switch on/off extended objects of inuit.css
+ *
+ * Put them each in `objects/extend/`, e.g.
+ *
+    `$use-project-extend-<NAME-OF-OBJECT>`:          true|false;`
+    `$use-project-extend-<NAME-OF-SECOND-OBJECT>`:   true|false;`
+    ... a.s.o. ...  
+ *
+ */
+// This particular object is just an example
+$use-project-extend-grid--ordinal:     false;
+
+
+
+
+
+/**
+ * Switch on/off new objects
+ *
+ * Put them each in `objects/create/`, e.g.
+ *
+    `$use-project-create-<NAME-OF-OBJECT>`:          true|false;`
+    `$use-project-create-<NAME-OF-SECOND-OBJECT>`:   true|false;`
+    ... a.s.o. ...  
+ *
+ */
+// This particular object is just an example
+$use-project-create-object:     false;
+
+
+
+
+
+/*------------------------------------*\
+    $PROJECT-USER-INTERFACE
+\*------------------------------------*/
+
+// Color scheme
+// var: value
+
+
+
+
+
+// Layout agnostic scheme
+// var: value
+
+
+
+
+// default border radius
+$border-radius:    5px!default;
