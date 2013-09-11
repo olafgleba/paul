@@ -96,7 +96,7 @@ module.exports = function(grunt) {
          */
         src: [
           'bower_components/fastclick/lib/fastclick.js',
-          'bower_components/jquery-css3-ease/cssEase.js',
+          'bower_components/jquery-easing/jquery.easing.js',
           'bower_components/jquery.smooth-scroll/jquery.smooth-scroll.js',
           'bower_components/jquery.transit/jquery.transit.js'
         ],

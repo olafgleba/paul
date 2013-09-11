@@ -12,7 +12,10 @@ App = (function($) {
     
       FastClick.attach(document.body);
       
-
+      $('a[href="#totop"]').smoothScroll({
+        easing: 'easeOutQuint',
+        speed: 1200
+      });
       
     }
   };
@@ -28,10 +31,5 @@ App = (function($) {
 $(function() {
  
   App.init();
-  
-  $('a[href="#totop"]').smoothScroll({
-    easing: 'easeInCirc',
-    speed: 900
-  });
 
 });
