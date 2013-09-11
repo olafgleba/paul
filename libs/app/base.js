@@ -1,7 +1,7 @@
 /**
  * Define Application (as module)
  */
-Application = (function($) {
+App = (function($) {
 
   // private Methoden
   // ...
@@ -9,9 +9,11 @@ Application = (function($) {
   return {
     // öffentliche Methoden, API
     init: function() {
-    // ...
     
       FastClick.attach(document.body);
+      
+
+      
     }
   };
   
@@ -25,6 +27,11 @@ Application = (function($) {
 
 $(function() {
  
-  Application.init();
+  App.init();
+  
+  $('a[href="#totop"]').smoothScroll({
+    easing: 'easeInCirc',
+    speed: 900
+  });
 
 });

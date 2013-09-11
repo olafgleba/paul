@@ -62,16 +62,16 @@ module.exports = function(grunt) {
       deploy: 'dist'
     },
     
-		modernizr: {
-			devFile: 'bower_components/modernizr/modernizr.js',
-			outputFile : 'dist/libs/vendor/modernizr.min.js',
-			extra: {
-				shiv: true,
-				mq: true
-			},
-			uglify: true,
-			files: ['libs/*.js', 'scss/**/*.scss']
-		},
+    modernizr: {
+      devFile: 'bower_components/modernizr/modernizr.js',
+      outputFile : 'dist/libs/vendor/modernizr.min.js',
+      extra: {
+    		shiv: true,
+    		mq: true
+    	},
+    	uglify: true,
+    	files: ['libs/*.js', 'scss/**/*.scss']
+    },
 		
     imagemin: {
       deploy: {
@@ -96,6 +96,7 @@ module.exports = function(grunt) {
          */
         src: [
           'bower_components/fastclick/lib/fastclick.js',
+          'bower_components/jquery-css3-ease/cssEase.js',
           'bower_components/jquery.smooth-scroll/jquery.smooth-scroll.js',
           'bower_components/jquery.transit/jquery.transit.js'
         ],
@@ -242,19 +243,8 @@ module.exports = function(grunt) {
   
   });
   
-  // load modules
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-modernizr');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-imagemin');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-text-replace');
-  grunt.loadNpmTasks('grunt-check-modules');
+  // load modules dynamically
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
   
   // check module state only
   grunt.registerTask('check', [
