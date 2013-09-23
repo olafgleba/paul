@@ -1,0 +1,16 @@
+/**
+ * Mixin description
+ *
+ * Markup example: 
+ *
+   <div>
+    ...
+   </div>
+ *
+ */
+
+@mixin hoverActiveFocus($property, $value) {
+   &:hover, &:active, &:focus {
+       #{$property}: $value;
+   }
+}

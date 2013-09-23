@@ -1,18 +1,74 @@
+/**
+ * Paul.framework Gruntfile
+ * @version 1.0.0
+ * @author Olaf Gleba
+ */
+ 
+/**
+ * ECMAScript 5 context mode
+ * see http://ejohn.org/blog/ecmascript-5-strict-mode-json-and-more/
+ */
 'use strict';
 
-// connect middleware
-var path = require('path');
-var mountFolder = function mountFolder(connect, point) {
-  return connect.static(path.resolve(point));
+/**
+ * Return livereload environment
+ * see also `connect` task
+ */
+var mountFolder = function mountFolder(connect, pointer) {
+  return connect.static(require('path').resolve(pointer));
 };
 
+/**
+ * Grunt module
+ */
 module.exports = function(grunt) {
-
+  
+  /**
+   * Grunt config
+   */
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-    // get jquery version
-    jq: grunt.file.readJSON('bower_components/jquery/bower.json'),
 
+    /**
+     * Read package.json and make it
+     * available with the `pkg` variable
+     */        
+    pkg: grunt.file.readJSON('package.json'),
+    
+    /**
+     * Define project paths and patterns
+     */
+    project: {
+      app: 'app',
+      src: 'src',
+      css: {
+        styles: '<%= project.src %>/scss/styles.scss',
+        dated: '<%= project.src %>/scss/dated.scss'
+      },
+      js: {
+        base: '<%= project.src %>/libs/base.js'
+      },
+      /**
+       * Define Project information banner
+       * Inherits from package.json
+       */
+      banner: '/**\n' +
+              ' * <%= pkg.name %>\n' +
+              ' * <%= pkg.title %>\n' +
+              ' * <%= pkg.url %>\n' +
+              ' * @author <%= pkg.author %>\n' +
+              ' * @version <%= pkg.version %>\n' +
+              ' * Copyright <%= pkg.copyright %>. <%= pkg.license %> licensed.\n' +
+              ' */\n\n'
+    },
+    
+    /**
+     * Connect the server
+     *
+     * Start local webserver and enable
+     * livereload on development folder by
+     * injecting livereload snippet with a 
+     * middleware approach
+     */
     connect: {
       options: {
         port: 9001
@@ -22,30 +78,59 @@ module.exports = function(grunt) {
           middleware: function (connect) {
             return [
               require('connect-livereload')(),
-              mountFolder(connect, '.')
+              
+              /**
+               * Serve scss `sourcemaps`
+               */
+              mountFolder(connect, '.'),
+
+              /**
+               * The root of our project files
+               */
+              mountFolder(connect, 'app')
             ];
           }
         }
       }
-    },  
-    
+    },
+
+    /**
+     * Run tasks on watched files
+     *
+     * Sass changes leads to page injection,
+     * changes in other files forces the browser
+     * to reload the page
+     */    
     watch: {
       sass: {
-        files: ['scss/**/*.scss'],
+        files: '<%= project.src %>/scss/**/*.scss',
         tasks: ['sass:dev']
+      },
+      concat: {
+        files: '<%= project.src %>/**/*.js',
+        tasks: ['concat:all']
       },
       livereload: {
         options: {
           livereload: true
         },
-        files: ['css/*.css', 'libs/*.js', '*.html']
+        files: [
+          '<%= project.app %>/css/*.css',
+          '<%= project.app %>/libs/*.js',
+          '<%= project.app %>/*.html',
+          '<%= project.app %>/img/**/*.{png,jpg,jpeg,gif,svg}'
+        ]
       }
     },   
-    
+
+    /**
+     * Check syntax consistence
+     *
+     * Define JSHint options inline
+     */    
     jshint: {
-      all: [
-        'Grundfile.js', 
-        'libs/base.js'
+      files: [
+        '<%= project.js.base %>'
       ],
       options: {
         'bitwise': true,
@@ -58,144 +143,163 @@ module.exports = function(grunt) {
       }
     },
     
-    clean : {
-      deploy: 'dist'
+    /**
+     * Compile SCSS files 
+     *
+     * Compiles all SCSS files and, when in
+     * deploy mode, adds project information
+     * banner to those files
+     */   
+    sass: {
+      dev: {
+        options: {
+          sourcemap: true,
+          style: 'expanded',
+          require: 'sass-globbing'
+        },
+        files : {
+          '<%= project.app %>/css/styles.min.css': '<%= project.css.styles %>',
+          '<%= project.app %>/css/dated.min.css': '<%= project.css.dated %>'
+        }
+      },      
+      deploy : {
+        options: {
+          style: 'compressed',
+          require: 'sass-globbing',
+          banner: '<%= project.banner %>'
+        },
+        files : {
+          '<%= project.app %>/css/styles.min.css': '<%= project.css.styles %>',
+          '<%= project.app %>/css/dated.min.css': '<%= project.css.dated %>'
+        }     
+      }
     },
     
+    
+    
+    
+    clean : {
+      cache: '<%= project.root %>/.sass-cache'
+    },
+
+
+
+    
     modernizr: {
-      devFile: 'bower_components/modernizr/modernizr.js',
-      outputFile : 'dist/libs/vendor/modernizr.min.js',
+      devFile:    'bower_components/modernizr/modernizr.js',
+      outputFile: '<%= project.app %>/libs/vendor/modernizr.min.js',
       extra: {
+    		load: false,
     		shiv: true,
+    		cssclasses: true,
     		mq: true
     	},
     	uglify: true,
-    	files: ['libs/*.js', 'scss/**/*.scss']
+      files: [
+        '<%= project.src %>/libs/*.js',
+        '<%= project.src %>/scss/**/*.scss'
+      ]
     },
+
+
+
 		
     imagemin: {
-      deploy: {
+      process: {
         options: {
           optimizationLevel: 7
         },
         files: [
           {
             expand: true,
-            cwd: 'img/',
-            src: ['**/*.{png,jpg,gif}'],
-            dest: 'dist/img/'
+            cwd: '<%= project.src %>/img/source/',
+            src: ['**/*.{png,jpg,jpeg,gif,svg}'],
+            dest: '<%= project.src %>/img/minified/'
           }
         ]
       }
     },
-		
-    concat: {
-      all: {
-        /**
-         * Add whatever bower components we have installed
-         */
-        src: [
-          'bower_components/fastclick/lib/fastclick.js',
-          'bower_components/jquery-easing/jquery.easing.js',
-          'bower_components/jquery.smooth-scroll/jquery.smooth-scroll.js',
-          'bower_components/jquery.transit/jquery.transit.js'
-        ],
-        dest: 'libs/app/plugins.js'
-      }
-    },
     
-    sass: {
-      dev: {
-        options: {
-          sourcemap: true,
-          unixNewlines: false,
-          lineNumbers: true,
-          debugInfo: false,
-          style: 'expanded',
-          require: 'sass-globbing'
-        },
-        files : {
-          'css/styles.css': 'scss/styles.scss',
-          'css/dated.css': 'scss/dated.scss'
-        }
-      },      
-      deploy : {
-        options: {
-          lineNumbers: false,
-          style: 'compressed',
-          require: 'sass-globbing'
-        },
-        files : {
-          'dist/css/styles.css': 'scss/styles.scss',
-          'dist/css/dated.css': 'scss/dated.scss'
-        }     
-      }
-    },
     
     copy: {
-        files: {
-          src: [
-          '*.html',
-          'htaccess',
-          'humans.txt',
-          'robots.txt',
-          'favicon.ico',
-          'icons/',
-          'img/',
-          'assets/'
-          ],
-          dest: 'dist/' 
-        }
+      lib: {
+        files : {
+             '<%= project.app %>/libs/vendor/jquery.min.js': 'bower_components/jquery/jquery.min.js',
+             '<%= project.app %>/libs/vendor/jquery.min.map': 'bower_components/jquery/jquery.min.map'
+           }
+      },
+      imagesToSrc: {
+        files: [
+          { 
+            expand: true,
+            cwd: '<%= project.app %>/img/',
+            src: ['**/*.{png,jpg,jpeg,gif,svg}'],
+            dest: '<%= project.src %>/img/source/'
+          }
+        ]
+      },
+      imagesToApp: {
+        files: [
+          { 
+            expand: true,
+            cwd: '<%= project.src %>/img/minified/',
+            src: ['**/*.{png,jpg,jpeg,gif,svg}'],
+            dest: '<%= project.app %>/img/'
+          }
+        ]
+      }
     },
     
-    uglify: {
-      base: {
-        options: {
-          banner: '/*!\n * Project: <%= pkg.name %>\n' +
-          ' * Version: <%= pkg.version %>\n' +
-          ' * Build: <%= grunt.template.today("yyyy-mm-dd")%>' +
-          '\n * \n' +
-          ' * Base application javascript\n' +
-          ' */' + 
-          '\n\n'
-        },
+    
+    
+        
+  
+    concat: {
+      options: {
+        stripBanners: true,
+        banner: '<%= project.banner %>'
+      },     
+      all: {
+        /**
+         * Add/Remove bower plugin components
+         */
         files: {
-          'dist/libs/app/base.min.js': 'libs/app/base.js'
-        }
-      },
-      plugins: {
-        options: {
-          banner: '/*!\n * Project: <%= pkg.name %>\n' +
-          ' * Version: <%= pkg.version %>\n' +
-          ' * Build: <%= grunt.template.today("yyyy-mm-dd")%>' +
-          '\n * \n' +
-          ' * Concatenated javascript plugins\n' +
-          ' */' + 
-          '\n\n'
-        },
-        files: {
-          'dist/libs/app/plugins.min.js': 'libs/app/plugins.js'
-        }
-      },
-      jquery: {
-        options: {
-          banner: '/*!\n * Project: <%= pkg.name %>\n' +
-          ' * Version: <%= pkg.version %>\n' +
-          ' * Build: <%= grunt.template.today("yyyy-mm-dd")%>' +
-          '\n * \n' +
-          ' * Version: <%= jq.version %>\n' +
-          ' */' + 
-          '\n\n'
-        },
-        files: {
-          'dist/libs/vendor/jquery.min.js': 'bower_components/jquery/jquery.js'
+          '<%= project.app %>/libs/vendor/plugins.min.js': 
+          [
+              'bower_components/fastclick/lib/fastclick.js',
+              'bower_components/jquery.easing/js/jquery.easing.js',
+              'bower_components/jquery.smooth-scroll/jquery.smooth-scroll.js',
+              'bower_components/jquery.transit/jquery.transit.js'
+          ],
+          '<%= project.app %>/libs/base.min.js': '<%= project.js.base %>'
         }
       }
     },
     
+    
+    
+    
+    uglify: {
+      options: {
+        banner: '<%= project.banner %>'
+      },
+      deploy: {
+        files: {
+          '<%= project.app %>/libs/base.min.js': '<%= project.js.base %>',
+          '<%= project.app %>/libs/vendor/plugins.min.js': '<%= project.app %>/libs/vendor/plugins.min.js'
+        }
+      }
+    },
+
+
+
+    
     replace: {
-      wcomCss: {
-        src: ['dist/css/styles.css', 'dist/css/dated.css'],
+      css: {
+        src: [
+          '<%= project.app %>/css/styles.min.css',
+          '<%= project.app %>/css/dated.min.css'
+        ],
         overwrite: true,
         replacements: [
           {
@@ -210,8 +314,8 @@ module.exports = function(grunt) {
           }
         ]   
       },
-      wcomJs: {
-        src: ['dist/libs/app/base.min.js'],
+      js: {
+        src: '<%= project.app %>/libs/base.min.js',
         overwrite: true,
         replacements: [
           {
@@ -220,83 +324,107 @@ module.exports = function(grunt) {
             to: '$1/files/global_files/$3'
           }
         ]
-      },
-      html: {
-        src: ['dist/*.html'],
-        overwrite: true,
-        replacements: [
-          {
-            // change file references (bower_components/ files)
-            // from `name-of-file.suffix`to `name-of-file.min.suffix`
-            from: /(bower_components\/[a-z\-]+)\/([a-z\-]+)([\.]+)([js]+)/g,
-            to: 'libs/vendor/$2.min.$4'
-          },
-          {
-            // change file references (libs/app files)
-            // from `name-of-file.suffix`to `name-of-file.min.suffix`
-            from: /(libs\/app\/[a-z\-]+)([\.]+)([js]+)/g,
-            to: '$1.min.$3'
-          }
-        ]
       }
-    }           
+    },
+    
+    
+           
   
   });
+
+
+
   
-  // load modules dynamically
+  /**
+   * Dynamically load npm tasks
+   */
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
-  
+
+
   // check module state only
   grunt.registerTask('check', [
     'jshint',
     'check-modules'
     ]
   );
-  
+
+
   // development
-  grunt.registerTask('dev', [
+  grunt.registerTask('prepare', [
+    'copy:lib',
+    'modernizr'
+    ]
+  );  
+
+
+  // development
+  grunt.registerTask('dev-process', [
     'jshint',
-    'concat',
+    'concat:all',
     'sass:dev'
     ]
+  );   
+
+  // development
+  grunt.registerTask('dev', 
+    function() {
+      var jquery = grunt.file.exists('app/libs/vendor/jquery.min.js');
+      var modernizr = grunt.file.exists('app/libs/vendor/modernizr.min.js');
+      
+      if (jquery === false || modernizr === false) {
+        grunt.task.run('prepare');
+      }     
+      grunt.task.run('dev-process');
+    }
   );
   
-  // deploy
-  grunt.registerTask('deploy', [
-    'clean',
-    'modernizr',
-    'concat',
-    'sass:deploy', 
-    'copy',
-    'imagemin:deploy',
-    'uglify:base',
-    'uglify:jquery',
-    'uglify:plugins',
-    'replace:html'
-    ]
-  );
-  
-  // deploy with wcom replacements
-  grunt.registerTask('deploy-wcom', [
-    'clean', 
-    'modernizr',
-    'concat', 
+  grunt.registerTask('deploy-process', [
+    'concat:all',
     'sass:deploy',
-    'copy',
-    'imagemin:deploy',
-    'replace:html',
-    'uglify:base', 
-    'uglify:jquery',
-    'uglify:plugins',
-    'replace:wcomCss', 
-    'replace:wcomJs'
+    'uglify:deploy'
     ]
   );
   
-  // default
+  grunt.registerTask('deploy', 
+    function() {
+      var sourceImageDir = grunt.file.isDir('src/img/source');
+      
+      grunt.task.run('prepare');
+    
+      if (sourceImageDir === false) {
+        grunt.task.run('copy:imagesToSrc', 'imagemin', 'copy:imagesToApp');
+      }    
+      grunt.task.run('deploy-process');
+    }
+  );
+
+  
+  grunt.registerTask('deploy-wcom-process', [
+    'concat:all',
+    'sass:deploy',
+    'uglify:deploy',
+    'replace'
+    ]
+  );
+
+  grunt.registerTask('deploy-wcom', 
+    function() {
+      var sourceImageDir = grunt.file.isDir('src/img/source');
+      
+      grunt.task.run('prepare');
+    
+      if (sourceImageDir === false) {
+        grunt.task.run('copy:imagesToSrc', 'imagemin', 'copy:imagesToApp');
+      }    
+      grunt.task.run('deploy-wcom-process');
+    }
+  );
+  
+  
+  // // default
   grunt.registerTask('default', [
     'connect', 'watch'
     ]
   );
-  
+
 };

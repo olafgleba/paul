@@ -1,6 +1,5 @@
 .sass-cache
-.DS_Store
-css
-dist
-libs/app/plugins.js
+**/*.DS_Store
+app/libs/vendor/
+src/img
 *.tmproj

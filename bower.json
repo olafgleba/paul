@@ -7,13 +7,13 @@
   ],
   "homepage": "http://olafgleba.de",
   "dependencies": {
-    "jquery": "~2.0.0",
     "jquery.transit": "~0.9.9",
     "jquery.smooth-scroll": "~1.4",
     "modernizr": "~2.6.2",
     "bourbon": "~3.1.8",
     "fastclick": "~0.6.10",
-    "jquery-easing": "~1.3.0"
+    "jquery": "1.10.2",
+    "jquery.easing": "~1.3.0"
   },
   "ignore": [
     "**/.*",
