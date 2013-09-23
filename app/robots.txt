@@ -1,9 +1,1 @@
 # robots.txt
-
-User-agent: *
-Disallow: /tmp/
-Disallow: /core/
-Disallow: /smarty/
-Disallow: /admin/
-Disallow: /cgi-bin/
-Disallow: /stats/
