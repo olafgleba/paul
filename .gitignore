@@ -1,5 +1,4 @@
 .sass-cache
 **/*.DS_Store
-app/libs/vendor/
 src/img
 *.tmproj
