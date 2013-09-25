@@ -100,6 +100,17 @@ module.exports = function(grunt) {
         }
       }
     },
+    
+
+
+    open : {
+      dev: {
+        path: 'http://127.0.0.1:<%= connect.options.port %>',
+        app: '<%= misc.app %>'
+      }
+    },
+    
+    
 
     /**
      * Run tasks on watched files
@@ -132,7 +143,7 @@ module.exports = function(grunt) {
           '<%= project.src %>/img/source/**/*.{png,jpg,jpeg,gif,svg}'
         ]
       }
-    },   
+    },
 
     /**
      * Check syntax consistence
@@ -160,6 +171,9 @@ module.exports = function(grunt) {
     clean: {
       images: {
         src: ['<%= project.app %>/img/**/*.{png,jpg,jpeg,gif,svg}']
+      },
+      minified: {
+        src: ['<%= project.src %>/img/minified/**/*.{png,jpg,jpeg,gif,svg}']
       },
       cache: {
         sass: ['.sass-cache']
@@ -345,18 +359,7 @@ module.exports = function(grunt) {
           }
         ]
       }
-    },
-    
-    
-    open : {
-      dev: {
-        path: 'http://127.0.0.1:<%= connect.options.port %>',
-        app: '<%= misc.app %>'
-      }
-    }
-    
-    
-           
+    }      
   
   });
 
@@ -374,20 +377,14 @@ module.exports = function(grunt) {
     'jshint',
     'check-modules'
     ]
-  );
+  ); 
 
 
-  // development
-  grunt.registerTask('prepare', [
-    'copy:lib',
-    'modernizr'
-    ]
-  );  
-
-
-  // development
-  grunt.registerTask('dev-process', [
+  // initialize 
+  grunt.registerTask('default', [
     'jshint',
+    'copy:lib',
+    'modernizr',
     'concat:all',
     'sass:dev',
     'copy:imagesSourceToApp',
@@ -395,87 +392,50 @@ module.exports = function(grunt) {
     'open', 
     'watch'
     ]
-  );   
-
-  // development
-  grunt.registerTask('dev', 
-    function() {
-      var jquery = grunt.file.exists('app/libs/vendor/jquery.min.js');
-      var modernizr = grunt.file.exists('app/libs/vendor/modernizr.min.js');
-      
-      if (jquery === false || modernizr === false) {
-        grunt.task.run('prepare');
-      }     
-      grunt.task.run('dev-process');
-    }
   );
+   
   
+  // internal
+  grunt.registerTask('internal', [
+    'jshint',
+    'concat:all',
+    'sass:dev',
+    'copy:imagesSourceToApp'
+    ]
+  );
+
   
+  // deploy
   grunt.registerTask('deploy', [
+    'modernizr',
     'concat:all',
     'sass:deploy',
     'uglify:deploy',
+    'clean:images',
+    'clean:minified',
     'imagemin',
     'copy:imagesMinifiedToApp'
     ]
   );
+
   
-  grunt.registerTask('deploy', [
+  // deploy wcom style
+  grunt.registerTask('deploy-wcom', [
+    'modernizr',
     'concat:all',
     'sass:deploy',
     'replace',
     'uglify:deploy',
+    'clean:images',
+    'clean:minified',
     'imagemin',
     'copy:imagesMinifiedToApp'
     ]
   );
   
-  // grunt.registerTask('deploy-process', [
-  //   'concat:all',
-  //   'sass:deploy',
-  //   'uglify:deploy'
-  //   ]
-  // );
-  
-  // grunt.registerTask('deploy', 
-  //   function() {
-  //     var sourceImageDir = grunt.file.isDir('src/img/source');
-  //     
-  //     grunt.task.run('prepare');
-  //   
-  //     if (sourceImageDir === false) {
-  //       grunt.task.run('copy:imagesToSrc', 'imagemin', 'copy:imagesToApp');
-  //     }    
-  //     grunt.task.run('deploy-process');
-  //   }
-  // );
-
-  
-  // grunt.registerTask('deploy-wcom-process', [
-  //   'concat:all',
-  //   'sass:deploy',
-  //   'uglify:deploy',
-  //   'replace'
-  //   ]
-  // );
-  // 
-  // grunt.registerTask('deploy-wcom', 
-  //   function() {
-  //     var sourceImageDir = grunt.file.isDir('src/img/source');
-  //     
-  //     grunt.task.run('prepare');
-  //   
-  //     if (sourceImageDir === false) {
-  //       grunt.task.run('copy:imagesToSrc', 'imagemin', 'copy:imagesToApp');
-  //     }    
-  //     grunt.task.run('deploy-wcom-process');
-  //   }
-  // );
-  
-  
   // // default
-  grunt.registerTask('default', [
-    'connect', 'watch'
+  grunt.registerTask('server', [
+    'connect', 'watch:livereload'
     ]
   );
 
