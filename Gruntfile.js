@@ -241,17 +241,17 @@ module.exports = function(grunt) {
              '<%= project.app %>/libs/vendor/jquery.min.map': 'bower_components/jquery/jquery.min.map'
            }
       },
-      imagesToSrc: {
-        files: [
-          { 
-            expand: true,
-            cwd: '<%= project.app %>/img/',
-            src: ['**/*.{png,jpg,jpeg,gif,svg}'],
-            dest: '<%= project.src %>/img/source/'
-          }
-        ]
-      },
-      imagesToApp: {
+      // imagesToSrc: {
+      //         files: [
+      //           { 
+      //             expand: true,
+      //             cwd: '<%= project.app %>/img/',
+      //             src: ['**/*.{png,jpg,jpeg,gif,svg}'],
+      //             dest: '<%= project.src %>/img/source/'
+      //           }
+      //         ]
+      //       },
+      imagesMinifiedToApp: {
         files: [
           { 
             expand: true,
@@ -402,47 +402,67 @@ module.exports = function(grunt) {
     }
   );
   
-  grunt.registerTask('deploy-process', [
-    'concat:all',
-    'sass:deploy',
-    'uglify:deploy'
-    ]
-  );
   
-  grunt.registerTask('deploy', 
-    function() {
-      var sourceImageDir = grunt.file.isDir('src/img/source');
-      
-      grunt.task.run('prepare');
-    
-      if (sourceImageDir === false) {
-        grunt.task.run('copy:imagesToSrc', 'imagemin', 'copy:imagesToApp');
-      }    
-      grunt.task.run('deploy-process');
-    }
-  );
-
-  
-  grunt.registerTask('deploy-wcom-process', [
+  grunt.registerTask('deploy', [
     'concat:all',
     'sass:deploy',
     'uglify:deploy',
-    'replace'
+    'imagemin',
+    'copy:imagesMinfiedToApp'
     ]
   );
-
-  grunt.registerTask('deploy-wcom', 
-    function() {
-      var sourceImageDir = grunt.file.isDir('src/img/source');
-      
-      grunt.task.run('prepare');
-    
-      if (sourceImageDir === false) {
-        grunt.task.run('copy:imagesToSrc', 'imagemin', 'copy:imagesToApp');
-      }    
-      grunt.task.run('deploy-wcom-process');
-    }
+  
+  grunt.registerTask('deploy', [
+    'concat:all',
+    'sass:deploy',
+    'replace',
+    'uglify:deploy',
+    'imagemin',
+    'copy:imagesMinfiedToApp'
+    ]
   );
+  
+  // grunt.registerTask('deploy-process', [
+  //   'concat:all',
+  //   'sass:deploy',
+  //   'uglify:deploy'
+  //   ]
+  // );
+  
+  // grunt.registerTask('deploy', 
+  //   function() {
+  //     var sourceImageDir = grunt.file.isDir('src/img/source');
+  //     
+  //     grunt.task.run('prepare');
+  //   
+  //     if (sourceImageDir === false) {
+  //       grunt.task.run('copy:imagesToSrc', 'imagemin', 'copy:imagesToApp');
+  //     }    
+  //     grunt.task.run('deploy-process');
+  //   }
+  // );
+
+  
+  // grunt.registerTask('deploy-wcom-process', [
+  //   'concat:all',
+  //   'sass:deploy',
+  //   'uglify:deploy',
+  //   'replace'
+  //   ]
+  // );
+  // 
+  // grunt.registerTask('deploy-wcom', 
+  //   function() {
+  //     var sourceImageDir = grunt.file.isDir('src/img/source');
+  //     
+  //     grunt.task.run('prepare');
+  //   
+  //     if (sourceImageDir === false) {
+  //       grunt.task.run('copy:imagesToSrc', 'imagemin', 'copy:imagesToApp');
+  //     }    
+  //     grunt.task.run('deploy-wcom-process');
+  //   }
+  // );
   
   
   // // default
