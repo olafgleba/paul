@@ -104,11 +104,15 @@ module.exports = function(grunt) {
     watch: {
       sass: {
         files: '<%= project.src %>/scss/**/*.scss',
-        tasks: ['sass:dev']
+        tasks: ['clean:cache','sass:dev']
       },
       concat: {
         files: '<%= project.src %>/**/*.js',
         tasks: ['concat:all']
+      },
+      copy: {
+        files: '<%= project.src %>/img/source/**/*.{png,jpg,jpeg,gif,svg}',
+        tasks: ['clean:images', 'copy:imagesSrcToApp']
       },
       livereload: {
         options: {
@@ -118,7 +122,7 @@ module.exports = function(grunt) {
           '<%= project.app %>/css/*.css',
           '<%= project.app %>/libs/*.js',
           '<%= project.app %>/*.html',
-          '<%= project.app %>/img/**/*.{png,jpg,jpeg,gif,svg}'
+          '<%= project.src %>/img/**/*.{png,jpg,jpeg,gif,svg}'
         ]
       }
     },   
@@ -142,6 +146,22 @@ module.exports = function(grunt) {
         'jquery': false
       }
     },
+    
+    
+    
+    
+    clean: {
+      images: {
+        src: ['<%= project.app %>/img/**/*.{png,jpg,jpeg,gif,svg}']
+      },
+      cache: {
+        sass: ['.sass-cache']
+      }
+    },
+    
+    
+    
+    
     
     /**
      * Compile SCSS files 
@@ -174,13 +194,6 @@ module.exports = function(grunt) {
         }     
       }
     },
-    
-    
-    
-    
-    clean : {
-      cache: '<%= project.root %>/.sass-cache'
-    },
 
 
 
@@ -205,7 +218,7 @@ module.exports = function(grunt) {
 
 		
     imagemin: {
-      process: {
+      deploy: {
         options: {
           optimizationLevel: 7
         },
@@ -243,6 +256,16 @@ module.exports = function(grunt) {
           { 
             expand: true,
             cwd: '<%= project.src %>/img/minified/',
+            src: ['**/*.{png,jpg,jpeg,gif,svg}'],
+            dest: '<%= project.app %>/img/'
+          }
+        ]
+      },
+      imagesSrcToApp: {
+        files: [
+          { 
+            expand: true,
+            cwd: '<%= project.src %>/img/source/',
             src: ['**/*.{png,jpg,jpeg,gif,svg}'],
             dest: '<%= project.app %>/img/'
           }
@@ -361,7 +384,8 @@ module.exports = function(grunt) {
   grunt.registerTask('dev-process', [
     'jshint',
     'concat:all',
-    'sass:dev'
+    'sass:dev',
+    'copy:imagesSrcToApp'
     ]
   );   
 

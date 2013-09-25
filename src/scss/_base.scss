@@ -3,16 +3,25 @@
     $BASE.CSS
 \*------------------------------------*/
 
+
 /**
- * Import inuit.css vars
+ * Import inuit-defaults.css vars and overrides
  *
- * In _vars.scss all base variables of the inuit.css framework
+ * In inuit.css/_defaults.scss all base variables of the inuit.css framework
  * are defined. There we choose which objects/abstractions
  * we like to use in our project and overwrite inuit.css 
  * default variables values (initially empty directive. See
  * `inuit.css/_defaults.scss` for available variables).
  */
-@import "vars";
+@import "inuit-defaults";
+
+
+
+/**
+ * Import inuit.css framework as a bower component
+ * 
+ */
+@import "../../bower_components/inuit.css/inuit";
 
 
 
@@ -21,7 +30,7 @@
  *
  * In _project.scss all project variables are set.
  * Switch on/off includes of inuit.css extended objects
- * new objects/abstractions to include, and UI related
+ * new objects/abstractions to include and ui related
  * declarations like colors and random defaults, e.g. 
  * border roundness a.s.o.
  */
@@ -30,21 +39,10 @@
 
 
 /**
- * Import our framework
- * 
- * Stacks our framework in. Given VARIABLES declared within the former
- * included _project.scss are used within. So, DO NOT DELETE any of 
- * them to avoid to break things...
- */
-@import "inuit.css/inuit";
-
-
-
-/**
  * Import own stack of functions/mixins.
  *
  * Add your own function and/or mixins, leaving
- * the unuit.css framework untouched.
+ * the inuit.css framework untouched.
  *  
  * Switch on/off in _vars.scss
  * Default both `false`
@@ -56,7 +54,7 @@
 
 /**
  * Import either extended objects of the inuit.css framework
- * or completely new objects which stands on their own
+ * or completely new objects which stands on their own, s. `_project.scss`
  */
 @import "objects/**/*";
 
