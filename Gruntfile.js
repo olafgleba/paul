@@ -60,6 +60,13 @@ module.exports = function(grunt) {
               ' * Copyright <%= pkg.copyright %>. <%= pkg.license %> licensed.\n' +
               ' */\n\n'
     },
+
+    /**
+     * Misc conf
+     */
+    misc: {
+      app: 'Google Chrome Canary'
+    },
     
     /**
      * Connect the server
@@ -112,7 +119,7 @@ module.exports = function(grunt) {
       },
       copy: {
         files: '<%= project.src %>/img/source/**/*.{png,jpg,jpeg,gif,svg}',
-        tasks: ['clean:images', 'copy:imagesSrcToApp']
+        tasks: ['clean:images', 'copy:imagesSourceToApp']
       },
       livereload: {
         options: {
@@ -122,7 +129,7 @@ module.exports = function(grunt) {
           '<%= project.app %>/css/*.css',
           '<%= project.app %>/libs/*.js',
           '<%= project.app %>/*.html',
-          '<%= project.src %>/img/**/*.{png,jpg,jpeg,gif,svg}'
+          '<%= project.src %>/img/source/**/*.{png,jpg,jpeg,gif,svg}'
         ]
       }
     },   
@@ -241,16 +248,6 @@ module.exports = function(grunt) {
              '<%= project.app %>/libs/vendor/jquery.min.map': 'bower_components/jquery/jquery.min.map'
            }
       },
-      // imagesToSrc: {
-      //         files: [
-      //           { 
-      //             expand: true,
-      //             cwd: '<%= project.app %>/img/',
-      //             src: ['**/*.{png,jpg,jpeg,gif,svg}'],
-      //             dest: '<%= project.src %>/img/source/'
-      //           }
-      //         ]
-      //       },
       imagesMinifiedToApp: {
         files: [
           { 
@@ -261,7 +258,7 @@ module.exports = function(grunt) {
           }
         ]
       },
-      imagesSrcToApp: {
+      imagesSourceToApp: {
         files: [
           { 
             expand: true,
@@ -351,6 +348,14 @@ module.exports = function(grunt) {
     },
     
     
+    open : {
+      dev: {
+        path: 'http://127.0.0.1:<%= connect.options.port %>',
+        app: '<%= misc.app %>'
+      }
+    }
+    
+    
            
   
   });
@@ -385,7 +390,10 @@ module.exports = function(grunt) {
     'jshint',
     'concat:all',
     'sass:dev',
-    'copy:imagesSrcToApp'
+    'copy:imagesSourceToApp',
+    'connect',
+    'open', 
+    'watch'
     ]
   );   
 
@@ -408,7 +416,7 @@ module.exports = function(grunt) {
     'sass:deploy',
     'uglify:deploy',
     'imagemin',
-    'copy:imagesMinfiedToApp'
+    'copy:imagesMinifiedToApp'
     ]
   );
   
@@ -418,7 +426,7 @@ module.exports = function(grunt) {
     'replace',
     'uglify:deploy',
     'imagemin',
-    'copy:imagesMinfiedToApp'
+    'copy:imagesMinifiedToApp'
     ]
   );
   
