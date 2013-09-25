@@ -176,7 +176,10 @@ module.exports = function(grunt) {
         src: ['<%= project.src %>/img/minified/**/*.{png,jpg,jpeg,gif,svg}']
       },
       cache: {
-        sass: ['.sass-cache']
+        src: ['.sass-cache']
+      },
+      gitignore: {
+        src: ['<%= project.app %>/**/.gitignore']
       }
     },
     
@@ -413,6 +416,7 @@ module.exports = function(grunt) {
     'uglify:deploy',
     'clean:images',
     'clean:minified',
+    'clean:gitignore',
     'imagemin',
     'copy:imagesMinifiedToApp'
     ]
@@ -428,6 +432,7 @@ module.exports = function(grunt) {
     'uglify:deploy',
     'clean:images',
     'clean:minified',
+    'clean:gitignore',
     'imagemin',
     'copy:imagesMinifiedToApp'
     ]
