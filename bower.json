@@ -19,8 +19,12 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "bower_components"
+  ],
+  "plugins": [
+    "bower_components/fastclick/lib/fastclick.js",
+    "bower_components/jquery.easing/js/jquery.easing.js",
+    "bower_components/jquery.transit/jquery.transit.js",
+    "bower_components/jquery.smooth-scroll/jquery.smooth-scroll.js"
   ]
 }

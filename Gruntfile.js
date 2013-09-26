@@ -34,6 +34,11 @@ module.exports = function(grunt) {
      */        
     pkg: grunt.file.readJSON('package.json'),
     
+    
+    bower: grunt.file.readJSON('bower.json'),
+    
+    
+    
     /**
      * Define project paths and patterns
      */
@@ -47,6 +52,14 @@ module.exports = function(grunt) {
       js: {
         base: '<%= project.src %>/libs/base.js'
       },
+      
+      browser: 'Google Chrome Canary',
+      
+      lib: {
+        filename: 'jquery.min.js',
+        path: 'bower_components/jquery'
+      },
+      
       /**
        * Define Project information banner
        * Inherits from package.json
@@ -60,14 +73,8 @@ module.exports = function(grunt) {
               ' * Copyright <%= pkg.copyright %>. <%= pkg.license %> licensed.\n' +
               ' */\n\n'
     },
-
-    /**
-     * Misc conf
-     */
-    misc: {
-      app: 'Google Chrome Canary'
-    },
     
+
     /**
      * Connect the server
      *
@@ -106,7 +113,7 @@ module.exports = function(grunt) {
     open : {
       dev: {
         path: 'http://127.0.0.1:<%= connect.options.port %>',
-        app: '<%= misc.app %>'
+        app: '<%= project.browser %>'
       }
     },
     
@@ -261,8 +268,7 @@ module.exports = function(grunt) {
     copy: {
       lib: {
         files : {
-             '<%= project.app %>/libs/vendor/jquery.min.js': 'bower_components/jquery/jquery.min.js',
-             '<%= project.app %>/libs/vendor/jquery.min.map': 'bower_components/jquery/jquery.min.map'
+             '<%= project.app %>/libs/vendor/<%= project.lib.filename %>': '<%= project.lib.path %>/<%= project.lib.filename %>'
            }
       },
       imagesMinifiedToApp: {
@@ -298,16 +304,37 @@ module.exports = function(grunt) {
       },     
       all: {
         /**
-         * Add/Remove bower plugin components
+         * Concatenate bower plugins
+         * 
+         * See bower.json, hash `plugins`
+         *
+         * Add a plugin:
+         * Make sure, the desired plugin is actually
+         * installed. Install a plugin with:
+         *
+            `bower install <package> --save`
+         *    
+         * Accordingly have a look at the actual path 
+         * of the dedicated plugin file and append it
+         * to the `plugins` hash within the bower.json
+         * config file.
+         *
+         * Delete a plugin:
+         * To spare out a plugin from concatenation simply
+         * delete the related row from the hash `plugins`.
+         * To remove a plugin completely run: 
+         *  
+            `bower uninstall <package> --save`
+         *   
          */
         files: {
           '<%= project.app %>/libs/vendor/plugins.min.js': 
           [
-              'bower_components/fastclick/lib/fastclick.js',
-              'bower_components/jquery.easing/js/jquery.easing.js',
-              'bower_components/jquery.smooth-scroll/jquery.smooth-scroll.js',
-              'bower_components/jquery.transit/jquery.transit.js'
+              '<%= bower.plugins %>'
           ],
+          /**
+           * Build our base javascript file
+           */
           '<%= project.app %>/libs/base.min.js': '<%= project.js.base %>'
         }
       }
@@ -388,7 +415,7 @@ module.exports = function(grunt) {
     'jshint',
     'copy:lib',
     'modernizr',
-    'concat:all',
+    'concat',
     'sass:dev',
     'copy:imagesSourceToApp',
     'connect',
@@ -396,22 +423,12 @@ module.exports = function(grunt) {
     'watch'
     ]
   );
-   
-  
-  // internal
-  grunt.registerTask('internal', [
-    'jshint',
-    'concat:all',
-    'sass:dev',
-    'copy:imagesSourceToApp'
-    ]
-  );
 
   
   // deploy
   grunt.registerTask('deploy', [
     'modernizr',
-    'concat:all',
+    'concat',
     'sass:deploy',
     'uglify:deploy',
     'clean:images',
@@ -426,7 +443,7 @@ module.exports = function(grunt) {
   // deploy wcom style
   grunt.registerTask('deploy-wcom', [
     'modernizr',
-    'concat:all',
+    'concat',
     'sass:deploy',
     'replace',
     'uglify:deploy',

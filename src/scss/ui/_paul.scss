@@ -1,0 +1,28 @@
+/**
+ * Paul.css  
+ *
+ * Description
+ *
+    ... Markup/Usage Example ... 
+ *
+ */
+
+html, body {
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+
+.sprite { 
+  background: url(../img/sprite.png) 0 0 no-repeat;
+  color: red; 
+}
+.sprite--questionmark {
+	background-position: 0 0;
+	background-color: red;
+}
+.sprite--user {
+	background-position: 0 -16px;
+}
+.sprite--bullet {
+	background-position: 0 -32px;
+}

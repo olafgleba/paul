@@ -66,8 +66,10 @@
  * To keep the lib files untouched (so we can update
  * the whole thing without any hassle), we must 
  * comment out/in the lib in here.
+ *
+ * Comment out by default
  */
-@import "../../bower_components/bourbon/app/assets/stylesheets/bourbon";
+// @import "../../bower_components/bourbon/app/assets/stylesheets/bourbon";
 
 
 
