@@ -1,28 +1,126 @@
 /**
- * Paul.css  
+ * Paul.css
  *
  * Description
  *
-    ... Markup/Usage Example ... 
+    ... Markup/Usage Example ...
  *
  */
 
-html, body {
-  font-family: "Helvetica Neue", sans-serif;
-}
+/*html*/.paul {
 
+  body {
+    color: #555;
+    background-color: #fff;
+  }
 
-.sprite { 
-  background: url(../img/sprite.png) 0 0 no-repeat;
-  color: red; 
-}
-.sprite--questionmark {
-	background-position: 0 0;
-	background-color: red;
-}
-.sprite--user {
-	background-position: 0 -16px;
-}
-.sprite--bullet {
-	background-position: 0 -32px;
+  ul, ol {
+    margin-left: 0;
+    list-style: none;
+    border-top: 0;
+
+    li, dd, dt {
+      border-bottom: 0;
+      background-color: #f9f9f9;
+
+      a {
+        background-color: #f2f2f2;
+      }
+    }
+  }
+
+  a, a:visited {
+    color: #EB583B;
+    text-decoration: none;
+
+    &:hover, &:active, &:focus {
+      text-decoration: underline;
+    }
+  }
+
+  h1, h2, h3 {
+    color: #555;
+    font-weight: 700;
+    margin-bottom: 3rem;
+
+    span {
+      color: #999;
+    }
+  }
+
+  h1 {
+    //font-size: 2.9rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-weight: 300;
+    font-size: 1.9rem;
+    line-height: 1.5;
+  }
+
+  h3 {
+    font-size: 1.9rem;
+    border-bottom: 3px solid #f2f2f2;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  h4 {
+    margin-bottom: 0.75rem;
+  }
+
+  /*hr*/.deco {
+    border: none;
+    border-bottom: 5px solid #efefef;
+    margin-bottom: 3rem;
+  }
+
+  [role="main"] div, .grid {
+    margin-bottom: 4.5rem;
+  }
+
+  .page {
+    max-width: 55em;
+    margin: 0 auto;
+    padding: 5em 2em;
+  }
+
+  .sprite {
+    background: url(../img/sprite.png) 0 0 no-repeat;
+    background-color: #EB583B;
+
+    &.sprite--questionmark {
+      background-position: 0 0;
+    }
+    &.sprite--user {
+      background-position: 0 -16px;
+    }
+    &.sprite--bullet {
+      background-position: 0 -32px;
+    }
+  }
+
+  .index {
+    h1, h2 {
+     margin-bottom: 3rem;
+    }
+
+    [role="main"] {
+
+     a {
+       font-weight: 600;
+     }
+
+     li {
+       background-color: transparent;
+       padding: 0.5em 0;
+
+       a {
+         padding: 0.5em;
+         //line-height: 2;
+       }
+     }
+    }
+  }
 }

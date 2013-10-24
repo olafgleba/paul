@@ -1,9 +1,11 @@
 @if $use-project-extend-grid--ordinal == true {
 
+// See also annotation in `_project-includes.scss`
+
 /**
  * Sometimes we want to use flex box ordinal source ordering.
  * To achive this we establish a modifier for the `grid` wrapper class and
- * append the desired order helper class to the grid items. 
+ * append the desired order helper class to the grid items.
  *
    <div class=grid grid--ordinal>
 
@@ -18,7 +20,7 @@
    </div>
  *
  * Nested grids are also possible without breaking the ordinals, e.g.
- * 
+ *
 	<div class="grid grid--ordinal">
 		<div class="grid__item one-whole ordinal-two">
 			<p>First</p>
@@ -45,12 +47,12 @@
 	</div>
  *
  */
- 
- 
+
+
  /**
   * Ordinal grid Modifier
   */
-.grid--ordinal {    
+.grid--ordinal {
     display: box;
     display: -webkit-box;
     box-orient: vertical;

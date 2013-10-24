@@ -2,7 +2,6 @@
 /*------------------------------------*\
     $DATED.CSS
 \*------------------------------------*/
-
 /**
  * The compiled sass output of this file is only
  * served to IEs lower than version 8. Have a look
@@ -17,7 +16,7 @@
  * @ref http://nicolasgallagher.com/mobile-first-css-sass-and-ie/
  */
 
- 
+
 
 /**
  * Import base styles
@@ -26,12 +25,12 @@
  * font/size, vertical rhythm measuring and some other stuff.
  * Change their values to fit your needs.
  */
-@import "base";
+@import "build";
 
 
 
 /**
- * Define custom view dimensions and/or tweaks for dated browser ( e.g. IE < 9) 
+ * Define custom view dimensions and/or tweaks for dated browser ( e.g. IE < 9)
  *
  * As we only address actual none browser like IE 8 here,
  * which does not support media queries, this is the appropriate
@@ -39,7 +38,7 @@
  *
  * E.g. most of the time we want a particular fixed view for them.
  * So stay calm with the base flows we import above and
- * limit the view by setting a max-width. 
+ * limit the view by setting a max-width.
  *
  * Add more additional tweaks whenever needed
  */

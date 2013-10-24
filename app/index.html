@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="paul">
 <head>
 <meta charset="utf-8">
 <title>Paul | with frontend developing</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="robots" content="index, follow" />
 <meta name="keywords" content="" />
 <meta name="description" content="" />
@@ -12,10 +13,6 @@
 <link type="text/plain" rel="author" href="humans.txt">
 
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="icons/apple-touch-icon-114x114-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="icons/apple-touch-icon-72x72-precomposed.png">
-<link rel="apple-touch-icon-precomposed" href="icons/apple-touch-icon-precomposed.png">
 
 <!--[if (gt IE 8) | (IEMobile)]><!-->
 <link rel="stylesheet" href="css/styles.min.css">
@@ -28,41 +25,81 @@
 <script src="libs/vendor/modernizr.min.js"></script>
 </head>
 
-<body id="totop">
-	<div class="page">
-	    <header role="banner">	     
-        <h1>Page</h1>
-        
-        <p>Init Image</p>
-        <img src="img/init.png" alt="" />
+<body id="totop" class="index">
+  <div class="page">
+    <header role="banner" class="tophead">
+      <h1>paul.<span>dev</span></h1>
+      <h2><i>paul.dev</i> is just my personal frontend development environment. It relies on libraries and extensions such as <a href="http://bower.io">Bower</a>, <a href="http://gruntjs.com">Grunt</a>, <a href="http://sass-lang.org">Sass</a> and the <a href="http://inuitcss.com/">inuit.css</a> framework as the foundation to build up the real css stuff. Instead to fiddle about repetitive, boring tasks, it allows me to focus on what i do like most: Building websites and apps.</h2>
+    </header> <!-- /role[header] -->
 
-        <nav role="navigation">
-  				<ul>
-  					<li><a href="">link</a></li>
-  					<li class="current">link</li>
-  					<li><a href="">link</a></li>
-  				</ul>
-        </nav>
-	    </header> <!-- /role[header] -->
-	
-		<div role="main">			
-			<p>Main section</p>
-		</div><!-- /role[main] -->
-		
-		<aside role="complementary">
-			<p>Aside</p>
-		</aside> <!-- /role[complementary] -->
+    <div role="main">
+      <h3>Introduction</h3>
+      <div>
+        <p><b>paul.dev</b> just reflects my way of doing things, my approach to facilitate starting new projects. Maybe someone find this frontend helpful. As a point to start but also as a inspiration to build and tweak it up for your own purposes.</p>
+        <p><b>paul.dev</b> just reflects my way of doing things, my approach to facilitate starting new projects. Maybe someone find this frontend helpful. As a point to start but also as a inspiration to build and tweak it up for your own purposes.</p>
+      </div>
 
-		<footer role="contentinfo">
-			<p>Footer</p>
-		</footer><!-- /role[footer] -->
-            
-	</div> <!-- /.page -->
+      <h3>Included plugins</h3>
+      <div>
+        <p>...</p>
 
-	<p><a id="backToTop" href="#totop">page top</a></p>
+        <h4>Bower</h4>
+        <ul class="block-list">
+          <li><a href="https://github.com/ftlabs/fastclick">FastClick</a></li>
+          <li><a href="http://inuitcss.com/">inuit.css</a></li>
+          <li><a href="https://github.com/Modernizr/Modernizr">Modernizr</a></li>
+          <li><a href="https://github.com/components/jquery">jQuery</a></li>
+          <li><a href="http://gsgd.co.uk/sandbox/jquery/easing/">jQuery Plugin Easing</a></li>
+          <li><a href="https://github.com/kswedberg/jquery-smooth-scroll">jQuery Plugin Smooth Scroll</a></li>
+          <li><a href="https://github.com/rstacruz/jquery.transit">jQuery Plugin Transit</a></li>
+        </ul>
 
-	<script src="libs/vendor/jquery.min.js"></script>
-	<script src="libs/vendor/plugins.min.js"></script>
-	<script src="libs/base.min.js"></script>
+        <h4>Grunt</h4>
+        <p>Requires installation of Grunt version >= 0.4.x</p>
+        <ul class="block-list">
+          <li><a href="http://csswizardry.com/">connect-livereload</a></li>
+          <li><a href="http://bower.io">grunt-check-modules</a></li>
+          <li><a href="http://gruntjs.com">grunt-contrib-clean</a></li>
+          <li><a href="http://sass-lang.org">grunt-contrib-concat</a></li>
+        </ul>
+      </div>
+
+      <h3>Support</h3>
+      <div>
+        <p>Maybe someone find this frontend helpful. Take it and do whatever you like. Since this is only a personal framework, i do not provide support for this. If you have any question or a bug to report, use the github issue tracker please.</p>
+      </div>
+
+      <h3>Honor and a big thx goes to:</h3>
+      <div>
+        <ul class="block-list">
+          <li><a href="http://csswizardry.com/">Harry Roberts</a> for the incredible work on <a href="http://inuitcss.com/">inuit.css</a></li>
+          <li><a href="http://bower.io">The bower team</a> to simplify life in lib and plugin organisation.</li>
+          <li><a href="http://gruntjs.com">The grunt devs</a> for let the machine doing all the stupid work while me making coffee.</li>
+          <li><a href="http://sass-lang.org">Founder of Sass</a> whom gives me inspiration (and the tool) to try new coding approaches.</li>
+        </ul>
+      </div>
+
+      <h3>Comparable projects</h3>
+      <ul class="block-list">
+        <li><a href="https://github.com/toddmotto/fireshell">FireShell</li>
+      </ul>
+
+    </div><!-- /role[main] -->
+
+    <aside role="complementary">
+
+    </aside> <!-- /role[complementary] -->
+
+    <footer role="contentinfo">
+
+    </footer><!-- /role[footer] -->
+
+    <p><a id="backToTop" href="#totop">page top</a></p>
+
+  </div> <!-- /.page -->
+
+  <script src="libs/vendor/jquery.min.js"></script>
+  <script src="libs/vendor/plugins.min.js"></script>
+  <script src="libs/base.min.js"></script>
 </body>
 </html>

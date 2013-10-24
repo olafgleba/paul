@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="paul">
 <head>
 <meta charset="utf-8">
 <title>Projekt</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="robots" content="index, follow" />
 <meta name="keywords" content="" />
 <meta name="description" content="" />
@@ -24,49 +25,53 @@
 	<div class="page">
         
 		<noscript><p>noscript</p></noscript>
+		
+    <div class="grid">
+      <div class="grid__item one-whole">
+        <h1>paul.<span>dev</span>: Objects</h1>
+        <p>Actually most of the object comes straight out of the inuit.css framework, except where indicated.</p>
+      </div>
+    </div>
+    
+    <hr class="deco" />
 	
 		<h3>Different lists</h3>
 		<div class="grid">
-			<div class="grid__item one-third">
+			<div class="grid__item one-whole desk-one-half">
 				<ul>
 					<li><a href="#">link</a></li>
 					<li><a href="#">link</a></li>
 					<li><a href="#">link</a></li>
 				</ul>
 			</div><!--
-			--><div class="grid__item one-third">
+			--><div class="grid__item one-whole desk-one-half">
 				<ul class="block-list">
 					<li><a class="block-list__link" href="#">link</a></li>
 					<li><a href="#">link</a></li>
 					<li><a href="#">link</a></li>
 				</ul>
-			</div><!--
-			--><div class="grid__item one-third">
-				<ul>
-					<li><a href="#">link</a></li>
-					<li><a href="#">link</a></li>
-					<li><a href="#">link</a></li>
-				</ul>
 			</div>
-		</div>			
+		</div>
+		
+		<hr class="deco" />		
 			
 		<h3>Different .nav lists</h3>
 		<div class="grid">
-			<div class="grid__item one-third mob-one-whole">
+			<div class="grid__item one-whole desk-one-third">
 				<ul class="nav">
 					<li><a href="#">.nav</a></li>
 					<li><a href="#">link</a></li>
 					<li><a href="#">link</a></li>
 				</ul>
 			</div><!--
-			--><div class="grid__item one-third mob-one-half desk-one-whole">
+			--><div class="grid__item one-whole desk-one-third">
 				<ul class="nav nav--stacked">
 					<li><a href="#">.nav--stacked</a></li>
 					<li><a href="#">link</a></li>
 					<li><a href="#">link</a></li>
 				</ul>
 			</div><!--
-			--><div class="grid__item one-third palm-one-half desk-one-whole">
+			--><div class="grid__item one-whole desk-one-third">
 				<ul class="nav nav--block">
 					<li><a href="#">.nav--block</a></li>
 					<li><a href="#">link</a></li>
@@ -75,22 +80,24 @@
 			</div>
 		</div>
 		
+		<hr class="deco" />
+		
 		<div class="grid">
-			<div class="grid__item one-third">
+			<div class="grid__item one-whole desk-one-third">
 				<ul class="nav nav--fit">
 					<li><a href="#">.nav--fit</a></li>
 					<li><a href="#">link</a></li>
 					<li><a href="#">link</a></li>
 				</ul>
 			</div><!--
-			--><div class="grid__item one-third">
+			--><div class="grid__item one-whole desk-one-third">
 				<ul class="nav nav--banner">
 					<li><a href="#">.nav--banner</a></li>
 					<li><a href="#">link</a></li>
 					<li><a href="#">link</a></li>
 				</ul>
 			</div><!--
-			--><div class="grid__item one-third">
+			--><div class="grid__item one-whole desk-one-third">
 				<ul class="nav nav--keywords">
 					<li><a href="#">.nav--keywords</a></li>
 					<li><a href="#">link</a></li>
@@ -98,17 +105,19 @@
 				</ul>
 			</div>
 		</div>
+		
+		<hr class="deco" />
 
 		<h3>Different .breadcrumb navs</h3>		
 		<div class="grid">
-			<div class="grid__item one-half">
+			<div class="grid__item one-whole desk-one-half">
 				<ul class="nav breadcrumb">
 					<li class="breadcrumb__root"><a href="#">.breadcrumb</a></li>
 					<li><a href="#">link</a></li>
 					<li class="breadcrumb__current">link</li>
 				</ul>
 			</div><!--
-			--><div class="grid__item one-half">
+			--><div class="grid__item one-whole desk-one-half">
 				<ul class="nav breadcrumb--path">
 					<li class="breadcrumb__root"><a href="#">.breadcrumb--path</a></li>
 					<li><a href="#">link</a></li>
@@ -117,10 +126,12 @@
 			</div>
 		</div>
 		
+		<hr class="deco" />
+		
 		<h3>.flyout</h3>
 		
 		<div class="grid">
-			<div class="grid__item one-half">
+			<div class="grid__item one-whole desk-one-half">
 				<div class="flyout">
 					<p>hover</p>
 					<div class="flyout__content">
@@ -129,7 +140,7 @@
 					</div>
 				</div>
 			</div><!--
-			--><div class="grid__item one-half">
+			--><div class="grid__item one-whole desk-one-half">
 				<div class="flyout flyout--alt">
 					<p>hover</p>
 					<div class="flyout__content">
@@ -140,13 +151,12 @@
 			</div>
 		</div>
 		
+		<hr class="deco" />
+		
 		<h3>Different icons .i (batch)</h3>
 		
-		<style type="text/css" media="screen">
-			.i {
-				color: red;
-			}
-		</style>
+    <p>As no icon font library comes with the pure framework, this 
+      is a bit odd. But the markup might be useful anyway.</p>
 		
 		<div class="grid">
 			<div class="grid__item one-whole">
@@ -168,6 +178,8 @@
 			</div>
 		</div>
 		
+		<hr class="deco" />
+		
 		<h3>Different icons .s (sprite)</h3>
 		
 		<div class="grid">
@@ -184,6 +196,8 @@
 			</div>
 		</div>
 		
+		<hr class="deco" />
+		
 		<div class="grid">
 			<div class="grid__item one-whole">
 				<a href="#" class="icon-text">
@@ -194,11 +208,13 @@
 				</a>
 			</div>
 		</div>
+		
+		<hr class="deco" />
 
-		<h3>object .media variants</h3>		
+		<h3>object .media</h3>		
 		
 		<div class="grid">
-			<div class="grid__item one-half">
+			<div class="grid__item one-whole desk-one-half">
 				<div class="media">
 					<img src="http://placehold.it/300x300" alt="" class="media__img" />
 					<p class="media__body">
@@ -207,7 +223,7 @@
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, magni odio earum consectetur ut adipisci nemo quas fuga expedita modi accusantium doloremque eum beatae repellendus rerum magnam voluptatibus excepturi ea.</p>
 				</div>
 			</div><!--
-			--><div class="grid__item one-half">
+			--><div class="grid__item one-whole desk-one-half">
 				<div class="media">
 					<img src="http://placehold.it/300x300" class="media__img--rev" />
 					<p class="media__body">
@@ -216,9 +232,11 @@
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, magni odio earum consectetur ut adipisci nemo quas fuga expedita modi accusantium doloremque eum beatae repellendus rerum magnam voluptatibus excepturi ea.</p>
 				</div>
 			</div>
-		</div>		
+		</div>
+		
+		<hr class="deco" />		
 
-		<h3>Pagination navs list</h3>	
+		<h3>object .pagination</h3>	
 		<div class="grid">
 			<div class="grid__item one-whole">
 			   <ol class="nav  pagination">
@@ -233,29 +251,33 @@
 			       <li class="pagination__last"><a href=/page/last>Last</a></li>
 			   </ol>
 			</div>
-		</div>		
+		</div>	
+		
+		<hr class="deco" />	
 		
 		<h3>Different divider (.rule)</h3>
 		
 		<div class="grid">
-			<div class="grid__item one-quarter">
+			<div class="grid__item one-whole desk-one-quarter">
 				<hr class="rule" />
 			</div><!--
-			--><div class="grid__item one-quarter">
+			--><div class="grid__item one-whole desk-one-quarter">
 				<hr class="rule rule--dotted" />
 			</div><!--
-			--><div class="grid__item one-quarter">
+			--><div class="grid__item one-whole desk-one-quarter">
 				<hr class="rule rule--dashed" />
 			</div><!--
-			--><div class="grid__item one-quarter">
+			--><div class="grid__item one-whole desk-one-quarter">
 				<hr class="rule rule--ornament" />
 			</div>
 		</div>
 		
+		<hr class="deco" />
+		
 		<h3>Different containers (.split)</h3>
 		
 		<div class="grid">
-			<div class="grid__item one-half">
+			<div class="grid__item one-whole desk-one-half">
 			   <dl class=split>
 			       <dt class=split__title>Burger and fries</dt>
 			       <dd>&pound;5.99</dd>
@@ -265,7 +287,7 @@
 			       <dd>&pound;2.99</dd>
 			   </dl>
 			</div><!--
-			--><div class="grid__item one-half">
+			--><div class="grid__item one-whole desk-one-half">
 			   <ol class="split results">
 			       <li><b class=split__title>1st place</b> Bob</li>
 			       <li><b class=split__title>2nd place</b> Lilly</li>
@@ -274,11 +296,13 @@
 			</div>
 		</div>
 		
+		<hr class="deco" />
+		
 		<h3>Different containers (.stats)</h3>
 		
 		<div class="grid">
 			<div class="grid__item one-whole">
-			    <div class="stat-group">
+			  <div class="stat-group">
 			        <dl class="stat">
 			            <dt class="stat__title">Tweets</dt>
 			            <dd class="stat__value">27,740</dd>
@@ -294,63 +318,36 @@
 			            <dd class="stat__value">12,105</dd>
 			        </dl>
 			    </div>
-			
-			    <div class="stat-group">
-			        <dl class="stat">
-			            <dt class="stat__title">RSS</dt>
-			            <dd class="stat__value">27,740</dd>
-			        </dl>
-
-			        <dl class="stat">
-			            <dt class="stat__title">Abonnenten</dt>
-			            <dd class="stat__value">11,529</dd>
-			        </dl>
-
-			        <dl class="stat">
-			            <dt class="stat__title">Seit...</dt>
-			            <dd class="stat__value">12,105</dd>
-			        </dl>
-			    </div>
-			</div>
+		    </div>
 		</div>
+		
+		<hr class="deco" />
 		
 		<h3>Inline block grid</h3>
 		
-		<style type="text/css" media="screen">
-			.gi {
-				background-color: gray;
-			}
-			.gi:nth-child(2) {
-				background-color: red;
-			}
-			.gi:nth-child(3) {
-				background-color: green;
-			}
-
-		</style>
 		<div class="grid">
-			<div class="grid__item one-quarter mob-one-half">
+			<div class="grid__item one-whole desk-one-quarter">
 				<ul>
 					<li><a href="#">link</a></li>
 					<li><a href="#">link</a></li>
 					<li><a href="#">link</a></li>
 				</ul>
 			</div><!--
-			--><div class="grid__item one-quarter mob-one-half">
+			--><div class="grid__item one-whole desk-one-quarter">
 				<ul class="block-list">
 					<li><a class="block-list__link" href="#">link</a></li>
 					<li><a href="#">link</a></li>
 					<li><a href="#">link</a></li>
 				</ul>
 			</div><!--
-			--><div class="grid__item one-quarter mob-one-half">
+			--><div class="grid__item one-whole desk-one-quarter">
 				<ul>
 					<li><a href="#">link</a></li>
 					<li><a href="#">link</a></li>
 					<li><a href="#">link</a></li>
 				</ul>
 			</div><!--
-			--><div class="grid__item one-quarter mob-one-half">
+			--><div class="grid__item one-whole desk-one-quarter">
 				<ul>
 					<li><a href="#">link</a></li>
 					<li><a href="#">link</a></li>
@@ -359,25 +356,27 @@
 			</div>
 		</div>
 		
+		<hr class="deco" />
+		
 		<h3>Nested grids</h3>
 		<div class="grid">
-			<div class="grid__item one-third">
+			<div class="grid__item one-whole desk-one-third">
 				<ul>
 					<li><a href="#">link</a></li>
 					<li><a href="#">link</a></li>
 					<li><a href="#">link</a></li>
 				</ul>
 			</div><!--
-			--><div class="grid__item one-third">
+			--><div class="grid__item one-whole desk-one-third">
 				<div class="grid">
-					<div class="grid__item one-half">
+					<div class="grid__item one-whole desk-one-half">
 						<ul>
 							<li><a href="#">link</a></li>
 							<li><a href="#">link</a></li>
 							<li><a href="#">link</a></li>
 						</ul>
 					</div><!--
-					--><div class="grid__item one-half">
+					--><div class="grid__item one-whole desk-one-half">
 						<ul class="block-list">
 							<li><a class="block-list__link" href="#">link</a></li>
 							<li><a href="#">link</a></li>
@@ -386,7 +385,7 @@
 					</div>
 				</div>
 			</div><!--
-			--><div class="grid__item one-third">
+			--><div class="grid__item one-whole desk-one-third">
 				<ul>
 					<li><a href="#">link</a></li>
 					<li><a href="#">link</a></li>
@@ -395,7 +394,9 @@
 			</div>
 		</div>
 		
-		<h3>Flex box ordinal test</h3>
+		<hr class="deco" />
+		
+		<h3>Flex box ordinal test (ø inuit.css)</h3>
 		
 		<div class="grid grid--ordinal">
 			<div class="grid__item one-whole ordinal-four">
@@ -411,6 +412,8 @@
 				<p>fourth</p>
 			</div>
 		</div>
+		
+		<hr class="deco" />
 		
 		<p><a id="backToTop" href="#totop">page top</a></p>
       

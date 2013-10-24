@@ -3,12 +3,6 @@
  * @version 1.0.0
  * @author Olaf Gleba
  */
- 
-/**
- * ECMAScript 5 context mode
- * see http://ejohn.org/blog/ecmascript-5-strict-mode-json-and-more/
- */
-'use strict';
 
 /**
  * Return livereload environment
@@ -22,7 +16,14 @@ var mountFolder = function mountFolder(connect, pointer) {
  * Grunt module
  */
 module.exports = function(grunt) {
-  
+
+  /**
+   * ECMAScript 5 context mode
+   * see http://ejohn.org/blog/ecmascript-5-strict-mode-json-and-more/
+   */
+  'use strict';
+
+
   /**
    * Grunt config
    */
@@ -31,14 +32,17 @@ module.exports = function(grunt) {
     /**
      * Read package.json and make it
      * available with the `pkg` variable
-     */        
+     */
     pkg: grunt.file.readJSON('package.json'),
-    
-    
+
+
+    /**
+     * Read package.json and make it
+     * available with the `pkg` variable
+     */
     bower: grunt.file.readJSON('bower.json'),
-    
-    
-    
+
+
     /**
      * Define project paths and patterns
      */
@@ -52,14 +56,12 @@ module.exports = function(grunt) {
       js: {
         base: '<%= project.src %>/libs/base.js'
       },
-      
-      browser: 'Google Chrome Canary',
-      
-      lib: {
-        filename: 'jquery.min.js',
+      library: {
+        file: 'jquery.min.js',
         path: 'bower_components/jquery'
       },
-      
+      browser: 'Google Chrome Canary',
+
       /**
        * Define Project information banner
        * Inherits from package.json
@@ -73,14 +75,14 @@ module.exports = function(grunt) {
               ' * Copyright <%= pkg.copyright %>. <%= pkg.license %> licensed.\n' +
               ' */\n\n'
     },
-    
+
 
     /**
      * Connect the server
      *
      * Start local webserver and enable
      * livereload on development folder by
-     * injecting livereload snippet with a 
+     * injecting livereload snippet with a
      * middleware approach
      */
     connect: {
@@ -92,7 +94,7 @@ module.exports = function(grunt) {
           middleware: function (connect) {
             return [
               require('connect-livereload')(),
-              
+
               /**
                * Serve scss `sourcemaps`
                */
@@ -107,7 +109,7 @@ module.exports = function(grunt) {
         }
       }
     },
-    
+
 
 
     open : {
@@ -116,8 +118,8 @@ module.exports = function(grunt) {
         app: '<%= project.browser %>'
       }
     },
-    
-    
+
+
 
     /**
      * Run tasks on watched files
@@ -125,11 +127,11 @@ module.exports = function(grunt) {
      * Sass changes leads to page injection,
      * changes in other files forces the browser
      * to reload the page
-     */    
+     */
     watch: {
       sass: {
         files: '<%= project.src %>/scss/**/*.scss',
-        tasks: ['clean:cache','sass:dev']
+        tasks: ['sass:dev', 'autoprefixer']
       },
       concat: {
         files: '<%= project.src %>/**/*.js',
@@ -152,11 +154,13 @@ module.exports = function(grunt) {
       }
     },
 
+
+
     /**
      * Check syntax consistence
      *
      * Define JSHint options inline
-     */    
+     */
     jshint: {
       files: [
         '<%= project.js.base %>'
@@ -171,10 +175,42 @@ module.exports = function(grunt) {
         'jquery': false
       }
     },
-    
-    
-    
-    
+
+
+    /**
+     * Autoprefix CSS on compile
+     *
+     * ...
+     */
+    autoprefixer: {
+      styles: {
+        src: '<%= project.app %>/css/styles.min.css',
+        dest: '<%= project.app %>/css/styles.min.css'
+      },
+      dated: {
+        src: '<%= project.app %>/css/dated.min.css',
+        dest: '<%= project.app %>/css/dated.min.css'
+      }
+    },
+
+
+
+    csso: {
+      deploy: {
+        options: {
+          report: 'gzip',
+          banner: '<%= project.banner %>'
+        },
+        files: {
+          '<%= project.app %>/css/styles.min.css': '<%= project.app %>/css/styles.min.css',
+          '<%= project.app %>/css/dated.min.css': '<%= project.app %>/css/dated.min.css'
+        }
+      }
+    },
+
+
+
+
     clean: {
       images: {
         src: ['<%= project.app %>/img/**/*.{png,jpg,jpeg,gif,svg}']
@@ -187,20 +223,22 @@ module.exports = function(grunt) {
       },
       gitignore: {
         src: ['<%= project.app %>/**/.gitignore']
+      },
+      cssmaps: {
+        src: ['<%= project.app %>/css/*.map']
       }
     },
-    
-    
-    
-    
-    
+
+
+
+
     /**
-     * Compile SCSS files 
+     * Compile SCSS files
      *
      * Compiles all SCSS files and, when in
      * deploy mode, adds project information
      * banner to those files
-     */   
+     */
     sass: {
       dev: {
         options: {
@@ -212,33 +250,33 @@ module.exports = function(grunt) {
           '<%= project.app %>/css/styles.min.css': '<%= project.css.styles %>',
           '<%= project.app %>/css/dated.min.css': '<%= project.css.dated %>'
         }
-      },      
+      },
       deploy : {
         options: {
-          style: 'compressed',
-          require: 'sass-globbing',
-          banner: '<%= project.banner %>'
+          sourcemap: false,
+          style: 'expanded',
+          require: 'sass-globbing'
         },
         files : {
           '<%= project.app %>/css/styles.min.css': '<%= project.css.styles %>',
           '<%= project.app %>/css/dated.min.css': '<%= project.css.dated %>'
-        }     
+        }
       }
     },
 
 
 
-    
+
     modernizr: {
       devFile:    'bower_components/modernizr/modernizr.js',
       outputFile: '<%= project.app %>/libs/vendor/modernizr.min.js',
       extra: {
-    		load: false,
-    		shiv: true,
-    		cssclasses: true,
-    		mq: true
-    	},
-    	uglify: true,
+        load: false,
+        shiv: true,
+        cssclasses: true,
+        mq: true
+      },
+      uglify: true,
       files: [
         '<%= project.src %>/libs/*.js',
         '<%= project.src %>/scss/**/*.scss'
@@ -247,7 +285,7 @@ module.exports = function(grunt) {
 
 
 
-		
+
     imagemin: {
       deploy: {
         options: {
@@ -263,17 +301,17 @@ module.exports = function(grunt) {
         ]
       }
     },
-    
-    
+
+
     copy: {
-      lib: {
+      library: {
         files : {
-             '<%= project.app %>/libs/vendor/<%= project.lib.filename %>': '<%= project.lib.path %>/<%= project.lib.filename %>'
+             '<%= project.app %>/libs/vendor/<%= project.library.file %>': '<%= project.library.path %>/<%= project.library.file %>'
            }
       },
       imagesMinifiedToApp: {
         files: [
-          { 
+          {
             expand: true,
             cwd: '<%= project.src %>/img/minified/',
             src: ['**/*.{png,jpg,jpeg,gif,svg}'],
@@ -283,7 +321,7 @@ module.exports = function(grunt) {
       },
       imagesSourceToApp: {
         files: [
-          { 
+          {
             expand: true,
             cwd: '<%= project.src %>/img/source/',
             src: ['**/*.{png,jpg,jpeg,gif,svg}'],
@@ -292,20 +330,20 @@ module.exports = function(grunt) {
         ]
       }
     },
-    
-    
-    
-        
-  
+
+
+
+
+
     concat: {
       options: {
         stripBanners: true,
         banner: '<%= project.banner %>'
-      },     
+      },
       all: {
         /**
          * Concatenate bower plugins
-         * 
+         *
          * See bower.json, hash `plugins`
          *
          * Add a plugin:
@@ -313,8 +351,8 @@ module.exports = function(grunt) {
          * installed. Install a plugin with:
          *
             `bower install <package> --save`
-         *    
-         * Accordingly have a look at the actual path 
+         *
+         * Accordingly have a look at the actual path
          * of the dedicated plugin file and append it
          * to the `plugins` hash within the bower.json
          * config file.
@@ -322,16 +360,16 @@ module.exports = function(grunt) {
          * Delete a plugin:
          * To spare out a plugin from concatenation simply
          * delete the related row from the hash `plugins`.
-         * To remove a plugin completely run: 
-         *  
+         * To remove a plugin itself run:
+         *
             `bower uninstall <package> --save`
-         *   
+         *
          */
-        files: {
-          '<%= project.app %>/libs/vendor/plugins.min.js': 
-          [
-              '<%= bower.plugins %>'
-          ],
+         files: {
+           '<%= project.app %>/libs/vendor/plugins.min.js':
+           [
+            '<%= bower.plugins %>'
+           ],
           /**
            * Build our base javascript file
            */
@@ -339,10 +377,10 @@ module.exports = function(grunt) {
         }
       }
     },
-    
-    
-    
-    
+
+
+
+
     uglify: {
       options: {
         banner: '<%= project.banner %>'
@@ -357,7 +395,7 @@ module.exports = function(grunt) {
 
 
 
-    
+
     replace: {
       css: {
         src: [
@@ -376,7 +414,7 @@ module.exports = function(grunt) {
             from: /(..)(\/assets\/)/g,
             to: '$2'
           }
-        ]   
+        ]
       },
       js: {
         src: '<%= project.app %>/libs/base.min.js',
@@ -389,13 +427,13 @@ module.exports = function(grunt) {
           }
         ]
       }
-    }      
-  
+    }
+
   });
 
 
 
-  
+
   /**
    * Dynamically load npm tasks
    */
@@ -407,29 +445,31 @@ module.exports = function(grunt) {
     'jshint',
     'check-modules'
     ]
-  ); 
+  );
 
 
-  // initialize 
+  // initialize
   grunt.registerTask('default', [
     'jshint',
-    'copy:lib',
+    'copy:library',
     'modernizr',
     'concat',
     'sass:dev',
     'copy:imagesSourceToApp',
     'connect',
-    'open', 
+    'open',
     'watch'
     ]
   );
 
-  
+
   // deploy
   grunt.registerTask('deploy', [
     'modernizr',
     'concat',
     'sass:deploy',
+    'autoprefixer',
+    'csso',
     'uglify:deploy',
     'clean:images',
     'clean:minified',
@@ -439,13 +479,15 @@ module.exports = function(grunt) {
     ]
   );
 
-  
+
   // deploy wcom style
   grunt.registerTask('deploy-wcom', [
     'modernizr',
     'concat',
     'sass:deploy',
     'replace',
+    'autoprefixer',
+    'csso',
     'uglify:deploy',
     'clean:images',
     'clean:minified',
@@ -454,7 +496,7 @@ module.exports = function(grunt) {
     'copy:imagesMinifiedToApp'
     ]
   );
-  
+
   // // default
   grunt.registerTask('server', [
     'connect', 'watch:livereload'
