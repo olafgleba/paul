@@ -7,14 +7,19 @@
  *
  */
 
+
+
 /*html*/.paul {
 
   body {
-    color: #555;
-    background-color: #fff;
+    color: #444;
+    background-color: $pageBackgroundColor;
+    // @include test("30em") {
+    //   background-color: green;
+    // }
   }
 
-  ul, ol {
+  ul {
     margin-left: 0;
     list-style: none;
     border-top: 0;
@@ -22,11 +27,11 @@
     li, dd, dt {
       border-bottom: 0;
       background-color: #f9f9f9;
-
-      a {
-        background-color: #f2f2f2;
-      }
     }
+  }
+
+  ol {
+    margin-left: $base-spacing-unit;
   }
 
   a, a:visited {
@@ -55,7 +60,7 @@
 
   h2 {
     font-weight: 300;
-    font-size: 1.9rem;
+    font-size: 1.7rem;
     line-height: 1.5;
   }
 
@@ -76,12 +81,23 @@
     margin-bottom: 3rem;
   }
 
+  .tip {
+    padding: $half-spacing-unit;
+    background-color: $tipBackgroundColor;
+    //@include font-size($milli-size)
+    font-style: italic;
+
+    > span {
+      font-weight: 600;
+    }
+  }
+
   [role="main"] div, .grid {
     margin-bottom: 4.5rem;
   }
 
   .page {
-    max-width: 55em;
+    max-width: 45em;
     margin: 0 auto;
     padding: 5em 2em;
   }
@@ -114,13 +130,36 @@
 
      li {
        background-color: transparent;
-       padding: 0.5em 0;
+       padding: 0;
 
        a {
-         padding: 0.5em;
-         //line-height: 2;
+
        }
      }
+    }
+  }
+
+  .inline-list {
+
+    @include inline-block-fix(li, 0.31);
+
+    > li {
+      display: inline-block;
+      vertical-align: top;
+      margin-right: $half-spacing-unit;
+      margin-bottom: $half-spacing-unit;
+    }
+
+    a {
+      background-color: #f2f2f2;
+      padding: 0.35em;
+    }
+  }
+
+  /*ul*/.bullets {
+    margin-left: $half-spacing-unit;
+    > li {
+      list-style: disc outside;
     }
   }
 }

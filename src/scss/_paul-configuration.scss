@@ -1,0 +1,172 @@
+
+
+/*------------------------------------*\
+    $OVERRIDES
+\*------------------------------------*/
+/**
+ * Override inuit.css’ default variables values here.
+ *
+ * Those variables listed below are only a selection
+ * of variables which you supposedly like to apdapt to your
+ * project. But take this only as an example. Place any
+ * variables that should override inuit.css’ defaults here.
+ *
+ * See `/bower_components/inuit.css/_defaults.scss` for
+ * available variables.
+ */
+
+
+/**
+ * Framework
+ */
+$base-font-family: sans-serif;
+$base-font-size: 20px;
+$base-line-height: 32px;
+
+
+/**
+ * Font-sizes (in pixels).
+ */
+$giga-size:         96px;
+$mega-size:         72px;
+$kilo-size:         48px;
+
+$h1-size:           48px; // .alpha
+$h2-size:           30px; // .beta
+$h3-size:           24px; // .gamma
+$h4-size:           22px; // .delta
+$h5-size:           16px; // .epsilon
+$h6-size:           14px; // .zeta
+
+$milli-size:        18px;
+$micro-size:        10px;
+
+
+/**
+ * Tell inuit.css when breakpoints start.
+ */
+$lap-start:         481px;
+$desk-start:        1024px;
+$desk-wide-start:   1200px;
+
+
+
+
+
+
+/*------------------------------------*\
+    $abstractions-AND-ABSTRACTIONS
+\*------------------------------------*/
+/**
+ * All of inuit.css’ abstractions and abstractions are initially turned off by
+ * default. This means that you start any project with as little as possible,
+ * and introducing abstractions and abstractions is as simple as switching the
+ * following variables to `true`.
+ */
+$use-grids:         true;
+$use-flexbox:       true;
+$use-columns:       true;
+$use-nav:           true;
+$use-options:       true;
+$use-pagination:    true;
+$use-breadcrumb:    true;
+$use-media:         true;
+$use-marginalia:    true;
+$use-island:        true;
+$use-block-list:    true;
+$use-matrix:        true;
+$use-split:         true;
+$use-this-or-this:  true;
+$use-link-complex:  true;
+$use-flyout:        true;
+$use-arrows:        true;
+$use-sprite:        true;
+$use-icon-text:     true;
+$use-beautons:      true;
+$use-lozenges:      true;
+$use-rules:         true;
+$use-stats:         true;
+$use-greybox:       true;
+
+
+
+
+
+
+
+
+
+$white: #fff;
+$red: red;
+$green: lighten(greenyellow, 30%);
+
+
+$pageBackgroundColor: $white!default;
+
+
+$tipBackgroundColor: $green;
+
+
+
+
+
+$border-radius:    10px!default;
+
+
+
+
+
+
+/*------------------------------------*\
+    $PROJECT-INCLUDES
+\*------------------------------------*/
+
+/**
+ * Switch on/off extended or created abstractions.
+ *
+ * Follows the inuit.css approach to switch on/off object including
+ * to have a as light css output as possible.
+ *
+    1. Add a new file for every abstraction within
+       the appropriate folder, e.g.
+
+       `abstracts/base/` 			// created abstractions
+       `abstracts/extend/` 		// extended inuit.css abstractions
+
+    2. Define a variable to use in our condition (s. below), e.g.
+
+      `$use-abstract-<NAME-OF-OBJECT>`:         		 	true|false;`
+      `$use-abstract-ext-<NAME-OF-SECOND-OBJECT>`:   true|false;`
+      ... a.s.o. ...
+
+    2. Add a condition within this file, e.g.
+
+      // created abstractions
+      @if $use-abstract-<NAME-OF-OBJECT> == true {
+        ... object declarations ...
+      }
+
+      // extended inuit.css abstractions
+      @if $use-abstract-ext-<NAME-OF-OBJECT> == true {
+        ... object declarations ...
+      }
+ *
+ */
+
+
+/**
+ * This particular object is just an (empty) example.
+ * Implements a new object, s. `abstractions/create/_object.scss`,
+ * Exluded by default (bool `false`).
+ */
+$use-abstract-test: 								false!default;
+
+
+/**
+ * This particular object modifier is just an example.
+ * Extends the inuit `grid` object, s. `abstractions/extend/_grids--ordinal.scss`,
+ * Exluded by default (bool `false`).
+ */
+$use-abstract-ext-grid--ordinal: 		false!default;
+
+

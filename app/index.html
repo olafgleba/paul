@@ -1,50 +1,105 @@
 <!DOCTYPE html>
 <html lang="de" class="paul">
 <head>
-<meta charset="utf-8">
-<title>Paul | with frontend developing</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="robots" content="index, follow" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<meta name="author" content="Olaf Gleba <og@olafgleba.de>" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>Paul | Frontend development environment</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="Olaf Gleba <og@olafgleba.de>" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link type="text/plain" rel="author" href="humans.txt">
+  <link type="text/plain" rel="author" href="humans.txt">
 
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 
-<!--[if (gt IE 8) | (IEMobile)]><!-->
-<link rel="stylesheet" href="css/styles.min.css">
-<!--<![endif]-->
+  <!--[if (gt IE 8) | (IEMobile)]><!-->
+  <link rel="stylesheet" href="css/styles.min.css">
+  <!--<![endif]-->
 
-<!--[if (lt IE 9) & (!IEMobile)]>
-<link rel="stylesheet" href="css/dated.min.css">
-<![endif]-->
+  <!--[if (lt IE 9) & (!IEMobile)]>
+  <link rel="stylesheet" href="css/dated.min.css">
+  <![endif]-->
 
-<script src="libs/vendor/modernizr.min.js"></script>
+  <script src="libs/vendor/modernizr.min.js"></script>
+  <script>
+    // (function(){
+    //   var s = document.createElement('script');
+    //   s.async = true;
+    //   s.src = '//use.typekit.net/pes0gwd.js';
+    //   s.onload = function(){
+    //     try{Typekit.load();}catch(e){}
+    //   };
+    //   var x = document.getElementsByTagName('head')[0];
+    //   x.appendChild(s);
+    // })();
+  </script>
 </head>
 
 <body id="totop" class="index">
   <div class="page">
     <header role="banner" class="tophead">
-      <h1>paul.<span>dev</span></h1>
-      <h2><i>paul.dev</i> is just my personal frontend development environment. It relies on libraries and extensions such as <a href="http://bower.io">Bower</a>, <a href="http://gruntjs.com">Grunt</a>, <a href="http://sass-lang.org">Sass</a> and the <a href="http://inuitcss.com/">inuit.css</a> framework as the foundation to build up the real css stuff. Instead to fiddle about repetitive, boring tasks, it allows me to focus on what i do like most: Building websites and apps.</h2>
+      <h1>Paul</h1>
+      <h2><i>Paul</i> is my personal frontend development environment. It relies on libraries and extensions such as <a href="http://bower.io">Bower</a>, <a href="http://gruntjs.com">Grunt</a>, <a href="http://sass-lang.org">Sass</a> and the <a href="http://inuitcss.com/">inuit.css</a> framework as the foundation to build up the real css stuff. Instead to fiddle about repetitive, boring tasks, it allows me to focus on what i do like most: Building websites and apps.</h2>
     </header> <!-- /role[header] -->
 
     <div role="main">
       <h3>Introduction</h3>
       <div>
-        <p><b>paul.dev</b> just reflects my way of doing things, my approach to facilitate starting new projects. Maybe someone find this frontend helpful. As a point to start but also as a inspiration to build and tweak it up for your own purposes.</p>
-        <p><b>paul.dev</b> just reflects my way of doing things, my approach to facilitate starting new projects. Maybe someone find this frontend helpful. As a point to start but also as a inspiration to build and tweak it up for your own purposes.</p>
+        <p><b>Paul</b> allows you to assemble libraries easily, starts a livereload- and webserver in your prefered browser, watch out for changes in your files and folders to run appropriate tasks then, like concatenation, minification, file copy and and a bunch of several more tasks. It also includes a HTML5 boilerplate (<code class="language-bash">template.html</code>) to start with. </p>
+
+        <p>Altough it is highly configurable, the main attempt is <b>workflow simplification</b> and <b>staying focused</b> on your real work. Simply run <code class="language-bash">grunt</code> (e.g. <code class="language-bash">grunt-deploy</code>) on the console and forget about the magic that happens behind.</p>
+
+        <p><b>Paul</b> just reflects my way of doing things, my approach to facilitate starting new projects. Hopefully someone find it helpful. By using it as it is or just as a inspiration to build your own environment.</p>
       </div>
 
-      <h3>Included plugins</h3>
+      <h3>Requirements</h3>
       <div>
-        <p>...</p>
+        <p>You must have installed the latest <a href="http://nodejs.org/">Node.js</a>, <a href="http://gruntjs.com">Grunt</a>, <a href="http://bower.io">Bower</a> and <a href="http://sass-lang.org">SASS</a>. As currently no windows compatible bash scripts are included, a UNIX operation system (like OS X) is required.</p>
+      </div>
 
+      <h3>Get Paul</h3>
+      <div>
+        <h4>Make a choice:</h4>
+        <ul>
+          <li>- Clone the git repo: <code class="language-bash">git clone https://github.com/olafgleba/paul.git</code></li>
+          <li>- Download the <a href="#">zip</a>, extract it and have a go.</li>
+        </ul>
+      </div>
+
+      <h3 id="getstarted">Get started with Paul</h3>
+      <div>
+        <ol>
+          <li>Open the <code class="language-bash">Grundfile.js</code> and set your prefered browser (search for <i>$BROWSER</i>)</li>
+          <li>Execute both <code class="language-bash">build-bower-components.command</code> and <code class="language-bash">build-node-modules.command</code> by double-click or run it from the console (currently only UNIX compatible)</li>
+          <li>Run <code class="language-bash">grunt</code> on the console</li>
+          <li>You're done. Start development...</li>
+        </ol>
+      </div>
+
+      <h3>What Paul does for us</h3>
+      <div>
+        <ul class="bullets">
+          <li>kdkddk</li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+
+      </div>
+
+      <h3>Prepared components/modules</h3>
+      <p>To ensure you always work with the most current component/module version, these files are not included in the project download actually. But installing them is fairly simple: execute both <code class="language-bash">*.command</code> bash scripts that comes with Paul and you're done (see above <a href="#getstarted">Get started with Paul</a>).
+      <div>
         <h4>Bower</h4>
-        <ul class="block-list">
+        <ul class="inline-list">
           <li><a href="https://github.com/ftlabs/fastclick">FastClick</a></li>
           <li><a href="http://inuitcss.com/">inuit.css</a></li>
           <li><a href="https://github.com/Modernizr/Modernizr">Modernizr</a></li>
@@ -56,32 +111,85 @@
 
         <h4>Grunt</h4>
         <p>Requires installation of Grunt version >= 0.4.x</p>
-        <ul class="block-list">
-          <li><a href="http://csswizardry.com/">connect-livereload</a></li>
-          <li><a href="http://bower.io">grunt-check-modules</a></li>
-          <li><a href="http://gruntjs.com">grunt-contrib-clean</a></li>
-          <li><a href="http://sass-lang.org">grunt-contrib-concat</a></li>
+        <ul class="inline-list">
+          <li><a href="https://github.com/gruntjs/grunt-contrib-clean">grunt-contrib-clean</a></li>
+          <li><a href="https://github.com/gruntjs/grunt-contrib-copy">grunt-contrib-copy</a></li>
+          <li><a href="https://github.com/gruntjs/grunt-contrib-sass">grunt-contrib-sass</a></li>
+          <li><a href="https://github.com/gruntjs/grunt-contrib-imagemin">grunt-contrib-imagemin</a></li>
+          <li><a href="https://github.com/gruntjs/grunt-contrib-concat">grunt-contrib-concat</a></li>
+          <li><a href="https://github.com/gruntjs/grunt-contrib-uglify">grunt-contrib-uglify</a></li>
+          <li><a href="https://github.com/gruntjs/grunt-contrib-jshint">grunt-contrib-jshint</a></li>
+          <li><a href="https://github.com/gruntjs/grunt-contrib-watch">grunt-contrib-watch</a></li>
+          <li><a href="https://github.com/gruntjs/grunt-contrib-connect">grunt-contrib-connect</a></li>
+          <li><a href="https://github.com/Modernizr/grunt-modernizr">grunt-modernizr</a></li>
+          <li><a href="https://github.com/jsoverson/grunt-open">grunt-open</a></li>
+          <li><a href="https://github.com/nDmitry/grunt-autoprefixer">grunt-autoprefixer</a></li>
+          <li><a href="https://github.com/t32k/grunt-csso">grunt-csso</a></li>
+          <li><a href="https://github.com/jzaefferer/grunt-check-modules">grunt-check-modules</a></li>
+          <li><a href="https://github.com/tkellen/node-matchdep">matchdep</a></li>
+          <li><a href="https://github.com/intesso/connect-livereload">connect-livereload</a></li>
         </ul>
+      </div>
+
+      <h3>Scaffolding</h3>
+      <div>
+        <pre><code class="language-css">app/
+bower_components/
+node_modules/
+src/
+    img/
+        libs/
+            base.js
+        scss/
+            abstracts/
+                base/
+                extended/
+            utilities/
+            sections/
+                paul
+                    _paul.scss
+                    queries/
+                        _mq.scss
+            vendor/
+                _overrides.scss
+            _bootstrap.scss
+            _paul-configuration.scss
+            dated.scss
+            styles.scss
+.gitignore
+bower.json
+build-bower-components.command
+build-node-modules.command
+package.json
+Grundfile.js
+travis.yml</code></pre>
+
+      </div>
+
+      <h3>Documentation</h3>
+      <div>
+        <p>Actually there is no documentation, but all files contains extensive annotations. Hint: Dig into the <code class="language-bash">Grundfile.js</code>. The comments within this file will probably gives you a rather comprehensive overview how it all works.</p>
+        <p>I will attach some wiki pages soon.</p>
       </div>
 
       <h3>Support</h3>
       <div>
-        <p>Maybe someone find this frontend helpful. Take it and do whatever you like. Since this is only a personal framework, i do not provide support for this. If you have any question or a bug to report, use the github issue tracker please.</p>
+        <p>Since this is only a personal approach and not intended to getting somewhere else, i do not provide support for this. If you have any question or a bug to report, please use the issue tracker for this project.</p>
       </div>
 
-      <h3>Honor and a big thx goes to:</h3>
+      <h3>Kudos and big thx:</h3>
       <div>
-        <ul class="block-list">
-          <li><a href="http://csswizardry.com/">Harry Roberts</a> for the incredible work on <a href="http://inuitcss.com/">inuit.css</a></li>
+        <ul class="inline-list">
+          <li><a href="http://csswizardry.com/">Harry Roberts</a> for the incredible work on his CSS-Framwork <a href="http://inuitcss.com/">inuit.css</a></li>
           <li><a href="http://bower.io">The bower team</a> to simplify life in lib and plugin organisation.</li>
           <li><a href="http://gruntjs.com">The grunt devs</a> for let the machine doing all the stupid work while me making coffee.</li>
-          <li><a href="http://sass-lang.org">Founder of Sass</a> whom gives me inspiration (and the tool) to try new coding approaches.</li>
+          <li><a href="http://sass-lang.org">Founder of Sass</a> whom gives me inspiration (and the tool) to get me organized better.</li>
         </ul>
       </div>
 
       <h3>Comparable projects</h3>
       <ul class="block-list">
-        <li><a href="https://github.com/toddmotto/fireshell">FireShell</li>
+        <li><a href="https://github.com/toddmotto/fireshell">FireShell</a> A project by Todd Motto with a fairly similar approach.</li>
       </ul>
 
     </div><!-- /role[main] -->

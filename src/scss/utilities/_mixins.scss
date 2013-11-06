@@ -1,0 +1,44 @@
+/**
+ * Mixin description
+ *
+ * Usage Example:
+ *
+   <div>
+    ...
+   </div>
+ *
+ */
+
+// content here
+//
+
+@mixin test($width) {
+	@media only screen and (max-width: $width) {
+		@content;
+	}
+}
+
+
+/**
+ * Filter inline-block whitespace bug
+ *
+ * Adjust letter spacing of the parent element
+ * to close the gap between childs, revert this
+ * on given childs where we apply the display type.
+ *
+ * Usage Example:
+ *
+ * // When parent is a unordered list
+   `@include inline-block-fix(li, 0.31);`
+ *
+ */
+@mixin inline-block-fix($child, $value) {
+
+	& {
+		letter-spacing: -#{$value}em;
+
+	   > #{$child} {
+	    letter-spacing: normal;
+	  }
+	}
+}

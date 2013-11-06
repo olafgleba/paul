@@ -1,5 +1,5 @@
 /**
- * Paul.framework Gruntfile
+ * paul Gruntfile
  * @version 1.0.0
  * @author Olaf Gleba
  */
@@ -38,7 +38,7 @@ module.exports = function(grunt) {
 
     /**
      * Read package.json and make it
-     * available with the `pkg` variable
+     * available with the `bower` variable
      */
     bower: grunt.file.readJSON('bower.json'),
 
@@ -60,6 +60,12 @@ module.exports = function(grunt) {
         file: 'jquery.min.js',
         path: 'bower_components/jquery'
       },
+
+      /**
+       * $BROWSER
+       *
+       * Set your prefered Browser
+       */
       browser: 'Google Chrome Canary',
 
       /**
@@ -134,7 +140,7 @@ module.exports = function(grunt) {
         tasks: ['sass:dev', 'autoprefixer']
       },
       concat: {
-        files: '<%= project.src %>/**/*.js',
+        files: ['<%= project.src %>/libs/**/*.js', 'bower.json'],
         tasks: ['concat:all']
       },
       copy: {
@@ -244,6 +250,7 @@ module.exports = function(grunt) {
         options: {
           sourcemap: true,
           style: 'expanded',
+          noCache: true,
           require: 'sass-globbing'
         },
         files : {
@@ -368,7 +375,11 @@ module.exports = function(grunt) {
          files: {
            '<%= project.app %>/libs/vendor/plugins.min.js':
            [
-            '<%= bower.plugins %>'
+            // Get all declared bower plugins
+            '<%= bower.plugins %>',
+
+            // Get available vendor scripts
+            '<%= project.src %>/libs/vendor/*.js'
            ],
           /**
            * Build our base javascript file

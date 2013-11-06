@@ -25,7 +25,14 @@
  * font/size, vertical rhythm measuring and some other stuff.
  * Change their values to fit your needs.
  */
-@import "build";
+//@import "build";
+
+
+@import "paul-configuration";
+
+@import "bootstrap";
+
+@import "sections/paul/*";
 
 
 
