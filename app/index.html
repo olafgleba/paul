@@ -68,22 +68,32 @@
         </ul>
       </div>
 
-      <h3 id="getstarted">Get started with Paul</h3>
+      <h3 id="getstarted">Getting started with Paul</h3>
       <div>
         <ol>
           <li>Open the <code class="language-bash">Grundfile.js</code> and set your prefered browser (search for <i>$BROWSER</i>)</li>
           <li>Execute both <code class="language-bash">build-bower-components.command</code> and <code class="language-bash">build-node-modules.command</code> by double-click or run it from the console (currently only UNIX compatible)</li>
-          <li>Run <code class="language-bash">grunt</code> on the console</li>
+          <li>Run <code class="language-bash">$ grunt</code> on the console</li>
           <li>You're done. Start development...</li>
         </ol>
+      </div>
+
+
+      <h3>Usage of Paul</h3>
+      <div>
+        <h4>There are a few rules you have to obey:</h4>
+        <ul class="bullets">
+          <li><b>All</b> of your working files (like CSS, javascript, images etc.) lives within the appropriate <code class="language-bash">source/...</code> folder. <b>Never</b> put any of this stuff directly into the <code class="language-bash">app/</code> folder. </li>
+          <li></li>
+        </ul>
       </div>
 
       <h3>What Paul does for us</h3>
       <div>
         <ul class="bullets">
-          <li>kdkddk</li>
-          <li></li>
-          <li></li>
+          <li>Automatically build custom Modernizr tied to what's really been used in your CSS/Javascript files</li>
+          <li>CSS prefixes are automatically added on deployment</li>
+          <li>HTML5 template as a boilerplate to start with</li>
           <li></li>
           <li></li>
           <li></li>
@@ -94,6 +104,7 @@
         </ul>
 
       </div>
+
 
       <h3>Prepared components/modules</h3>
       <p>To ensure you always work with the most current component/module version, these files are not included in the project download actually. But installing them is fairly simple: execute both <code class="language-bash">*.command</code> bash scripts that comes with Paul and you're done (see above <a href="#getstarted">Get started with Paul</a>).

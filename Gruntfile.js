@@ -48,7 +48,7 @@ module.exports = function(grunt) {
      */
     project: {
       app: 'app',
-      src: 'src',
+      src: 'source',
       css: {
         styles: '<%= project.src %>/scss/styles.scss',
         dated: '<%= project.src %>/scss/dated.scss'
@@ -143,9 +143,17 @@ module.exports = function(grunt) {
         files: ['<%= project.src %>/libs/**/*.js', 'bower.json'],
         tasks: ['concat:all']
       },
-      copy: {
+      images: {
         files: '<%= project.src %>/img/source/**/*.{png,jpg,jpeg,gif,svg}',
         tasks: ['clean:images', 'copy:imagesSourceToApp']
+      },
+      assets: {
+        files: '<%= project.src %>/assets/**/*',
+        tasks: ['clean:assets', 'copy:assetsSourceToApp']
+      },
+      icons: {
+        files: '<%= project.src %>/icons/**/*',
+        tasks: ['clean:icons', 'copy:iconsSourceToApp']
       },
       livereload: {
         options: {
@@ -155,7 +163,9 @@ module.exports = function(grunt) {
           '<%= project.app %>/css/*.css',
           '<%= project.app %>/libs/*.js',
           '<%= project.app %>/*.html',
-          '<%= project.src %>/img/source/**/*.{png,jpg,jpeg,gif,svg}'
+          '<%= project.src %>/img/source/**/*.{png,jpg,jpeg,gif,svg}',
+          '<%= project.src %>/assets/**/*',
+          '<%= project.src %>/icons/**/*'
         ]
       }
     },
@@ -223,6 +233,12 @@ module.exports = function(grunt) {
       },
       minified: {
         src: ['<%= project.src %>/img/minified/**/*.{png,jpg,jpeg,gif,svg}']
+      },
+      assets: {
+        src: ['<%= project.app %>/assets/']
+      },
+      icons: {
+        src: ['<%= project.app %>/icons/']
       },
       cache: {
         src: ['.sass-cache']
@@ -333,6 +349,26 @@ module.exports = function(grunt) {
             cwd: '<%= project.src %>/img/source/',
             src: ['**/*.{png,jpg,jpeg,gif,svg}'],
             dest: '<%= project.app %>/img/'
+          }
+        ]
+      },
+      assetsSourceToApp: {
+        files: [
+          {
+            expand: true,
+            cwd: '<%= project.src %>/assets/',
+            src: ['**'],
+            dest: '<%= project.app %>/assets/'
+          }
+        ]
+      },
+      iconsSourceToApp: {
+        files: [
+          {
+            expand: true,
+            cwd: '<%= project.src %>/icons/',
+            src: ['**'],
+            dest: '<%= project.app %>/icons/'
           }
         ]
       }
@@ -451,14 +487,6 @@ module.exports = function(grunt) {
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
 
-  // check module state only
-  grunt.registerTask('check', [
-    'jshint',
-    'check-modules'
-    ]
-  );
-
-
   // initialize
   grunt.registerTask('default', [
     'jshint',
@@ -466,7 +494,13 @@ module.exports = function(grunt) {
     'modernizr',
     'concat',
     'sass:dev',
+    'clean:images',
+    'clean:minified',
+    'clean:assets',
+    'clean:icons',
     'copy:imagesSourceToApp',
+    'copy:assetsSourceToApp',
+    'copy:iconsSourceToApp',
     'connect',
     'open',
     'watch'
@@ -485,8 +519,12 @@ module.exports = function(grunt) {
     'clean:images',
     'clean:minified',
     'clean:gitignore',
+    'clean:assets',
+    'clean:icons',
     'imagemin',
-    'copy:imagesMinifiedToApp'
+    'copy:imagesMinifiedToApp',
+    'copy:assetsSourceToApp',
+    'copy:iconsSourceToApp'
     ]
   );
 
