@@ -1,3 +1,15 @@
+# ##############################################################################
+# # Project                                                                    #
+# ##############################################################################
+
+# Project: @@name
+# Description: @@description
+# Site: @@homepage
+#
+# Author: @@author.name <@@author.email>
+# LastModified: @@timestamp
+
+
 # Apache Server Configs v1.1.0 | MIT License
 # https://github.com/h5bp/server-configs-apache
 

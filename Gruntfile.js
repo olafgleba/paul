@@ -496,7 +496,7 @@ module.exports = function(grunt) {
             expand: true,
             cwd: '<%= project.src %>/misc/',
             src: ['**'],
-            dest: '<%= project.app %>'
+            dest: '<%= project.app %>/'
           }
         ]
       }
@@ -595,6 +595,18 @@ module.exports = function(grunt) {
       deploy: {
         options: {
           patterns: [
+            {
+              match: 'name',
+              replacement: '<%= pkg.name %>'
+            },
+            {
+              match: 'description',
+              replacement: '<%= pkg.description %>'
+            },
+            {
+              match: 'homepage',
+              replacement: '<%= pkg.homepage %>'
+            },
             {
               match: 'version',
               replacement: '<%= library.version %>'
@@ -732,8 +744,7 @@ module.exports = function(grunt) {
     'replace',
     'copy:imagesMinifiedToApp',
     'copy:assetsSourceToApp',
-    'copy:iconsSourceToApp',
-    'copy:miscSourceToApp'
+    'copy:iconsSourceToApp'
     ]
   );
 

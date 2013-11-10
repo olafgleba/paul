@@ -5,23 +5,15 @@
 # TEAM
 
   Developer: Olaf Gleba
-  Site: http://
-  Contact: og [at] olafgleba.de
+  Contact: @@author.email
   Twitter: @olafgleba
   Location: Cologne, Germany
 
 
-# THANKS
+# PROJECT
 
-  http://grundjs.com/
-  http://sass-lang.com/
+  Name: @@name
+  Description: @@description
+  Site: @@homepage
+  Last modified: @@timestamp
 
-
-# SITE
-
-  Last update: @@timestamp 
-  Language: Deutsch / German
-  Standards: HTML5, CSS3
-  Build: sass, gruntjs
-  CMS: Welcompose, https://github.com/olafgleba/welcompose
-  

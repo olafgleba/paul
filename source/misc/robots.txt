@@ -1,1 +1,7 @@
-# robots.txt
+# Project: @@name
+# Description: @@description
+# Site: @@homepage
+#
+# Author: @@author.name <@@author.email>
+# LastModified: @@timestamp
+
