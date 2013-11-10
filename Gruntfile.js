@@ -489,6 +489,16 @@ module.exports = function(grunt) {
             dest: '<%= project.app %>/icons/'
           }
         ]
+      },
+      miscSourceToApp: {
+        files: [
+          {
+            expand: true,
+            cwd: '<%= project.src %>/misc/',
+            src: ['**'],
+            dest: '<%= project.app %>'
+          }
+        ]
       }
     },
 
@@ -689,7 +699,6 @@ module.exports = function(grunt) {
     'copy:library',
     'copy:imagesSourceToApp',
     'copy:assetsSourceToApp',
-    'copy:iconsSourceToApp',
     'replace',
     'connect',
     'open',
@@ -723,7 +732,8 @@ module.exports = function(grunt) {
     'replace',
     'copy:imagesMinifiedToApp',
     'copy:assetsSourceToApp',
-    'copy:iconsSourceToApp'
+    'copy:iconsSourceToApp',
+    'copy:miscSourceToApp'
     ]
   );
 
