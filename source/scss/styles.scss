@@ -24,10 +24,10 @@
  * font/size, vertical rhythm measuring and some other stuff.
  * Change their values to fit your needs.
  */
-@import "paul-configuration";
+@import "example-configuration";
 
 @import "bootstrap";
 
-@import "sections/paul/*";
+@import "sections/example/*";
 
-@import "sections/paul/queries/*";
+@import "sections/example/queries/*";

@@ -243,7 +243,7 @@ module.exports = function(grunt) {
         tasks: ['concat:all']
       },
       images: {
-        files: '<%= project.src %>/img/source/**/*.{png,jpg,jpeg,gif,svg}',
+        files: '<%= project.src %>/img/source/**/*',
         tasks: ['clean:images', 'copy:imagesSourceToApp']
       },
       assets: {
@@ -254,9 +254,13 @@ module.exports = function(grunt) {
         files: '<%= project.src %>/icons/**/*',
         tasks: ['clean:icons', 'copy:iconsSourceToApp']
       },
-      templates: {
-        files: ['<%= project.src %>/html/**/*', '<%= project.src %>/misc/**/*'],
-        tasks: ['replace']
+      html: {
+        files: ['<%= project.src %>/html/**/*'],
+        tasks: ['clean:html', 'replace:html']
+      },
+      misc: {
+        files: ['<%= project.src %>/misc/**/*'],
+        tasks: ['clean:misc', 'replace:misc']
       },
       livereload: {
         options: {
@@ -265,7 +269,7 @@ module.exports = function(grunt) {
         files: [
           '<%= project.css.app.path %>/**/*.css',
           '<%= project.js.app.path %>/**/*.js',
-          '<%= project.src %>/img/source/**/*.{png,jpg,jpeg,gif,svg}',
+          '<%= project.src %>/img/source/**/*',
           '<%= project.src %>/assets/**/*',
           '<%= project.src %>/icons/**/*',
           '<%= project.src %>/html/**/*'
@@ -324,17 +328,23 @@ module.exports = function(grunt) {
      * Grunt task scope: default, deploy
      */
     clean: {
-      images: {
-        src: ['<%= project.app %>/img/**/*.{png,jpg,jpeg,gif,svg}']
-      },
       minified: {
-        src: ['<%= project.src %>/img/minified/**/*.{png,jpg,jpeg,gif,svg}']
+        src: ['<%= project.src %>/img/minified/']
+      },
+      images: {
+        src: ['<%= project.app %>/img/**/*']
       },
       assets: {
-        src: ['<%= project.app %>/assets/']
+        src: ['<%= project.app %>/assets/**/*']
       },
       icons: {
-        src: ['<%= project.app %>/icons/']
+        src: ['<%= project.app %>/icons/**/*']
+      },
+      html: {
+        src: ['<%= project.app %>/*.{html,htm,jade,haml}']
+      },
+      misc: {
+        src: ['<%= project.app %>/*.{txt,md,mdown,htaccess}', '<%= project.app %>/htaccess']
       },
       cache: {
         src: ['.sass-cache']
@@ -361,7 +371,7 @@ module.exports = function(grunt) {
         options: {
           sourcemap: true,
           style: 'expanded',
-          noCache: true,
+          noCache: false, // s. also https://github.com/gruntjs/grunt-contrib-sass/issues/63
           require: 'sass-globbing'
         },
         files : {
@@ -373,7 +383,7 @@ module.exports = function(grunt) {
         options: {
           sourcemap: false,
           style: 'expanded',
-          noCache: true,
+          noCache: false,
           require: 'sass-globbing'
         },
         files : {
@@ -447,7 +457,7 @@ module.exports = function(grunt) {
       library: {
         files : {
              '<%= project.js.app.vendor %>/<%= project.library.file %>':
-                        '<%= project.library.path %>/<%= project.library.file %>'
+                  '<%= project.library.path %>/<%= project.library.file %>'
            }
       },
       imagesMinifiedToApp: {
@@ -455,7 +465,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: '<%= project.src %>/img/minified/',
-            src: ['**/*.{png,jpg,jpeg,gif,svg}'],
+            src: ['**'],
             dest: '<%= project.app %>/img/'
           }
         ]
@@ -465,7 +475,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: '<%= project.src %>/img/source/',
-            src: ['**/*.{png,jpg,jpeg,gif,svg}'],
+            src: ['**', '!README.md'],
             dest: '<%= project.app %>/img/'
           }
         ]
@@ -475,7 +485,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: '<%= project.src %>/assets/',
-            src: ['**'],
+            src: ['**', '!README.md'],
             dest: '<%= project.app %>/assets/'
           }
         ]
@@ -485,18 +495,8 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: '<%= project.src %>/icons/',
-            src: ['**'],
+            src: ['**', '!README.md'],
             dest: '<%= project.app %>/icons/'
-          }
-        ]
-      },
-      miscSourceToApp: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= project.src %>/misc/',
-            src: ['**'],
-            dest: '<%= project.app %>/'
           }
         ]
       }
@@ -592,46 +592,61 @@ module.exports = function(grunt) {
      * Grunt task scope: default, deploy
      */
     replace: {
-      deploy: {
-        options: {
-          patterns: [
-            {
-              match: 'name',
-              replacement: '<%= pkg.name %>'
-            },
-            {
-              match: 'description',
-              replacement: '<%= pkg.description %>'
-            },
-            {
-              match: 'homepage',
-              replacement: '<%= pkg.homepage %>'
-            },
-            {
-              match: 'version',
-              replacement: '<%= library.version %>'
-            },
-            {
-              match: 'author.name',
-              replacement: '<%= pkg.author.name %>'
-            },
-            {
-              match: 'author.email',
-              replacement: '<%= pkg.author.email %>'
-            },
-            {
-              match: 'file',
-              replacement: '<%= project.library.file %>'
-            },
-            {
-              match: 'timestamp',
-              replacement: '<%= grunt.template.today() %>'
-            }
-          ]
-        },
+      options: {
+        force: true,
+        patterns: [
+          {
+            match: 'name',
+            replacement: '<%= pkg.name %>'
+          },
+          {
+            match: 'description',
+            replacement: '<%= pkg.description %>'
+          },
+          {
+            match: 'homepage',
+            replacement: '<%= pkg.homepage %>'
+          },
+          {
+            match: 'version',
+            replacement: '<%= library.version %>'
+          },
+          {
+            match: 'author.name',
+            replacement: '<%= pkg.author.name %>'
+          },
+          {
+            match: 'author.email',
+            replacement: '<%= pkg.author.email %>'
+          },
+          {
+            match: 'file',
+            replacement: '<%= project.library.file %>'
+          },
+          {
+            match: 'timestamp',
+            replacement: '<%= grunt.template.today() %>'
+          }
+        ]
+      },
+      html: {
         files: [
-          {expand: true, flatten: true, src: ['<%= project.src %>/html/**/*',
-          '<%= project.src %>/misc/**/*'], dest: 'app/'}
+          {
+            expand: true,
+            flatten: true,
+            src: ['<%= project.src %>/html/**/*', '!<%= project.src %>/html/README.md'],
+            dest: '<%= project.app %>/'
+          }
+        ]
+      },
+      misc: {
+        files: [
+          {
+            expand: true,
+            flatten: true,
+            src: ['<%= project.src %>/misc/**/*', '!<%= project.src %>/misc/README.md'],
+            dest: '<%= project.app %>/'
+          }
         ]
       }
     }
@@ -708,10 +723,12 @@ module.exports = function(grunt) {
     'clean:minified',
     'clean:assets',
     'clean:icons',
+    'clean:misc',
+    'replace:html',
+    'replace:misc',
     'copy:library',
     'copy:imagesSourceToApp',
     'copy:assetsSourceToApp',
-    'replace',
     'connect',
     'open',
     'watch'
@@ -740,8 +757,10 @@ module.exports = function(grunt) {
     'clean:gitignore',
     'clean:assets',
     'clean:icons',
+    'clean:misc',
+    'replace:html',
+    'replace:misc',
     'imagemin',
-    'replace',
     'copy:imagesMinifiedToApp',
     'copy:assetsSourceToApp',
     'copy:iconsSourceToApp'
