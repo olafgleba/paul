@@ -12,11 +12,17 @@
 /*html*/.paul {
 
   body {
-    color: #444;
+    color: $textColor;
     background-color: $pageBackgroundColor;
     // @include test("30em") {
     //   background-color: green;
     // }
+  }
+
+  .page {
+    max-width: 42em;
+    margin: 0 auto;
+    padding: 5em 2em;
   }
 
   ul {
@@ -27,11 +33,16 @@
     li, dd, dt {
       border-bottom: 0;
       background-color: #f9f9f9;
+      margin-bottom: 0.5rem;
     }
   }
 
   ol {
     margin-left: $base-spacing-unit;
+
+    > li {
+      margin-bottom: 0.5rem;
+    }
   }
 
   a, a:visited {
@@ -43,10 +54,11 @@
     }
   }
 
-  h1, h2, h3 {
-    color: #555;
-    font-weight: 700;
-    margin-bottom: 3rem;
+  h1, h2, h3, h4 {
+    //font-family: "Helvetica Neue", sans-serif;
+    color: $headingColor;
+    font-weight: 400;
+    @extend %sass-margin-bottom;
 
     span {
       color: #999;
@@ -54,24 +66,25 @@
   }
 
   h1 {
-    //font-size: 2.9rem;
+    font-family: "Helvetica Neue", sans-serif;
     font-weight: 700;
   }
 
   h2 {
     font-weight: 300;
-    font-size: 1.7rem;
     line-height: 1.5;
+    margin-bottom: 2.5rem;
   }
 
   h3 {
-    font-size: 1.9rem;
-    border-bottom: 3px solid #f2f2f2;
+    font-weight: 600;
+    border-bottom: 5px solid $borderColor;
     padding-bottom: 0.75rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
   }
 
   h4 {
+    font-weight: 700;
     margin-bottom: 0.75rem;
   }
 
@@ -92,14 +105,30 @@
     }
   }
 
-  [role="main"] div, .grid {
-    margin-bottom: 4.5rem;
+  .btn {
+    background-color: lighten($black, 60%);
+    padding: 0.35em;
+    border-radius: 0;
+    line-height: 2;
   }
 
-  .page {
-    max-width: 45em;
-    margin: 0 auto;
-    padding: 5em 2em;
+  span.btn {
+    cursor: auto;
+  }
+
+  .notice {
+    padding: $half-spacing-unit;
+    background-color: lighten($black, 60%);
+  }
+
+
+
+  [role="main"] {
+    //background-color: $pageBackgroundColor;
+  }
+
+  [role="main"] div, .grid {
+    margin-bottom: 4.5rem;
   }
 
   .sprite {
@@ -118,8 +147,12 @@
   }
 
   .index {
-    h1, h2 {
-     margin-bottom: 3rem;
+    h1 {
+     margin-bottom: 1rem;
+    }
+
+    h2 {
+     font-family: $base-font-family;
     }
 
     [role="main"] {
@@ -145,13 +178,13 @@
 
     > li {
       display: inline-block;
-      vertical-align: top;
+      vertical-align: middle;
       margin-right: $half-spacing-unit;
       margin-bottom: $half-spacing-unit;
     }
 
     a {
-      background-color: #f2f2f2;
+      background-color: lighten($black, 60%);
       padding: 0.35em;
     }
   }
@@ -162,4 +195,12 @@
       list-style: disc outside;
     }
   }
+
+  /*ul*/.bullets--text {
+
+    > li {
+      @extend %sass-margin-bottom;
+    }
+  }
+
 }

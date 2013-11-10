@@ -19,9 +19,9 @@
 /**
  * Framework
  */
-$base-font-family: sans-serif;
-$base-font-size: 20px;
-$base-line-height: 32px;
+$base-font-family: Georgia, serif;
+$base-font-size: 23px;
+$base-line-height: 40px;
 
 
 /**
@@ -31,10 +31,10 @@ $giga-size:         96px;
 $mega-size:         72px;
 $kilo-size:         48px;
 
-$h1-size:           48px; // .alpha
-$h2-size:           30px; // .beta
-$h3-size:           24px; // .gamma
-$h4-size:           22px; // .delta
+$h1-size:           52px; // .alpha
+$h2-size:           36px; // .beta
+$h3-size:           32px; // .gamma
+$h4-size:           24px; // .delta
 $h5-size:           16px; // .epsilon
 $h6-size:           14px; // .zeta
 
@@ -97,16 +97,24 @@ $use-greybox:       true;
 
 
 $white: #fff;
+$black: #4f5759;
 $red: red;
 $green: lighten(greenyellow, 30%);
 
 
-$pageBackgroundColor: $white!default;
-
-
+$textColor: $black;
+$headingColor: $black;
+$pageBackgroundColor: lighten($black, 50%);
 $tipBackgroundColor: $green;
 
 
+//$codeTextColor: darken($white, 5%);
+//$codeBackgroundColor: lighten($black, 25%);
+
+$codeTextColor: $black;
+$codeBackgroundColor: lighten($black, 56%);
+
+$borderColor: lighten($black, 45%) !default;
 
 
 
@@ -153,14 +161,12 @@ $border-radius:    10px!default;
  *
  */
 
-
 /**
  * This particular object is just an (empty) example.
  * Implements a new object, s. `abstractions/create/_object.scss`,
  * Exluded by default (bool `false`).
  */
 $use-abstract-test: 								false!default;
-
 
 /**
  * This particular object modifier is just an example.

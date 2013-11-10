@@ -3,23 +3,22 @@
  */
 App = (function($) {
 
-  // private Methoden
-  // ...
-  
+  // private methods
+
   return {
-    // öffentliche Methoden, API
+    // public api
     init: function() {
-    
+
       FastClick.attach(document.body);
-      
+
       $('a[href="#totop"]').smoothScroll({
         easing: 'easeOutQuint',
         speed: 1200
       });
-      
+
     }
   };
-  
+
 })(jQuery)
 
 
@@ -29,7 +28,7 @@ App = (function($) {
  */
 
 $(function() {
- 
+
   App.init();
 
 });

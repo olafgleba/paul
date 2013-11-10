@@ -1,5 +1,5 @@
 /**
- * paul Gruntfile
+ * Paul Gruntfile
  * @version 1.0.0
  * @author Olaf Gleba
  */
@@ -37,25 +37,85 @@ module.exports = function(grunt) {
 
 
     /**
-     * Read package.json and make it
+     * Read bower.json and make it
      * available with the `bower` variable
      */
     bower: grunt.file.readJSON('bower.json'),
 
 
     /**
+     * Read bower.json of choosen library and make it
+     * available with the `library` variable
+     */
+    library: grunt.file.readJSON('bower_components/jquery/bower.json'),
+
+
+    /**
      * Define project paths and patterns
+     *
+     * This is the place where almost all
+     * configuration is done. The Grundfile
+     * heavely uses these variables to simplify
+     * maintainment. So to say, if you like to
+     * edit the environment, you'll probably just
+     * need to change variables within this section
      */
     project: {
+
+      /**
+       * $PATHS
+       *
+       * Set the app and source folder
+       */
       app: 'app',
       src: 'source',
+
+      /**
+       * $CSS
+       *
+       * Set origin paths, the main stylesheet
+       * and a fallback for older browsers (eg. < 9 IE)
+       */
       css: {
-        styles: '<%= project.src %>/scss/styles.scss',
-        dated: '<%= project.src %>/scss/dated.scss'
+        source: {
+          path:     '<%= project.src %>/scss',
+          base:     '<%= project.src %>/scss/styles.scss',
+          fallback: '<%= project.src %>/scss/dated.scss'
+        },
+        app: {
+          path:     '<%= project.app %>/css',
+          base:     '<%= project.app %>/css/styles.min.css',
+          fallback: '<%= project.app %>/css/dated.min.css'
+
+        }
       },
+
+      /**
+       * $JAVASCRIPT
+       *
+       * Set origin paths, the main and
+       * the plugins javascript file
+       */
       js: {
-        base: '<%= project.src %>/libs/base.js'
+        source: {
+          path:      '<%= project.src %>/libs',
+          vendor:    '<%= project.src %>/libs/vendor',
+          base:      '<%= project.src %>/libs/base.js'
+        },
+        app: {
+          path:       '<%= project.app %>/libs',
+          vendor:     '<%= project.app %>/libs/vendor',
+          base:       '<%= project.app %>/libs/base.min.js',
+          plugins:    '<%= project.app %>/libs/vendor/plugins.min.js'
+        }
       },
+
+      /**
+       * $LIBRARY
+       *
+       * Set your prefered javascript library
+       *
+       */
       library: {
         file: 'jquery.min.js',
         path: 'bower_components/jquery'
@@ -65,31 +125,41 @@ module.exports = function(grunt) {
        * $BROWSER
        *
        * Set your prefered Browser
+       * Could be: `Firefox`, `Google Chrome` also
        */
       browser: 'Google Chrome Canary',
 
       /**
-       * Define Project information banner
+       * $BANNER
+       *
+       * Define Project information banner, which will
+       * appear on top of every css and javascript file
+       * when the grunt task `grunt deploy` is excecuted.
        * Inherits from package.json
        */
       banner: '/**\n' +
-              ' * <%= pkg.name %>\n' +
-              ' * <%= pkg.title %>\n' +
-              ' * <%= pkg.url %>\n' +
-              ' * @author <%= pkg.author %>\n' +
+              ' * Project: <%= pkg.name %>\n' +
+              ' * Description: <%= pkg.description %>\n' +
+              ' * Site: <%= pkg.homepage %>\n' +
+              ' * \n' +
+              ' * @author <%= pkg.author.name %>, <<%= pkg.author.email %>>\n' +
               ' * @version <%= pkg.version %>\n' +
-              ' * Copyright <%= pkg.copyright %>. <%= pkg.license %> licensed.\n' +
+              ' * @lastmodified <%= grunt.template.today() %>\n' +
+              ' * \n' +
+              ' * <%= pkg.licenses.type %> licensed.\n' +
               ' */\n\n'
     },
 
 
     /**
-     * Connect the server
+     * $CONNECT
      *
-     * Start local webserver and enable
-     * livereload on development folder by
-     * injecting livereload snippet with a
+     * Connect the server, start local webserver
+     * and enable livereload on development folder
+     * by injecting livereload snippet with a
      * middleware approach
+     *
+     * Grunt task scope: default
      */
     connect: {
       options: {
@@ -117,7 +187,13 @@ module.exports = function(grunt) {
     },
 
 
-
+    /**
+     * $OPEN
+     *
+     * Open prefered Browser on defined port
+     *
+     * Grunt task scope: default
+     */
     open : {
       dev: {
         path: 'http://127.0.0.1:<%= connect.options.port %>',
@@ -126,60 +202,17 @@ module.exports = function(grunt) {
     },
 
 
-
     /**
-     * Run tasks on watched files
+     * $JSHINT
      *
-     * Sass changes leads to page injection,
-     * changes in other files forces the browser
-     * to reload the page
-     */
-    watch: {
-      sass: {
-        files: '<%= project.src %>/scss/**/*.scss',
-        tasks: ['sass:dev', 'autoprefixer']
-      },
-      concat: {
-        files: ['<%= project.src %>/libs/**/*.js', 'bower.json'],
-        tasks: ['concat:all']
-      },
-      images: {
-        files: '<%= project.src %>/img/source/**/*.{png,jpg,jpeg,gif,svg}',
-        tasks: ['clean:images', 'copy:imagesSourceToApp']
-      },
-      assets: {
-        files: '<%= project.src %>/assets/**/*',
-        tasks: ['clean:assets', 'copy:assetsSourceToApp']
-      },
-      icons: {
-        files: '<%= project.src %>/icons/**/*',
-        tasks: ['clean:icons', 'copy:iconsSourceToApp']
-      },
-      livereload: {
-        options: {
-          livereload: true
-        },
-        files: [
-          '<%= project.app %>/css/*.css',
-          '<%= project.app %>/libs/*.js',
-          '<%= project.app %>/*.html',
-          '<%= project.src %>/img/source/**/*.{png,jpg,jpeg,gif,svg}',
-          '<%= project.src %>/assets/**/*',
-          '<%= project.src %>/icons/**/*'
-        ]
-      }
-    },
-
-
-
-    /**
-     * Check syntax consistence
-     *
+     * Check syntax consistence.
      * Define JSHint options inline
+     *
+     * Grunt task scope: default
      */
     jshint: {
       files: [
-        '<%= project.js.base %>'
+        '<%= project.js.source.base %>'
       ],
       options: {
         'bitwise': true,
@@ -194,23 +227,80 @@ module.exports = function(grunt) {
 
 
     /**
-     * Autoprefix CSS on compile
+     * $WATCH
      *
-     * ...
+     * Run tasks on watched files. Sass changes
+     * leads to page injection, changes in other
+     * files forces the browser to reload the page
      */
-    autoprefixer: {
-      styles: {
-        src: '<%= project.app %>/css/styles.min.css',
-        dest: '<%= project.app %>/css/styles.min.css'
+    watch: {
+      sass: {
+        files: '<%= project.css.source.path %>/**/*.scss',
+        tasks: ['sass:dev']
       },
-      dated: {
-        src: '<%= project.app %>/css/dated.min.css',
-        dest: '<%= project.app %>/css/dated.min.css'
+      concat: {
+        files: ['<%= project.js.source.path %>/**/*.js', 'bower.json'],
+        tasks: ['concat:all']
+      },
+      images: {
+        files: '<%= project.src %>/img/source/**/*.{png,jpg,jpeg,gif,svg}',
+        tasks: ['clean:images', 'copy:imagesSourceToApp']
+      },
+      assets: {
+        files: '<%= project.src %>/assets/**/*',
+        tasks: ['clean:assets', 'copy:assetsSourceToApp']
+      },
+      icons: {
+        files: '<%= project.src %>/icons/**/*',
+        tasks: ['clean:icons', 'copy:iconsSourceToApp']
+      },
+      templates: {
+        files: ['<%= project.src %>/html/**/*', '<%= project.src %>/misc/**/*'],
+        tasks: ['replace']
+      },
+      livereload: {
+        options: {
+          livereload: true
+        },
+        files: [
+          '<%= project.css.app.path %>/**/*.css',
+          '<%= project.js.app.path %>/**/*.js',
+          '<%= project.src %>/img/source/**/*.{png,jpg,jpeg,gif,svg}',
+          '<%= project.src %>/assets/**/*',
+          '<%= project.src %>/icons/**/*',
+          '<%= project.src %>/html/**/*'
+        ]
       }
     },
 
 
+    /**
+     * $AUTOPREFIXER
+     *
+     * Vendor prefixing on compile
+     * s. $CSSO also
+     *
+     * Grunt task scope: deploy
+     */
+    autoprefixer: {
+      styles: {
+        src:  '<%= project.css.app.base %>',
+        dest: '<%= project.css.app.base %>'
+      },
+      dated: {
+        src:  '<%= project.css.app.fallback %>',
+        dest: '<%= project.css.app.fallback %>'
+      }
+    },
 
+
+    /**
+     * $CSSO
+     *
+     * Compress styles after vendor prefixing
+     *
+     * Grunt task scope: deploy
+     */
     csso: {
       deploy: {
         options: {
@@ -218,15 +308,21 @@ module.exports = function(grunt) {
           banner: '<%= project.banner %>'
         },
         files: {
-          '<%= project.app %>/css/styles.min.css': '<%= project.app %>/css/styles.min.css',
-          '<%= project.app %>/css/dated.min.css': '<%= project.app %>/css/dated.min.css'
+          '<%= project.css.app.base %>': '<%= project.css.app.base %>',
+          '<%= project.css.app.fallback %>': '<%= project.css.app.fallback %>'
         }
       }
     },
 
 
-
-
+    /**
+     * $CLEAN
+     *
+     * Delete files or folders as a pre-step
+     * for some population tasks
+     *
+     * Grunt task scope: default, deploy
+     */
     clean: {
       images: {
         src: ['<%= project.app %>/img/**/*.{png,jpg,jpeg,gif,svg}']
@@ -252,14 +348,13 @@ module.exports = function(grunt) {
     },
 
 
-
-
     /**
-     * Compile SCSS files
+     * $SASS
      *
-     * Compiles all SCSS files and, when in
-     * deploy mode, adds project information
-     * banner to those files
+     * Compiles all SCSS files. Add project information
+     * banner to those files when in deploy mode.
+     *
+     * Grunt task scope: default, deploy
      */
     sass: {
       dev: {
@@ -270,29 +365,37 @@ module.exports = function(grunt) {
           require: 'sass-globbing'
         },
         files : {
-          '<%= project.app %>/css/styles.min.css': '<%= project.css.styles %>',
-          '<%= project.app %>/css/dated.min.css': '<%= project.css.dated %>'
+          '<%= project.css.app.base %>': '<%= project.css.source.base %>',
+          '<%= project.css.app.fallback %>': '<%= project.css.source.fallback %>'
         }
       },
       deploy : {
         options: {
           sourcemap: false,
           style: 'expanded',
+          noCache: true,
           require: 'sass-globbing'
         },
         files : {
-          '<%= project.app %>/css/styles.min.css': '<%= project.css.styles %>',
-          '<%= project.app %>/css/dated.min.css': '<%= project.css.dated %>'
+          '<%= project.css.app.base %>': '<%= project.css.source.base %>',
+          '<%= project.css.app.fallback %>': '<%= project.css.source.fallback %>'
         }
       }
     },
 
 
-
-
+    /**
+     * $MODERNIZR
+     *
+     * Build custom modernizr file depending
+     * on what's been found within your css
+     * and javscript files.
+     *
+     * Grunt task scope: default, deploy
+     */
     modernizr: {
       devFile:    'bower_components/modernizr/modernizr.js',
-      outputFile: '<%= project.app %>/libs/vendor/modernizr.min.js',
+      outputFile: '<%= project.js.app.vendor %>/modernizr.min.js',
       extra: {
         load: false,
         shiv: true,
@@ -301,14 +404,20 @@ module.exports = function(grunt) {
       },
       uglify: true,
       files: [
-        '<%= project.src %>/libs/*.js',
-        '<%= project.src %>/scss/**/*.scss'
+        '<%= project.js.source.path %>/**/*.js',
+        '<%= project.css.source.path %>/**/*.scss'
       ]
     },
 
 
-
-
+    /**
+     * $IMAGEMIN
+     *
+     * Grab all source images, minify them
+     * and shove it to the appropriate app folder
+     *
+     * Grunt task scope: deploy
+     */
     imagemin: {
       deploy: {
         options: {
@@ -326,10 +435,19 @@ module.exports = function(grunt) {
     },
 
 
+    /**
+     * $COPY
+     *
+     * Misc. copy tasks to follow the `single direction`
+     * approach (See doc/paul.md also)
+     *
+     * Grunt task scope: default, deploy
+     */
     copy: {
       library: {
         files : {
-             '<%= project.app %>/libs/vendor/<%= project.library.file %>': '<%= project.library.path %>/<%= project.library.file %>'
+             '<%= project.js.app.vendor %>/<%= project.library.file %>':
+                        '<%= project.library.path %>/<%= project.library.file %>'
            }
       },
       imagesMinifiedToApp: {
@@ -375,9 +493,16 @@ module.exports = function(grunt) {
     },
 
 
-
-
-
+    /**
+     * $CONCAT
+     *
+     * Concatenate javascript files, collect
+     * bower plugins plus vendor file and build
+     * a single file of it. Build our main
+     * javascript file separately.
+     *
+     * Grunt task scope: default, deploy
+     */
     concat: {
       options: {
         stripBanners: true,
@@ -385,7 +510,9 @@ module.exports = function(grunt) {
       },
       all: {
         /**
-         * Concatenate bower plugins
+         * Concatenate bower plugins, append other
+         * vendor scripts to it and build our main base
+         * javascript file
          *
          * See bower.json, hash `plugins`
          *
@@ -403,94 +530,155 @@ module.exports = function(grunt) {
          * Delete a plugin:
          * To spare out a plugin from concatenation simply
          * delete the related row from the hash `plugins`.
+         * within the bower.json file.
          * To remove a plugin itself run:
          *
             `bower uninstall <package> --save`
          *
          */
          files: {
-           '<%= project.app %>/libs/vendor/plugins.min.js':
+           '<%= project.js.app.plugins %>':
            [
-            // Get all declared bower plugins
+            // Get all specified bower plugins
             '<%= bower.plugins %>',
 
             // Get available vendor scripts
-            '<%= project.src %>/libs/vendor/*.js'
+            '<%= project.js.source.vendor %>/*.js'
            ],
           /**
            * Build our base javascript file
            */
-          '<%= project.app %>/libs/base.min.js': '<%= project.js.base %>'
+          '<%= project.js.app.base %>': '<%= project.js.source.base %>'
         }
       }
     },
 
 
-
-
+    /**
+     * $UGLIFY
+     *
+     * Add banner and compress our javascript files.
+     *
+     * Grunt task scope: deploy
+     */
     uglify: {
       options: {
         banner: '<%= project.banner %>'
       },
       deploy: {
         files: {
-          '<%= project.app %>/libs/base.min.js': '<%= project.js.base %>',
-          '<%= project.app %>/libs/vendor/plugins.min.js': '<%= project.app %>/libs/vendor/plugins.min.js'
+          '<%= project.js.app.base %>': '<%= project.js.source.base %>',
+          '<%= project.js.app.plugins %>': '<%= project.js.app.plugins %>'
         }
       }
     },
 
 
-
-
+    /**
+     * $REPLACE
+     *
+     * Substitute text patterns with a given string
+     *
+     * Grunt task scope: default, deploy
+     */
     replace: {
-      css: {
-        src: [
-          '<%= project.app %>/css/styles.min.css',
-          '<%= project.app %>/css/dated.min.css'
-        ],
-        overwrite: true,
-        replacements: [
-          {
-            // change image references within css files to wcom smarty syntax
-            from: /(url\()(..\/img\/)([a-z\-\.]+)(\))/g,
-            to: '$1=%global_file name="$3"%=$4'
-          },
-          {
-            // change to root (or whatever prefixed dir) for folder include
-            from: /(..)(\/assets\/)/g,
-            to: '$2'
-          }
-        ]
-      },
-      js: {
-        src: '<%= project.app %>/libs/base.min.js',
-        overwrite: true,
-        replacements: [
-          {
-            // change image references within js files to wcom smarty syntax
-            from: /(url\()(..\/img\/)([a-z\-\.]+)(\))/g,
-            to: '$1/files/global_files/$3'
-          }
+      deploy: {
+        options: {
+          patterns: [
+            {
+              match: 'version',
+              replacement: '<%= library.version %>'
+            },
+            {
+              match: 'author.name',
+              replacement: '<%= pkg.author.name %>'
+            },
+            {
+              match: 'author.email',
+              replacement: '<%= pkg.author.email %>'
+            },
+            {
+              match: 'file',
+              replacement: '<%= project.library.file %>'
+            },
+            {
+              match: 'timestamp',
+              replacement: '<%= grunt.template.today() %>'
+            }
+          ]
+        },
+        files: [
+          {expand: true, flatten: true, src: ['<%= project.src %>/html/**/*',
+          '<%= project.src %>/misc/**/*'], dest: 'app/'}
         ]
       }
     }
 
-  });
+
+    /**
+     * $REPLACE
+     *
+     * These are special tasks to change path and
+     * syntaxes while deploying for the CMS
+     * Welcompose only.
+     *
+     * Grunt task scope: deploy
+     */
+    // replace: {
+    //   css: {
+    //     src: [
+    //       '<%= project.css.app.base %>',
+    //       '<%= project.css.app.fallback %>'
+    //     ],
+    //     overwrite: true,
+    //     replacements: [
+    //       {
+    //         // change image references within css files to wcom smarty syntax
+    //         from: /(url\()(..\/img\/)([a-z\-\.]+)(\))/g,
+    //         to: '$1=%global_file name="$3"%=$4'
+    //       },
+    //       {
+    //         // change to root (or whatever prefixed dir) for folder include
+    //         from: /(..)(\/assets\/)/g,
+    //         to: '$2'
+    //       }
+    //     ]
+    //   },
+    //   js: {
+    //     src: '<%= project.js.app.base %>',
+    //     overwrite: true,
+    //     replacements: [
+    //       {
+    //         // change image references within js files to wcom smarty syntax
+    //         from: /(url\()(..\/img\/)([a-z\-\.]+)(\))/g,
+    //         to: '$1/files/global_files/$3'
+    //       }
+    //     ]
+    //   }
+    // }
 
 
+  }); // eol grunt.initConfig
 
 
   /**
+   * $MATCHDEP
+   *
    * Dynamically load npm tasks
    */
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
 
-  // initialize
+  /**
+   * $DEFAULT
+   *
+   * Run this task by type `grunt` on the
+   * console to start development. This starts
+   * the localwebser, open a browser and prepares
+   * the application folder right away.
+   */
   grunt.registerTask('default', [
     'jshint',
-    'copy:library',
     'modernizr',
     'concat',
     'sass:dev',
@@ -498,9 +686,11 @@ module.exports = function(grunt) {
     'clean:minified',
     'clean:assets',
     'clean:icons',
+    'copy:library',
     'copy:imagesSourceToApp',
     'copy:assetsSourceToApp',
     'copy:iconsSourceToApp',
+    'replace',
     'connect',
     'open',
     'watch'
@@ -508,11 +698,47 @@ module.exports = function(grunt) {
   );
 
 
-  // deploy
+  /**
+   * $DEPLOY
+   *
+   * Run this task by type `grunt deploy` when
+   * you finish development. Clear up the
+   * application folder, get rid of dot files,
+   * minify binary data, compile and compress
+   * the css and javascript
+   */
   grunt.registerTask('deploy', [
     'modernizr',
     'concat',
     'sass:deploy',
+    'autoprefixer',
+    'csso',
+    'uglify:deploy',
+    'clean:images',
+    'clean:minified',
+    'clean:gitignore',
+    'clean:assets',
+    'clean:icons',
+    'imagemin',
+    'replace',
+    'copy:imagesMinifiedToApp',
+    'copy:assetsSourceToApp',
+    'copy:iconsSourceToApp'
+    ]
+  );
+
+
+  /**
+   * $DEPLOY-WCOM
+   *
+   * Special task while deploying for the
+   * CMS Welcompose.
+   */
+  grunt.registerTask('deploy-wcom', [
+    'modernizr',
+    'concat',
+    'sass:deploy',
+    'replace',
     'autoprefixer',
     'csso',
     'uglify:deploy',
@@ -529,27 +755,17 @@ module.exports = function(grunt) {
   );
 
 
-  // deploy wcom style
-  grunt.registerTask('deploy-wcom', [
-    'modernizr',
-    'concat',
-    'sass:deploy',
-    'replace',
-    'autoprefixer',
-    'csso',
-    'uglify:deploy',
-    'clean:images',
-    'clean:minified',
-    'clean:gitignore',
-    'imagemin',
-    'copy:imagesMinifiedToApp'
-    ]
-  );
-
-  // // default
+  /**
+   * $SERVER
+   *
+   * Start web- and livereload
+   * server only. Useful after
+   * deploying your site.
+   */
   grunt.registerTask('server', [
-    'connect', 'watch:livereload'
+    'connect',
+    'open'
     ]
   );
 
-};
+}; // eol module.exports
