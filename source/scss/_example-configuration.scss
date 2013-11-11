@@ -172,13 +172,13 @@ $border-radius:    10px!default;
  * Implements a new object, s. `abstractions/create/_object.scss`,
  * Exluded by default (bool `false`).
  */
-$use-abstract-test: 								false !default;
+$use-abstract-example: 						false !default;
 
 /**
  * This particular object modifier is just an example.
  * Extends the inuit `grid` object, s. `abstractions/extend/_grids--ordinal.scss`,
  * Exluded by default (bool `false`).
  */
-$use-abstract-ext-grid--ordinal: 		false !default;
+$use-abstract-ext-example:        false !default;
 
 
