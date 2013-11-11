@@ -1,4 +1,5 @@
-# assets/
+# scss/
 
-This the appropriate folder to places your fonts etc.
-Nesting of folders is allowed.
+The SASS structure
+
+Compile stylesheets: styles.scss, dated.scss

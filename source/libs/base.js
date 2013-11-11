@@ -1,30 +1,31 @@
 /**
- * Define Application (as module)
+ * Define module
  */
 App = (function($) {
 
-  // private methods
+  // Private methods
+  // ...
 
   return {
-    // public api
+
+    // Public api
     init: function() {
 
+      // see FastClick bower plugin
       FastClick.attach(document.body);
 
-      $('a[href="#totop"]').smoothScroll({
-        easing: 'easeOutQuint',
-        speed: 1200
-      });
+      // ...
 
     }
   };
 
-})(jQuery)
+})(jQuery);
+
 
 
 
 /**
- * DOM is ready
+ * If DOM is ready...
  */
 
 $(function() {

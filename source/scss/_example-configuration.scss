@@ -20,8 +20,14 @@
  * Framework
  */
 $base-font-family: Georgia, serif;
-$base-font-size: 23px;
-$base-line-height: 40px;
+$base-font-size: 23px !default;
+$base-line-height: 40px !default;
+
+
+
+$base-spacing-unit: $base-line-height!default;
+$half-spacing-unit: $base-spacing-unit / 2!default;
+$line-height-ratio: $base-line-height / $base-font-size !default;
 
 
 /**
@@ -45,9 +51,9 @@ $micro-size:        10px;
 /**
  * Tell inuit.css when breakpoints start.
  */
-$lap-start:         481px;
-$desk-start:        1024px;
-$desk-wide-start:   1200px;
+$lap-start:         481px !default;
+$desk-start:        1024px !default;
+$desk-wide-start:   1200px !default;
 
 
 
@@ -63,30 +69,30 @@ $desk-wide-start:   1200px;
  * and introducing abstractions and abstractions is as simple as switching the
  * following variables to `true`.
  */
-$use-grids:         true;
-$use-flexbox:       true;
-$use-columns:       true;
-$use-nav:           true;
-$use-options:       true;
-$use-pagination:    true;
-$use-breadcrumb:    true;
-$use-media:         true;
-$use-marginalia:    true;
-$use-island:        true;
-$use-block-list:    true;
-$use-matrix:        true;
-$use-split:         true;
-$use-this-or-this:  true;
-$use-link-complex:  true;
-$use-flyout:        true;
-$use-arrows:        true;
-$use-sprite:        true;
-$use-icon-text:     true;
-$use-beautons:      true;
-$use-lozenges:      true;
-$use-rules:         true;
-$use-stats:         true;
-$use-greybox:       true;
+$use-grids:         false;
+$use-flexbox:       false;
+$use-columns:       false;
+$use-nav:           false;
+$use-options:       false;
+$use-pagination:    false;
+$use-breadcrumb:    false;
+$use-media:         false;
+$use-marginalia:    false;
+$use-island:        false;
+$use-block-list:    false;
+$use-matrix:        false;
+$use-split:         false;
+$use-this-or-this:  false;
+$use-link-complex:  false;
+$use-flyout:        false;
+$use-arrows:        false;
+$use-sprite:        false;
+$use-icon-text:     false;
+$use-beautons:      false;
+$use-lozenges:      false;
+$use-rules:         false;
+$use-stats:         false;
+$use-greybox:       false;
 
 
 
@@ -130,7 +136,7 @@ $border-radius:    10px!default;
 \*------------------------------------*/
 
 /**
- * Switch on/off extended or created abstractions.
+ * Switch on/off extensions or created abstractions.
  *
  * Follows the inuit.css approach to switch on/off object including
  * to have a as light css output as possible.
@@ -139,7 +145,7 @@ $border-radius:    10px!default;
        the appropriate folder, e.g.
 
        `abstracts/base/` 			// created abstractions
-       `abstracts/extend/` 		// extended inuit.css abstractions
+       `abstracts/extend/` 		// extensions inuit.css abstractions
 
     2. Define a variable to use in our condition (s. below), e.g.
 
@@ -154,7 +160,7 @@ $border-radius:    10px!default;
         ... object declarations ...
       }
 
-      // extended inuit.css abstractions
+      // extensions inuit.css abstractions
       @if $use-abstract-ext-<NAME-OF-OBJECT> == true {
         ... object declarations ...
       }
@@ -166,13 +172,13 @@ $border-radius:    10px!default;
  * Implements a new object, s. `abstractions/create/_object.scss`,
  * Exluded by default (bool `false`).
  */
-$use-abstract-test: 								false!default;
+$use-abstract-test: 								false !default;
 
 /**
  * This particular object modifier is just an example.
  * Extends the inuit `grid` object, s. `abstractions/extend/_grids--ordinal.scss`,
  * Exluded by default (bool `false`).
  */
-$use-abstract-ext-grid--ordinal: 		false!default;
+$use-abstract-ext-grid--ordinal: 		false !default;
 
 

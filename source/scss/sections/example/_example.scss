@@ -1,22 +1,13 @@
 /**
  * Paul.css
  *
- * Description
- *
-    ... Markup/Usage Example ...
- *
  */
-
-
 
 /*html*/.paul {
 
   body {
     color: $textColor;
     background-color: $pageBackgroundColor;
-    // @include test("30em") {
-    //   background-color: green;
-    // }
   }
 
   .page {
@@ -38,7 +29,7 @@
   }
 
   ol {
-    margin-left: $base-spacing-unit;
+    margin-left: 32px;
 
     > li {
       margin-bottom: 0.5rem;
@@ -55,7 +46,6 @@
   }
 
   h1, h2, h3, h4 {
-    //font-family: "Helvetica Neue", sans-serif;
     color: $headingColor;
     font-weight: 400;
     @extend %sass-margin-bottom;
@@ -121,11 +111,6 @@
     background-color: lighten($black, 60%);
   }
 
-
-
-  [role="main"] {
-    //background-color: $pageBackgroundColor;
-  }
 
   [role="main"] div, .grid {
     margin-bottom: 4.5rem;

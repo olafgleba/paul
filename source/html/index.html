@@ -29,15 +29,15 @@
   <div class="page">
     <header role="banner" class="tophead">
       <h1>Paul</h1>
-      <h2><i>Paul</i> is just my personal frontend development environment. It relies on libraries and extensions such as <a href="http://bower.io">Bower</a>, <a href="http://gruntjs.com">Grunt</a>, <a href="http://sass-lang.org">Sass</a> and the <a href="http://inuitcss.com/">inuit.css</a> framework as the foundation to build up the real CSS stuff.</h2>
+      <h2><i>Paul</i> is just my personal frontend development environment to facilitate my daily work. It relies on libraries and extensions such as <a href="http://bower.io">Bower</a>, <a href="http://gruntjs.com">Grunt</a>, <a href="http://sass-lang.org">Sass</a> and the <a href="http://inuitcss.com/">inuit.css</a> framework. </h2>
     </header> <!-- /role[header] -->
 
     <div role="main">
       <h3>Introduction</h3>
       <div>
-        <p><b>Paul</b> allows you to assemble libraries easily, starts a webserver and a livereload server to watch out for changes and run appropriate tasks like concatenation, minification,  file copy, text pattern substitution and more. It also includes a HTML5 boilerplate to start with.</p>
+        <p><b>Paul</b> allows you to assemble libraries easily, starts a webserver and a livereload server to watch out for changes and run appropriate tasks like concatenation, minification on deploy, file copy, text pattern substitution and more. It also includes a HTML5 boilerplate to start with.</p>
 
-        <p>Altough it is highly configurable, the main attempt is <b>workflow simplification</b> and <b>staying focused</b> on your real work. Simply run <code class="language-bash">$ grunt</code> (e.g. <code class="language-bash">$ grunt-deploy</code>) on the console and forget about the magic that happens behind.</p>
+        <p>Altough it is highly configurable, the main attempt is <b>workflow simplification</b> and <b>staying focused</b> on your real work. Simply run <code class="language-bash">$ grunt</code> (e.g. <code class="language-bash">$ grunt-deploy</code>) on the console, dig into coding your site and forget about the magic that happens behind.</p>
       </div>
 
       <h3>Some of what Paul provides...</h3>
@@ -45,10 +45,10 @@
         <ul class="inline-list">
           <li><span class="btn">Automatic CSS-Prefixing</span></li>
           <li><span class="btn">HTML5 template</span></li>
-          <li><span class="btn">Dynamically Banner append</span></li>
+          <li><span class="btn">Automatic Banner append</span></li>
           <li><span class="btn">Easy add/remove of bower plugins</span></li>
           <li><span class="btn">Automatic custom Modernizr build</span></li>
-          <li><span class="btn">Dynamic text pattern substitute</span></li>
+          <li><span class="btn">Dynamic text pattern substitution</span></li>
           <li><span class="btn">humans.txt</span></li>
           <li><span class="btn">htaccess</span></li>
           <li><span class="btn">robots.txt</span></li>
@@ -124,8 +124,6 @@
           <li><a href="https://github.com/Modernizr/Modernizr">Modernizr</a></li>
           <li><a href="https://github.com/components/jquery">jQuery</a></li>
           <li><a href="http://gsgd.co.uk/sandbox/jquery/easing/">jQuery Plugin Easing</a></li>
-          <li><a href="https://github.com/kswedberg/jquery-smooth-scroll">jQuery Plugin Smooth Scroll</a></li>
-          <li><a href="https://github.com/rstacruz/jquery.transit">jQuery Plugin Transit</a></li>
         </ul>
 
         <h4>Grunt</h4>
@@ -150,56 +148,6 @@
         </ul>
       </div>
 
-<!--       <h3>Scaffolding</h3>
-      <div>
-        <pre><code class="language-css">app/
-    css/
-    icons/
-    img/
-    libs/
-        base.min.js
-        vendor/
-    template.html
-    robots.txt
-    humans.txt
-    htaccess
-    favicon.ico
-bower_components/ &lt;!--  see `build-bower-components.command` --&gt;
-node_modules/  &lt;!--  see `build-node-modules.command` --&gt;
-source/
-    assets/
-    icons/
-    img/
-        source/
-    libs/
-          base.js
-          vendor/
-    scss/
-        abstracts/
-              base/
-              extended/
-          utilities/
-          sections/
-              paul
-                  _paul.scss
-                  queries/
-                      _mq.scss
-          vendor/
-              _overrides.scss
-          _bootstrap.scss
-          _paul-configuration.scss
-          dated.scss
-          styles.scss
-.gitignore
-bower.json
-build-bower-components.command
-build-node-modules.command
-package.json
-Grundfile.js
-travis.yml</code></pre>
-
-      </div> -->
-
       <h3>Support</h3>
       <div>
         <p>If you have any question, <a href="#">get in touch</a> with me. For bug reports, please use the project <a href="#">issue tracker</a>.</p>
@@ -213,13 +161,6 @@ travis.yml</code></pre>
           <li><a href="http://gruntjs.com">The grunt devs</a></li>
           <li><a href="http://sass-lang.org">Founder of Sass</a></li>
         </ul>
-
-<!--         <ul class="inline-list">
-          <li><a href="http://csswizardry.com/">Harry Roberts</a> for the incredible work on his CSS-Framwork <a href="http://inuitcss.com/">inuit.css</a></li>
-          <li><a href="http://bower.io">The bower team</a> to simplify life in lib and plugin organisation.</li>
-          <li><a href="http://gruntjs.com">The grunt devs</a> for let the machine doing all the stupid work while me making coffee.</li>
-          <li><a href="http://sass-lang.org">Founder of Sass</a> whom gives me inspiration (and the tool) to get me organized better.</li>
-        </ul> -->
       </div>
 
       <h3>Comparable projects</h3>
@@ -242,9 +183,6 @@ travis.yml</code></pre>
         </ul>
 
     </footer><!-- /role[footer] -->
-
-    <p><a id="backToTop" href="#totop">top</a></p>
-
   </div> <!-- /.page -->
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/@@version/@@file"></script>

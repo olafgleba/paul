@@ -58,7 +58,7 @@ module.exports = function(grunt) {
      * heavely uses these variables to simplify
      * maintainment. So to say, if you like to
      * edit the environment, you'll probably just
-     * need to change variables within this section
+     * need to change variables values within this section
      */
     project: {
 
@@ -238,9 +238,13 @@ module.exports = function(grunt) {
         files: '<%= project.css.source.path %>/**/*.scss',
         tasks: ['sass:dev']
       },
+      plugins: {
+        files: ['<%= project.js.source.vendor %>/**/*.js', 'bower.json'],
+        tasks: ['concat:plugins']
+      },
       concat: {
-        files: ['<%= project.js.source.path %>/**/*.js', 'bower.json'],
-        tasks: ['concat:all']
+        files: ['<%= project.js.source.base %>'],
+        tasks: ['concat:base']
       },
       images: {
         files: '<%= project.src %>/img/source/**/*',
@@ -258,9 +262,9 @@ module.exports = function(grunt) {
         files: ['<%= project.src %>/html/**/*'],
         tasks: ['clean:html', 'replace:html']
       },
-      misc: {
-        files: ['<%= project.src %>/misc/**/*'],
-        tasks: ['clean:misc', 'replace:misc']
+      meta: {
+        files: ['<%= project.src %>/meta/**/*'],
+        tasks: ['clean:meta', 'replace:meta']
       },
       livereload: {
         options: {
@@ -343,8 +347,8 @@ module.exports = function(grunt) {
       html: {
         src: ['<%= project.app %>/*.{html,htm,jade,haml}']
       },
-      misc: {
-        src: ['<%= project.app %>/*.{txt,md,mdown,htaccess}', '<%= project.app %>/htaccess']
+      meta: {
+        src: ['<%= project.app %>/*.{txt,md,mdown,markdown,htaccess}', '<%= project.app %>/htaccess']
       },
       cache: {
         src: ['.sass-cache']
@@ -448,8 +452,8 @@ module.exports = function(grunt) {
     /**
      * $COPY
      *
-     * Misc. copy tasks to follow the `single direction`
-     * approach (See doc/paul.md also)
+     * Several copy tasks to follow the `single direction`
+     * approach of Paul.
      *
      * Grunt task scope: default, deploy
      */
@@ -518,7 +522,7 @@ module.exports = function(grunt) {
         stripBanners: true,
         banner: '<%= project.banner %>'
       },
-      all: {
+      plugins: {
         /**
          * Concatenate bower plugins, append other
          * vendor scripts to it and build our main base
@@ -533,9 +537,9 @@ module.exports = function(grunt) {
             `bower install <package> --save`
          *
          * Accordingly have a look at the actual path
-         * of the dedicated plugin file and append it
-         * to the `plugins` hash within the bower.json
-         * config file.
+         * of the dedicated plugin file (bower_components)
+         * and append it to the `plugins` hash within
+         * the bower.json config file.
          *
          * Delete a plugin:
          * To spare out a plugin from concatenation simply
@@ -552,12 +556,16 @@ module.exports = function(grunt) {
             // Get all specified bower plugins
             '<%= bower.plugins %>',
 
-            // Get available vendor scripts
+            // Get available vendor scripts and append it
             '<%= project.js.source.vendor %>/*.js'
            ],
-          /**
-           * Build our base javascript file
-           */
+        }
+      },
+      base: {
+        /**
+         * Build our base javascript file
+         */
+         files: {
           '<%= project.js.app.base %>': '<%= project.js.source.base %>'
         }
       }
@@ -639,12 +647,12 @@ module.exports = function(grunt) {
           }
         ]
       },
-      misc: {
+      meta: {
         files: [
           {
             expand: true,
             flatten: true,
-            src: ['<%= project.src %>/misc/**/*', '!<%= project.src %>/misc/README.md'],
+            src: ['<%= project.src %>/meta/**/*', '!<%= project.src %>/meta/README.md'],
             dest: '<%= project.app %>/'
           }
         ]
@@ -709,7 +717,7 @@ module.exports = function(grunt) {
   /**
    * $DEFAULT
    *
-   * Run this task by type `grunt` on the
+   * Run this task by type in `$ grunt` on the
    * console to start development. This starts
    * the localwebser, open a browser and prepares
    * the application folder right away.
@@ -723,9 +731,9 @@ module.exports = function(grunt) {
     'clean:minified',
     'clean:assets',
     'clean:icons',
-    'clean:misc',
+    'clean:meta',
     'replace:html',
-    'replace:misc',
+    'replace:meta',
     'copy:library',
     'copy:imagesSourceToApp',
     'copy:assetsSourceToApp',
@@ -739,11 +747,11 @@ module.exports = function(grunt) {
   /**
    * $DEPLOY
    *
-   * Run this task by type `grunt deploy` when
-   * you finish development. Clear up the
+   * Run this task by type in `$ grunt deploy` when
+   * you finished development. It clears up the
    * application folder, get rid of dot files,
-   * minify binary data, compile and compress
-   * the css and javascript
+   * minify binary data, compress the css and
+   * javascript and place your touch icons to the root
    */
   grunt.registerTask('deploy', [
     'modernizr',
@@ -755,11 +763,13 @@ module.exports = function(grunt) {
     'clean:images',
     'clean:minified',
     'clean:gitignore',
+    'clean:cache',
     'clean:assets',
     'clean:icons',
-    'clean:misc',
+    'clean:meta',
     'replace:html',
-    'replace:misc',
+    'replace:meta',
+    'copy:library',
     'imagemin',
     'copy:imagesMinifiedToApp',
     'copy:assetsSourceToApp',
@@ -791,20 +801,6 @@ module.exports = function(grunt) {
     'copy:imagesMinifiedToApp',
     'copy:assetsSourceToApp',
     'copy:iconsSourceToApp'
-    ]
-  );
-
-
-  /**
-   * $SERVER
-   *
-   * Start web- and livereload
-   * server only. Useful after
-   * deploying your site.
-   */
-  grunt.registerTask('server', [
-    'connect',
-    'open'
     ]
   );
 

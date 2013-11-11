@@ -11,12 +11,10 @@
     "type": "git",
     "url": "https://github.com/olafgleba/paul.git"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://github.com/olafgleba/paul/blob/master/LICENSE-MIT"
-    }
-  ],
+  "licenses": {
+    "type": "MIT",
+    "url": "http://github.com/olafgleba/paul/blob/master/LICENSE-MIT"
+  },
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",

@@ -1,5 +1,7 @@
 # html/
 
-This the appropriate folder to places all of your html.
+Places all (and only) your HTML here.
 
-Nested folders are NOT allowed. 
+Allowed extension: html, htm, jade, haml
+
+Nesting of folders NOT allowed.

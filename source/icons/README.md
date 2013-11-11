@@ -1,4 +1,5 @@
 # icons/
 
-This the appropriate folder to places your touch icons and favicon.
+Places your touch icons here.
+
 Nesting of folders is allowed.

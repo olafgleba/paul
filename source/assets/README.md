@@ -1,5 +1,5 @@
 # assets/
 
-This the appropriate folder to places your fonts etc.
+Places your fonts or whatever you think is a "asset" here.
 
-Nesting of folders are allowed.
+Nesting of folders is allowed.

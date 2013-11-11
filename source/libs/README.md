@@ -1,4 +1,6 @@
 # libs/
 
-The content of this folder is build up dynamically from the files of our `source/libs` folder. 
-DO NOT PUT ANY FILES IN HERE, DO NOT CREATE FOLDERS IN HERE. 
+DO NOT places any additional javascript files on this folder level. It won't be recognized by grunt tasks. 
+
+## base.js
+This is our main javascript file. Here we define own functions a.s.o. and writing calls to code on document ready.

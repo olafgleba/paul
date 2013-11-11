@@ -3,5 +3,6 @@
 *.tmproj
 *.sublime-project
 *.sublime-workspace
+app
 node_modules
 bower_components

@@ -1,4 +1,5 @@
 # img/source/
 
-This the appropriate folder to places all your images (except device icons, s. folder `icons/`).
+Places your images here.
+
 Nesting of folders is allowed.

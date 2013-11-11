@@ -8,6 +8,8 @@
  */
 //@import "inuit-defaults";
 
+
+
 /**
  * Import inuit.css framework as a bower component
  */
@@ -26,7 +28,7 @@
 
 // Ggf. abgeleitete Objekte aus Drittanbieter-Frameworks
 // einzeln importieren. "ext-" als Datei-Prefix verwenden
-@import "abstracts/extended/*";
+@import "abstracts/extensions/*";
 
 // Vendor styles importieren
 @import "vendor/*";
