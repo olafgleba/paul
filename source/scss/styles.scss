@@ -1,13 +1,9 @@
-@charset "UTF-8";
-/*------------------------------------*\
-    $STYLES.CSS
-\*------------------------------------*/
 /**
- * The compiled sass output of this file is the main
- * (and - beside of the lazy dated.css for IE < 9 - the only)
- * css stylesheet to adress in your HTML.
- * The declaration goes like that:
+ * The compiled sass output of this file becomes
+ * the main CSS stylesheet to adress in your HTML
  *
+    HTML Markup approach:
+
     <!--[if (gt IE 8) | (IEMobile)]><!-->
     <link rel="stylesheet" href="css/styles.css">
     <!--<![endif]-->
@@ -15,19 +11,14 @@
  * @ref http://nicolasgallagher.com/mobile-first-css-sass-and-ie/
  */
 
-
-
-/**
- * Import base styles
- *
- * In _project.scss all base variables are declared such typos,
- * font/size, vertical rhythm measuring and some other stuff.
- * Change their values to fit your needs.
- */
+// Project configuration
 @import "example-configuration";
 
+// Global bootstrap
 @import "bootstrap";
 
+// project section styles
 @import "sections/example/*";
 
+// project section media queries
 @import "sections/example/queries/*";

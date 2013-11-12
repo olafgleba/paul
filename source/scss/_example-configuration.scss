@@ -1,43 +1,42 @@
-
-
-/*------------------------------------*\
-    $OVERRIDES
-\*------------------------------------*/
 /**
- * Override inuit.css’ default variables values here.
+ * Project configuration
  *
- * Those variables listed below are only a selection
- * of variables which you supposedly like to apdapt to your
- * project. But take this only as an example. Place any
- * variables that should override inuit.css’ defaults here.
+ * Section: example
+ *
+ *
+ * FRAMEWORK   - Override/define inuit.css framework defaults
+ * COLORS      - Project agnostic colors, project aware colors
+ * INTERFACE   - Element defaults
+ * INCLUDES    - Switch on/off inclusion of abstractions
+ */
+
+
+
+/**
+ * $FRAMEWORK
+ *
+ * Set defaults of inuit.css stuff
  *
  * See `/bower_components/inuit.css/_defaults.scss` for
  * available variables.
  */
 
-
-/**
- * Framework
- */
+// Base stuff
 $base-font-family: Georgia, serif;
 $base-font-size: 23px !default;
 $base-line-height: 40px !default;
-
-
 
 $base-spacing-unit: $base-line-height!default;
 $half-spacing-unit: $base-spacing-unit / 2!default;
 $line-height-ratio: $base-line-height / $base-font-size !default;
 
 
-/**
- * Font-sizes (in pixels).
- */
+// Font-sizes (in pixels)
 $giga-size:         96px;
 $mega-size:         72px;
 $kilo-size:         48px;
 
-$h1-size:           52px; // .alpha
+$h1-size:           58px; // .alpha
 $h2-size:           36px; // .beta
 $h3-size:           32px; // .gamma
 $h4-size:           24px; // .delta
@@ -48,27 +47,13 @@ $milli-size:        18px;
 $micro-size:        10px;
 
 
-/**
- * Tell inuit.css when breakpoints start.
- */
+// Breakpoints
 $lap-start:         481px !default;
 $desk-start:        1024px !default;
 $desk-wide-start:   1200px !default;
 
 
-
-
-
-
-/*------------------------------------*\
-    $abstractions-AND-ABSTRACTIONS
-\*------------------------------------*/
-/**
- * All of inuit.css’ abstractions and abstractions are initially turned off by
- * default. This means that you start any project with as little as possible,
- * and introducing abstractions and abstractions is as simple as switching the
- * following variables to `true`.
- */
+// Turn on/off inuit.css abstractions
 $use-grids:         false;
 $use-flexbox:       false;
 $use-columns:       false;
@@ -99,86 +84,61 @@ $use-greybox:       false;
 
 
 
+/**
+ * $COLORS
+ *
+ * 1. Project agnostic colors
+ * 2. project aware colors
+ */
 
-
-
+/**
+ * Project agnostic colors
+ */
 $white: #fff;
 $black: #4f5759;
 $red: red;
 $green: lighten(greenyellow, 30%);
 
 
+/**
+ * Project aware colors
+ */
 $textColor: $black;
 $headingColor: $black;
 $pageBackgroundColor: lighten($black, 50%);
 $tipBackgroundColor: $green;
-
-
-//$codeTextColor: darken($white, 5%);
-//$codeBackgroundColor: lighten($black, 25%);
-
 $codeTextColor: $black;
 $codeBackgroundColor: lighten($black, 56%);
-
 $borderColor: lighten($black, 45%) !default;
 
 
 
+
+
+
+/**
+ * $INTERFACE
+ *
+ * Define element default values
+ */
 $border-radius:    10px!default;
 
 
 
 
 
-
-/*------------------------------------*\
-    $PROJECT-INCLUDES
-\*------------------------------------*/
-
 /**
- * Switch on/off extensions or created abstractions.
+ * $INCLUDES
  *
- * Follows the inuit.css approach to switch on/off object including
- * to have a as light css output as possible.
+ * Turn on/off abstractions
  *
-    1. Add a new file for every abstraction within
-       the appropriate folder, e.g.
-
-       `abstracts/base/` 			// created abstractions
-       `abstracts/extend/` 		// extensions inuit.css abstractions
-
-    2. Define a variable to use in our condition (s. below), e.g.
-
-      `$use-abstract-<NAME-OF-OBJECT>`:         		 	true|false;`
-      `$use-abstract-ext-<NAME-OF-SECOND-OBJECT>`:   true|false;`
-      ... a.s.o. ...
-
-    2. Add a condition within this file, e.g.
-
-      // created abstractions
-      @if $use-abstract-<NAME-OF-OBJECT> == true {
-        ... object declarations ...
-      }
-
-      // extensions inuit.css abstractions
-      @if $use-abstract-ext-<NAME-OF-OBJECT> == true {
-        ... object declarations ...
-      }
- *
+ * bool true|false (default)
  */
+$use-abstract-example: 			false !default;
+$use-abstract-ext-example:  false !default;
 
-/**
- * This particular object is just an (empty) example.
- * Implements a new object, s. `abstractions/create/_object.scss`,
- * Exluded by default (bool `false`).
- */
-$use-abstract-example: 						false !default;
 
-/**
- * This particular object modifier is just an example.
- * Extends the inuit `grid` object, s. `abstractions/extend/_grids--ordinal.scss`,
- * Exluded by default (bool `false`).
- */
-$use-abstract-ext-example:        false !default;
+
+
 
 
