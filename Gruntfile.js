@@ -5,6 +5,12 @@
  */
 
 /**
+ * ECMAScript 5 context mode
+ * see http://ejohn.org/blog/ecmascript-5-strict-mode-json-and-more/
+ */
+'use strict';
+
+/**
  * Return livereload environment
  * see also `connect` task
  */
@@ -16,13 +22,6 @@ var mountFolder = function mountFolder(connect, pointer) {
  * Grunt module
  */
 module.exports = function(grunt) {
-
-  /**
-   * ECMAScript 5 context mode
-   * see http://ejohn.org/blog/ecmascript-5-strict-mode-json-and-more/
-   */
-  'use strict';
-
 
   /**
    * Grunt config
@@ -37,13 +36,6 @@ module.exports = function(grunt) {
 
 
     /**
-     * Read bower.json and make it
-     * available with the `bower` variable
-     */
-    bower: grunt.file.readJSON('bower.json'),
-
-
-    /**
      * Read bower.json of choosen library and make it
      * available with the `library` variable
      */
@@ -53,60 +45,49 @@ module.exports = function(grunt) {
     /**
      * Define project paths and patterns
      *
-     * This is the place where almost all
-     * configuration is done. The Grundfile
-     * heavely uses these variables to simplify
-     * maintainment. So to say, if you like to
-     * edit the environment, you'll probably just
-     * need to change variables values within this section
+     * This is (in conjunction with the above $SCSS section)
+     * is the place where almost all configuration
+     * is done. The Grundfile heavely uses these
+     * variables to simplify maintainment. So to say,
+     * if you like to edit the environment, you'll probably
+     * just need to change variables values within this section
      */
     project: {
 
       /**
        * $PATHS
        *
-       * Set the app and source folder
+       * 1. Dynamic application folder
+       * 2. Project source folder, inherits from package.json
        */
-      app: 'app',
-      src: 'source',
-
-      /**
-       * $CSS
-       *
-       * Set origin paths, the main stylesheet
-       * and a fallback for older browsers (eg. < 9 IE)
-       */
-      css: {
-        source: {
-          path:     '<%= project.src %>/scss',
-          base:     '<%= project.src %>/scss/styles.scss',
-          fallback: '<%= project.src %>/scss/dated.scss'
-        },
-        app: {
-          path:     '<%= project.app %>/css',
-          base:     '<%= project.app %>/css/styles.min.css',
-          fallback: '<%= project.app %>/css/dated.min.css'
-
-        }
-      },
+      app:      'app', /* [1] */
+      src:      'source/sections/<%= pkg.activeSection.name %>', /* [2] */
 
       /**
        * $JAVASCRIPT
        *
        * Set origin paths, the main and
        * the plugins javascript file
+       *
+       * 1. Project source folder for related javascript files
+       * 2. Project source folder for related vendor scripts
+       * 3. Project source base javascript file
+       * 4. Application folder for javascript files
+       * 5. Application folder for vendor scripts
+       * 6. Application base javascript file
+       * 7. Concatenated application javascript plugin file, s. $CONCAT
        */
       js: {
         source: {
-          path:      '<%= project.src %>/libs',
-          vendor:    '<%= project.src %>/libs/vendor',
-          base:      '<%= project.src %>/libs/base.js'
+          path:      '<%= project.src %>/libs', /* [1] */
+          vendor:    '<%= project.src %>/libs/vendor', /* [2] */
+          base:      '<%= project.src %>/libs/base.js' /* [3] */
         },
         app: {
-          path:       '<%= project.app %>/libs',
-          vendor:     '<%= project.app %>/libs/vendor',
-          base:       '<%= project.app %>/libs/base.min.js',
-          plugins:    '<%= project.app %>/libs/vendor/plugins.min.js'
+          path:       '<%= project.app %>/libs', /* [4] */
+          vendor:     '<%= project.app %>/libs/vendor', /* [5] */
+          base:       '<%= project.app %>/libs/base.min.js', /* [6] */
+          plugins:    '<%= project.app %>/libs/vendor/plugins.min.js' /* [7] */
         }
       },
 
@@ -117,8 +98,9 @@ module.exports = function(grunt) {
        *
        */
       library: {
-        file: 'jquery.min.js',
-        path: 'bower_components/jquery'
+        file:     '<%= library.name %>.min.js',
+        version:  '<%= library.version %>',
+        path:     'bower_components/jquery'
       },
 
       /**
@@ -139,6 +121,7 @@ module.exports = function(grunt) {
        */
       banner: '/**\n' +
               ' * Project: <%= pkg.name %>\n' +
+              ' * Section: <%= pkg.activeSection.name %>\n' +
               ' * Description: <%= pkg.description %>\n' +
               ' * Site: <%= pkg.homepage %>\n' +
               ' * \n' +
@@ -152,6 +135,71 @@ module.exports = function(grunt) {
 
 
     /**
+     * $SCSS
+     *
+     * Set SCSS related paths
+     *
+     * 1. Root name of our base stylesheet, inherits from package.json
+     * 2. Root name of our stylesheet for IE =< 8, inherits from package.json
+     * 3. Set source filename of our base stylesheet
+     * 4. Set source filename of our fallback stylesheet
+     * 5. Set compiled filename of our base stylesheet
+     * 6. Set compiled filename of our fallback stylesheet
+     */
+    scss: {
+      root:        'source/scss',
+      names: {
+        base:      '<%= pkg.activeSection.css.base %>', /* [1] */
+        fallback:  '<%= pkg.activeSection.css.fallback %>'  /* [2] */
+      },
+      src: {
+        base:      '<%= scss.names.base %>.scss',  /* [3] */
+        fallback:  '<%= scss.names.fallback %>.scss'  /* [4] */
+      },
+      comp: {
+        base:      '<%= scss.names.base %>.min.css',  /* [5] */
+        fallback:  '<%= scss.names.fallback %>.min.css'  /* [6] */
+      }
+    },
+
+
+    /**
+     * $JSHINT
+     *
+     * Check syntax consistence.
+     * Define JSHint options inline
+     *
+     * Grunt task scope: default
+     */
+    jshint: {
+      files: [
+        'Gruntfile.js',
+        '<%= project.js.source.base %>'
+      ],
+      options: {
+        'bitwise': true,
+        'strict': true,
+        'indent': 2,
+        'smarttabs': true,
+        'curly': true,
+        'node': true,
+        'eqnull': false,
+        'eqeqeq': true,
+        'undef': false,
+        'asi': true,
+        'globals': {
+          '$': false,
+          'jQuery': false,
+          'Modernizr': false,
+          'require': false,
+          'module': false,
+          'forEach': false
+        }
+      }
+    },
+
+
+    /**
      * $CONNECT
      *
      * Connect the server, start local webserver
@@ -160,9 +208,13 @@ module.exports = function(grunt) {
      * middleware approach
      *
      * Grunt task scope: default
+     *
+     * 1. Needed to serve scss sourcemaps
+     * 2. The project application folder
      */
     connect: {
       options: {
+        hostname: '*',
         port: 9001
       },
       dev: {
@@ -170,16 +222,8 @@ module.exports = function(grunt) {
           middleware: function (connect) {
             return [
               require('connect-livereload')(),
-
-              /**
-               * Serve scss `sourcemaps`
-               */
-              mountFolder(connect, '.'),
-
-              /**
-               * The root of our project files
-               */
-              mountFolder(connect, 'app')
+              mountFolder(connect, '.'), /* [1] */
+              mountFolder(connect, 'app') /* [2] */
             ];
           }
         }
@@ -203,30 +247,6 @@ module.exports = function(grunt) {
 
 
     /**
-     * $JSHINT
-     *
-     * Check syntax consistence.
-     * Define JSHint options inline
-     *
-     * Grunt task scope: default
-     */
-    jshint: {
-      files: [
-        '<%= project.js.source.base %>'
-      ],
-      options: {
-        'bitwise': true,
-        'curly': true,
-        'eqnull': false,
-        'eqeqeq': true,
-        'undef': false,
-        'asi': true,
-        'jquery': false
-      }
-    },
-
-
-    /**
      * $WATCH
      *
      * Run tasks on watched files. Sass changes
@@ -235,11 +255,11 @@ module.exports = function(grunt) {
      */
     watch: {
       sass: {
-        files: '<%= project.css.source.path %>/**/*.scss',
-        tasks: ['sass:dev']
+        files: '<%= scss.root %>/**/*.scss',
+        tasks: ['clean:css', 'sass:dev']
       },
       plugins: {
-        files: ['<%= project.js.source.vendor %>/**/*.js', 'bower.json'],
+        files: ['<%= project.js.source.vendor %>/**/*.js', 'package.json'],
         tasks: ['concat:plugins']
       },
       concat: {
@@ -271,8 +291,8 @@ module.exports = function(grunt) {
           livereload: true
         },
         files: [
-          '<%= project.css.app.path %>/**/*.css',
-          '<%= project.js.app.path %>/**/*.js',
+          '<%= project.app %>/css/**/*.css',
+          '<%= project.app %>/libs/**/*.js',
           '<%= project.src %>/img/source/**/*',
           '<%= project.src %>/assets/**/*',
           '<%= project.src %>/icons/**/*',
@@ -292,12 +312,12 @@ module.exports = function(grunt) {
      */
     autoprefixer: {
       styles: {
-        src:  '<%= project.css.app.base %>',
-        dest: '<%= project.css.app.base %>'
+        src:  '<%= project.app %>/css/<%= scss.comp.base %>',
+        dest: '<%= project.app %>/css/<%= scss.comp.base %>'
       },
       dated: {
-        src:  '<%= project.css.app.fallback %>',
-        dest: '<%= project.css.app.fallback %>'
+        src:  '<%= project.app %>/css/<%= scss.comp.fallback %>',
+        dest: '<%= project.app %>/css/<%= scss.comp.fallback %>'
       }
     },
 
@@ -316,8 +336,8 @@ module.exports = function(grunt) {
           banner: '<%= project.banner %>'
         },
         files: {
-          '<%= project.css.app.base %>': '<%= project.css.app.base %>',
-          '<%= project.css.app.fallback %>': '<%= project.css.app.fallback %>'
+          '<%= project.app %>/css/<%= scss.comp.base %>': '<%= project.app %>/css/<%= scss.comp.base %>',
+          '<%= project.app %>/css/<%= scss.comp.fallback %>': '<%= project.app %>/css/<%= scss.comp.fallback %>'
         }
       }
     },
@@ -344,6 +364,9 @@ module.exports = function(grunt) {
       icons: {
         src: ['<%= project.app %>/icons/**/*']
       },
+      css: {
+        src: ['<%= project.app %>/css/**/*']
+      },
       html: {
         src: ['<%= project.app %>/*.{html,htm,jade,haml}']
       },
@@ -369,30 +392,31 @@ module.exports = function(grunt) {
      * banner to those files when in deploy mode.
      *
      * Grunt task scope: default, deploy
+     *
+     * 1. s. also https://github.com/gruntjs/grunt-contrib-sass/issues/63
      */
     sass: {
+      options: {
+        style: 'expanded',
+        noCache: false, /* [1] */
+        require: 'sass-globbing'
+      },
       dev: {
         options: {
-          sourcemap: true,
-          style: 'expanded',
-          noCache: false, // s. also https://github.com/gruntjs/grunt-contrib-sass/issues/63
-          require: 'sass-globbing'
+          sourcemap: true
         },
         files : {
-          '<%= project.css.app.base %>': '<%= project.css.source.base %>',
-          '<%= project.css.app.fallback %>': '<%= project.css.source.fallback %>'
+          '<%= project.app %>/css/<%= scss.comp.base %>': '<%= scss.root %>/<%= scss.src.base %>',
+          '<%= project.app %>/css/<%= scss.comp.fallback %>': '<%= scss.root %>/<%= scss.src.fallback %>'
         }
       },
       deploy : {
         options: {
-          sourcemap: false,
-          style: 'expanded',
-          noCache: false,
-          require: 'sass-globbing'
+          sourcemap: false
         },
         files : {
-          '<%= project.css.app.base %>': '<%= project.css.source.base %>',
-          '<%= project.css.app.fallback %>': '<%= project.css.source.fallback %>'
+          '<%= project.app %>/css/<%= scss.comp.base %>': '<%= scss.root %>/<%= scss.src.base %>',
+          '<%= project.app %>/css/<%= scss.comp.fallback %>': '<%= scss.root %>/<%= scss.src.fallback %>'
         }
       }
     },
@@ -419,7 +443,7 @@ module.exports = function(grunt) {
       uglify: true,
       files: [
         '<%= project.js.source.path %>/**/*.js',
-        '<%= project.css.source.path %>/**/*.scss'
+        '<%= scss.root %>/**/*.scss'
       ]
     },
 
@@ -460,9 +484,9 @@ module.exports = function(grunt) {
     copy: {
       library: {
         files : {
-             '<%= project.js.app.vendor %>/<%= project.library.file %>':
-                  '<%= project.library.path %>/<%= project.library.file %>'
-           }
+          '<%= project.js.app.vendor %>/<%= project.library.file %>':
+            '<%= project.library.path %>/<%= project.library.file %>'
+        }
       },
       imagesMinifiedToApp: {
         files: [
@@ -513,7 +537,7 @@ module.exports = function(grunt) {
      * Concatenate javascript files, collect
      * bower plugins plus vendor file and build
      * a single file of it. Build our main
-     * javascript file separately.
+     * javascript file on its own.
      *
      * Grunt task scope: default, deploy
      */
@@ -549,24 +573,21 @@ module.exports = function(grunt) {
          *
             `bower uninstall <package> --save`
          *
+         * 1. Get all bower plugins for current project section
+         * 2. Get available vendor scripts and append it to the plugin file
+         * 3. Build our base javascript file separately
          */
-         files: {
-           '<%= project.js.app.plugins %>':
-           [
-            // Get all specified bower plugins
-            '<%= bower.plugins %>',
-
-            // Get available vendor scripts and append it
-            '<%= project.js.source.vendor %>/*.js'
-           ],
+        files: {
+          '<%= project.js.app.plugins %>':
+          [
+            '<%= pkg.activeSection.plugins %>', /* [1] */
+            '<%= project.js.source.vendor %>/*.js' /* [2] */
+          ],
         }
       },
       base: {
-        /**
-         * Build our base javascript file
-         */
-         files: {
-          '<%= project.js.app.base %>': '<%= project.js.source.base %>'
+        files: {
+          '<%= project.js.app.base %>': '<%= project.js.source.base %>' /* [3] */
         }
       }
     },
@@ -612,12 +633,12 @@ module.exports = function(grunt) {
             replacement: '<%= pkg.description %>'
           },
           {
-            match: 'homepage',
-            replacement: '<%= pkg.homepage %>'
+            match: 'section',
+            replacement: '<%= pkg.activeSection.name %>'
           },
           {
-            match: 'version',
-            replacement: '<%= library.version %>'
+            match: 'homepage',
+            replacement: '<%= pkg.homepage %>'
           },
           {
             match: 'author.name',
@@ -628,12 +649,24 @@ module.exports = function(grunt) {
             replacement: '<%= pkg.author.email %>'
           },
           {
-            match: 'file',
+            match: 'libraryVersion',
+            replacement: '<%= project.library.version %>'
+          },
+          {
+            match: 'libraryFile',
             replacement: '<%= project.library.file %>'
           },
           {
             match: 'timestamp',
             replacement: '<%= grunt.template.today() %>'
+          },
+          {
+            match: 'cssBase',
+            replacement: '<%= scss.comp.base %>'
+          },
+          {
+            match: 'cssFallback',
+            replacement: '<%= scss.comp.fallback %>'
           }
         ]
       },
@@ -654,6 +687,25 @@ module.exports = function(grunt) {
             flatten: true,
             src: ['<%= project.src %>/meta/**/*', '!<%= project.src %>/meta/README.md'],
             dest: '<%= project.app %>/'
+          }
+        ]
+      },
+      scss: {
+        options: {
+          force: false,
+          patterns: [
+            {
+              match: 'section',
+              replacement: '<%= pkg.activeSection.name %>'
+            }
+          ]
+        },
+        files: [
+          {
+            expand: true,
+            flatten: true,
+            src: ['<%= scss.root %>/compile/*.scss', '!<%= scss.root %>/src/README.md'],
+            dest: '<%= scss.root %>/'
           }
         ]
       }
@@ -717,7 +769,7 @@ module.exports = function(grunt) {
   /**
    * $DEFAULT
    *
-   * Run this task by type in `$ grunt` on the
+   * Run this task by enter `$ grunt` on the
    * console to start development. This starts
    * the localwebser, open a browser and prepares
    * the application folder right away.
@@ -726,28 +778,31 @@ module.exports = function(grunt) {
     'jshint',
     'modernizr',
     'concat',
-    'sass:dev',
     'clean:images',
     'clean:minified',
     'clean:assets',
     'clean:icons',
+    'clean:css',
     'clean:meta',
+    'clean:html',
     'replace:html',
     'replace:meta',
+    'replace:scss',
     'copy:library',
     'copy:imagesSourceToApp',
     'copy:assetsSourceToApp',
+    'sass:dev',
     'connect',
     'open',
     'watch'
-    ]
+  ]
   );
 
 
   /**
    * $DEPLOY
    *
-   * Run this task by type in `$ grunt deploy` when
+   * Run this task by enter `$ grunt deploy` when
    * you finished development. It clears up the
    * application folder, get rid of dot files,
    * minify binary data, compress the css and
@@ -756,9 +811,6 @@ module.exports = function(grunt) {
   grunt.registerTask('deploy', [
     'modernizr',
     'concat',
-    'sass:deploy',
-    'autoprefixer',
-    'csso',
     'uglify:deploy',
     'clean:images',
     'clean:minified',
@@ -766,15 +818,21 @@ module.exports = function(grunt) {
     'clean:cache',
     'clean:assets',
     'clean:icons',
+    'clean:css',
     'clean:meta',
+    'clean:html',
     'replace:html',
     'replace:meta',
+    'replace:scss',
     'copy:library',
     'imagemin',
     'copy:imagesMinifiedToApp',
     'copy:assetsSourceToApp',
-    'copy:iconsSourceToApp'
-    ]
+    'copy:iconsSourceToApp',
+    'sass:deploy',
+    'autoprefixer',
+    'csso'
+  ]
   );
 
 
@@ -801,7 +859,7 @@ module.exports = function(grunt) {
     'copy:imagesMinifiedToApp',
     'copy:assetsSourceToApp',
     'copy:iconsSourceToApp'
-    ]
+  ]
   );
 
 }; // eol module.exports

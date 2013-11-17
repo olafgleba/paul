@@ -7,6 +7,21 @@
     "name": "Olaf Gleba",
     "email": "og@olafgleba.de"
   },
+  "sections": [
+    "example",
+    "ghpages"
+  ],
+  "activeSection": {
+    "name": "example",
+    "css": {
+      "base": "styles",
+      "fallback": "dated"
+    },
+    "plugins": [
+      "bower_components/fastclick/lib/fastclick.js",
+      "bower_components/jquery.easing/js/jquery.easing.js"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/olafgleba/paul.git"

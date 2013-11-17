@@ -1,12 +1,6 @@
 {
   "name": "Paul",
   "description": "Frontend development with Grunt, Sass, Bower and inuit.css",
-  "version": "1.0.0",
-  "homepage": "http://github.com/olafgleba.github.io/paul",
-  "author": {
-    "name": "Olaf Gleba",
-    "email": "og@olafgleba.de"
-  },
   "dependencies": {
     "modernizr": "~2.6.2",
     "fastclick": "~0.6.10",
@@ -18,9 +12,5 @@
     "**/.*",
     "node_modules",
     "bower_components"
-  ],
-  "plugins": [
-    "bower_components/fastclick/lib/fastclick.js",
-    "bower_components/jquery.easing/js/jquery.easing.js"
   ]
 }

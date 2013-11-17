@@ -4,6 +4,7 @@
 
 # Project: @@name
 # Description: @@description
+# Section: @@section
 # Site: @@homepage
 #
 # Author: @@author.name <@@author.email>

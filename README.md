@@ -1,12 +1,12 @@
 # Paul
 
-*Paul* is my personal frontend development environment and just reflects my approach to facilitate my daily work. It relies on libraries and extensions such as [Bower](http://bower.io), [Grunt](http://gruntjs.com), [Sass](http://sass-lang.org) and the [inuit.css](http://inuitcss.com/) CSS framework as the foundation to build up the real css stuff.
+*Paul* is my personal frontend development environment and just reflects my approach to facilitate my daily work. It relies on libraries and extensions such as [Bower](http://bower.io), [Grunt](http://gruntjs.com), [Sass](http://sass-lang.org) and the [inuit.css](http://inuitcss.com/) CSS framework.
 
 ## Introduction
 
-*Paul* allows you to assemble libraries easily, starts a webserver and a livereload server to watch out for changes and run appropriate tasks like concatenation, minification, file copy, text pattern substitution and more. It also includes a HTML boilerplate to start with.
+*Paul* allows you to assemble libraries easily, starts a webserver and a livereload server to watch out for changes and run appropriate tasks like concatenation, minification, file copy, text pattern substitution and more. It provides easy maintainment of infinite project sections and comes with a HTML5 boilerplate to start with also.
 
-Altough it is highly configurable, the main attempt is **workflow simplification** and **staying focused** on your real work. Simply run `grunt` (or `grunt-deploy`) on the console,  dig into coding your site and forget about the magic that happens behind.
+Altough it is highly configurable, the main attempt is **workflow simplification** and **staying focused** on your real work. Simply run `grunt` (or `grunt deploy`) on the console,  dig into coding your site and forget about the magic that happens behind.
 
 ## Requirements
 
@@ -22,27 +22,22 @@ You must have installed the latest [Node.js](http://nodejs.org/), [Grunt](http:/
 ## Getting started
 
 1. Open the `Grundfile.js` and set your prefered browser (search for `$BROWSER` comment block)
-2. If you are on OS X execute `build-bower-components.command` and `build-node-modules.command` by double-clicking or run it from the console. On Windows execute both `*.bat` files.
+2. If you are on OS X execute `build-bower-components.command` and `build-node-modules.command` by double-click or run it from the console. I'll add Windows related scripts soon.
 3. Run `$ grunt` on the console
 
 You're done. Enjoy development...
 
-## Usage
+## Usage rules
 
-### Rules:
-
-* Paul follows a *single direction approach*. That means we have **one** main `app/` folder for both, development and deployment.
-* **All** of your editable files lives within the `source/` root folder.
-* **Any** edit or adding/removing files solely takes place within the source/ root folder only (**Never ever** put any of those files into the `app/` folder or edit any files right there, because this will break how things work - your files will be overwritten on the very next task execution).
-
-### Hints
-
-* All prepared library plugins are installed as a bower component. To find out how to add/remove easily such plugins, search for `$CONCAT` comment block within the `Gruntfile.js`.
-* All stuff within the `source/scss/` folder represents my opinionated way of organizing my SASS files. Altough i recommend to give it a try, you are free to replace it anytime to implement your own approach. If you want to change the naming of both compiled stylesheets (`styles.scss`, `dated.scss`), you must edit the appropriate config variable within the `Gruntfile.js` (search for `$CSS` comment block) and adapt the paths within your HTML files (`source/html/...`) accordingly.
+* Paul follows a *single direction approach*. That means we have **one** main `app/` output folder for both, development and deployment.
+* **All** of your source files lives within the `source/` root folder.
+* **Any** edit or add/remove solely takes place within the source/ root folder only (**Never ever** put anything into the `app/` folder or edit files right there. This will break how things works - your files will be overwritten on the very next task execution).
 
 ## Documentation
 
-Actually there is no regular documentation, but all files contains **extensive annotations** and there is a README file in every appropriate folder. Hint: Dig into the `Gruntfile.js`. The comments in this file will probably gives you a rather comprehensive overview how it all works. I also will add a `doc.md` with some workflow examples soon.
+Actually there is no regular documentation, but all files contains **extensive annotations** and there is a README file within folder where appropriate. Hint: Dig into the `Gruntfile.js`. The comments in this file will probably gives you a rather comprehensive overview how it all works.
+
+I also will add a `workflows.md` with some *real life* examples soon.
 
 ## Prepared components/modules
 
@@ -79,7 +74,7 @@ Requires installation of Grunt version >= 0.4.x
 
 ## Support
 
-If you have any question, <a href="#">get in touch</a> with me. For bug reports, please use the project <a href="#">issue tracker
+If you have any question, [get in touch](mailto:og@olafgleba.de) with me. For bug reports, please use the project [issue tracker](https://github.com/olafgleba/paul/issues).
 
 ## Kudos to
 
@@ -88,8 +83,10 @@ If you have any question, <a href="#">get in touch</a> with me. For bug reports,
 * [The grunt devs](http://gruntjs.com)
 * [Founder of Sass](http://sass-lang.org)
 
+## Comparable projects
 
+[FireShell](https://github.com/toddmotto/fireshell) is a project by Todd Motto with fairly similar approach.
 
 ## License stuff
 
-I throw it with a MIT License. So tweak it, trash it, rewrite it, make it better - do whatsover you like to do with it ;-). It's just my personal approach i like to share...
+I throw it with a MIT License. So tweak it, rewrite it, enhance it - do whatever you like to do with it ;-). It's just my personal approach i like to share...

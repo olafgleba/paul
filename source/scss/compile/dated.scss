@@ -12,17 +12,17 @@
  */
 
 // Project configuration
-@import "example-configuration";
+@import "@@section-configuration";
 
 // Global bootstrap
 @import "bootstrap";
 
 // project section styles
-@import "sections/example/*";
+@import "sections/@@section/*";
 
 // project section vendor styles
-@import "sections/example/vendor/*";
+@import "sections/@@section/vendor/*";
 
 // project section vendor override partial
-@import "sections/example/vendor/overrides";
+@import "sections/@@section/vendor/overrides";
 

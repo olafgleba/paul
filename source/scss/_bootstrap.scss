@@ -1,36 +1,22 @@
 /**
- * Import inuit-defaults.css vars and overrides
+ * Import global files
  *
- * In inuit.css/_defaults.scss all base variables of the inuit.css framework
- * are defined. There we choose which objects/abstractions we like to use
- * in our project and overwrite inuit.css default variables values.
- * See `bower_components/inuit.css/_defaults.scss` for available variables.
+ * These files not related to a specific project
+ * section. So they are available globally. As we
+ * can switch on/off the inclusion of abstractions
+ * within every project configuration file
+ * individually, there is no overhead of what's
+ * been populated in our compiled CSS.
  */
 
-
-/**
- * Import inuit.css framework as a bower component
- */
+ // Import inuit.css framework on top of every project section
 @import "../../bower_components/inuit.css/inuit";
 
-
-
-
-// Helper like functions, mixins
+// Import helper like functions, mixins
 @import "utilities/*";
 
-// Eigenen Objekte mit Hilfe von Globbing
-// importieren. Es werden nur die Objekte importiert
-// deren Wert in der `_app-configuration.scss` auf
-// `true` gesetzt ist
+// Import abstractions
 @import "abstracts/base/*";
 
-// Ggf. abgeleitete Objekte aus Drittanbieter-Frameworks
-// einzeln importieren. "ext-" als Datei-Prefix verwenden
+// Import framwork extensions
 @import "abstracts/extensions/*";
-
-// Vendor styles importieren
-@import "vendor/*";
-
-// Vendor overrites importieren
-@import "vendor/overrides";

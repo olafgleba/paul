@@ -3,6 +3,8 @@
  */
 App = (function($) {
 
+  'use strict';
+
   // Private methods
   // ...
 
@@ -11,7 +13,7 @@ App = (function($) {
     // Public api
     init: function() {
 
-      // see FastClick bower plugin
+      // see prepared FastClick bower plugin
       FastClick.attach(document.body);
 
       // ...
@@ -22,13 +24,13 @@ App = (function($) {
 })(jQuery);
 
 
-
-
 /**
  * If DOM is ready...
  */
 
 $(function() {
+
+  'use strict';
 
   App.init();
 
