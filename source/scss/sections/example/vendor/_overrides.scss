@@ -1,33 +1,7 @@
-code[class*="language-"],
-pre[class*="language-"] {
-	color: $codeTextColor;
-	text-shadow: none;
-	background: $codeBackgroundColor;
-	@include font-size(18px);
-}
-
-
-/* Code blocks */
-pre[class*="language-"] {
-	margin-bottom: 1.5rem;
-}
-
-/* Inline blocks */
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-	background: $codeBackgroundColor;
-}
-
-:not(pre) > code[class*="language-"] {
-	padding: .2em .4em;
-	border-radius: 0;
-}
-
-/* colors /*/
-.token.property,
-.token.operator,
-.token.punctuation {
-	color: $codeTextColor;
-	background: $codeBackgroundColor;
-}
+/**
+ * overrides.scss
+ *
+ * Override vendor styles here.
+ *
+ */
 

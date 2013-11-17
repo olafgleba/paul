@@ -15,45 +15,20 @@
 /**
  * $FRAMEWORK
  *
- * Set defaults of inuit.css stuff
+ * Override defaults of inuit.css
  *
  * See `/bower_components/inuit.css/_defaults.scss` for
  * available variables.
  */
+// ... override inuit (only) variables here ...
 
-// Base stuff
-$base-font-family: Georgia, serif;
-$base-font-size: 23px !default;
-$base-line-height: 40px !default;
 
-// Base stuff calculates
-$base-spacing-unit: $base-line-height!default;
-$half-spacing-unit: $base-spacing-unit / 2!default;
-$line-height-ratio: $base-line-height / $base-font-size !default;
-
-// Font-sizes (in pixels)
-$giga-size:         96px;
-$mega-size:         72px;
-$kilo-size:         48px;
-
-$h1-size:           58px; // .alpha
-$h2-size:           36px; // .beta
-$h3-size:           32px; // .gamma
-$h4-size:           24px; // .delta
-$h5-size:           16px; // .epsilon
-$h6-size:           14px; // .zeta
-
-$milli-size:        18px;
-$micro-size:        10px;
-
-// Breakpoints
-$lap-start:         481px !default;
-$desk-start:        1024px !default;
-$desk-wide-start:   1200px !default;
-
-// At least you will like to
-// switch on/off inuit.css abstractions
-// here, right?
+/**
+ * At least you will like to switch on/off
+ * inuit.css abstractions, right?
+ *
+ * bool true|false (default)
+ */
 $use-grids:         false;
 $use-flexbox:       false;
 $use-columns:       false;
@@ -80,9 +55,6 @@ $use-stats:         false;
 $use-greybox:       false;
 
 
-
-
-
 /**
  * $COLORS
  *
@@ -90,25 +62,18 @@ $use-greybox:       false;
  * 2. project aware colors
  */
 
+
 /**
  * Project agnostic colors
  */
-$white: #fff;
-$black: #4f5759;
-$red: red;
-$green: lighten(greenyellow, 30%);
-
+// ...
 
 /**
  * Project aware colors
  */
-$textColor: $black;
-$headingColor: $black;
-$pageBackgroundColor: lighten($black, 50%);
-$tipBackgroundColor: $green;
-$codeTextColor: $black;
-$codeBackgroundColor: lighten($black, 56%);
-$borderColor: lighten($black, 45%) !default;
+// ...
+
+
 
 
 
@@ -119,7 +84,8 @@ $borderColor: lighten($black, 45%) !default;
  *
  * Define element default values
  */
-$border-radius:    10px!default;
+// ...
+
 
 
 
@@ -130,7 +96,15 @@ $border-radius:    10px!default;
  *
  * Turn on/off abstractions
  *
+ * ALL abstraction which exists within the
+ * `abstracts/` folder must be declared here!
+ * Whether you are using them or not. This is
+ * because otherwise SASS spits out an error.
+ *
  * bool true|false (default)
  */
 $use-abstract-example: 			false !default;
 $use-abstract-ext-example:  false !default;
+
+
+

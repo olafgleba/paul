@@ -1,0 +1,3 @@
+Because grunt seems fails to recognize empty folders on init (even there is a dotfile in it), this file addresses this behaviour for us.
+
+It does no harm e.g. never populates into the app folder, so just leave it in the particular source folder... 
