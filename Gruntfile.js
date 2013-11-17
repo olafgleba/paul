@@ -356,6 +356,9 @@ module.exports = function(grunt) {
      * Grunt task scope: default, deploy
      */
     clean: {
+      app: {
+        src: ['<%= project.app %>']
+      },
       minified: {
         src: ['<%= project.src %>/img/minified/']
       },
@@ -416,7 +419,8 @@ module.exports = function(grunt) {
       },
       deploy : {
         options: {
-          sourcemap: false
+          sourcemap: false,
+          noCache: true
         },
         files : {
           '<%= project.app %>/css/<%= scss.comp.base %>': '<%= scss.root %>/<%= scss.src.base %>',
@@ -769,22 +773,14 @@ module.exports = function(grunt) {
    * javascript and place your touch icons to the root
    */
   grunt.registerTask('deploy', [
-    'modernizr',
-    'concat',
-    'uglify:deploy',
-    'clean:images',
+    'clean:app',
     'clean:minified',
-    'clean:gitignore',
-    'clean:cache',
-    'clean:assets',
-    'clean:icons',
-    'clean:css',
-    'clean:meta',
-    'clean:html',
     'replace:html',
     'replace:meta',
     'replace:scss',
     'copy:library',
+    'concat',
+    'uglify:deploy',
     'imagemin',
     'copy:imagesMinifiedToApp',
     'copy:assetsSourceToApp',
@@ -792,33 +788,6 @@ module.exports = function(grunt) {
     'sass:deploy',
     'autoprefixer',
     'csso'
-  ]
-  );
-
-
-  /**
-   * $DEPLOY-WCOM
-   *
-   * Special task while deploying for the
-   * CMS Welcompose.
-   */
-  grunt.registerTask('deploy-wcom', [
-    'modernizr',
-    'concat',
-    'sass:deploy',
-    'replace',
-    'autoprefixer',
-    'csso',
-    'uglify:deploy',
-    'clean:images',
-    'clean:minified',
-    'clean:gitignore',
-    'clean:assets',
-    'clean:icons',
-    'imagemin',
-    'copy:imagesMinifiedToApp',
-    'copy:assetsSourceToApp',
-    'copy:iconsSourceToApp'
   ]
   );
 
