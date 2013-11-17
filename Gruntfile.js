@@ -556,7 +556,7 @@ module.exports = function(grunt) {
          * vendor scripts to it and build our main base
          * javascript file
          *
-         * See bower.json, hash `plugins`
+         * See package.json, hash `activeSection:plugins`
          *
          * Add a plugin:
          * Make sure, the desired plugin is actually
@@ -566,13 +566,13 @@ module.exports = function(grunt) {
          *
          * Accordingly have a look at the actual path
          * of the dedicated plugin file (bower_components)
-         * and append it to the `plugins` hash within
-         * the bower.json config file.
+         * and append it to the `activeSection:plugins` hash within
+         * the package.json config file.
          *
          * Delete a plugin:
          * To spare out a plugin from concatenation simply
-         * delete the related row from the hash `plugins`.
-         * within the bower.json file.
+         * delete the related row from the hash `activeSection:plugins`.
+         * within the package.json file.
          * To remove a plugin itself run:
          *
             `bower uninstall <package> --save`
@@ -714,50 +714,6 @@ module.exports = function(grunt) {
         ]
       }
     }
-
-
-    /**
-     * $REPLACE
-     *
-     * These are special tasks to change path and
-     * syntaxes while deploying for the CMS
-     * Welcompose only.
-     *
-     * Grunt task scope: deploy
-     */
-    // replace: {
-    //   css: {
-    //     src: [
-    //       '<%= project.css.app.base %>',
-    //       '<%= project.css.app.fallback %>'
-    //     ],
-    //     overwrite: true,
-    //     replacements: [
-    //       {
-    //         // change image references within css files to wcom smarty syntax
-    //         from: /(url\()(..\/img\/)([a-z\-\.]+)(\))/g,
-    //         to: '$1=%global_file name="$3"%=$4'
-    //       },
-    //       {
-    //         // change to root (or whatever prefixed dir) for folder include
-    //         from: /(..)(\/assets\/)/g,
-    //         to: '$2'
-    //       }
-    //     ]
-    //   },
-    //   js: {
-    //     src: '<%= project.js.app.base %>',
-    //     overwrite: true,
-    //     replacements: [
-    //       {
-    //         // change image references within js files to wcom smarty syntax
-    //         from: /(url\()(..\/img\/)([a-z\-\.]+)(\))/g,
-    //         to: '$1/files/global_files/$3'
-    //       }
-    //     ]
-    //   }
-    // }
-
 
   }); // eol grunt.initConfig
 
