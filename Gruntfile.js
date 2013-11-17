@@ -259,7 +259,7 @@ module.exports = function(grunt) {
         tasks: ['clean:css', 'sass:dev']
       },
       plugins: {
-        files: ['<%= project.js.source.vendor %>/**/*.js', 'package.json'],
+        files: ['<%= project.js.source.vendor %>/**/*', 'package.json'],
         tasks: ['concat:plugins']
       },
       concat: {
