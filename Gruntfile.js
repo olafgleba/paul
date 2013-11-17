@@ -254,6 +254,10 @@ module.exports = function(grunt) {
      * files forces the browser to reload the page
      */
     watch: {
+      compile: {
+        files: '<%= scss.root %>/compile/*.scss',
+        tasks: ['replace:scss', 'clean:css', 'sass:dev']
+      },
       sass: {
         files: '<%= scss.root %>/**/*.scss',
         tasks: ['clean:css', 'sass:dev']
