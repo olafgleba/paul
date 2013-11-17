@@ -10,7 +10,7 @@ Although it is highly configurable, the main attempt is **workflow simplificatio
 
 ## Requirements
 
-You must have installed the latest [Node.js](http://nodejs.org/), [Grunt](http://gruntjs.com), [Bower](http://bower.io) and [Sass](http://sass-lang.org) plus ([SASS-Globbing Plugin](https://github.com/chriseppstein/sass-globbing)).
+You must have installed the latest [Node.js](http://nodejs.org/), [Grunt](http://gruntjs.com), [Bower](http://bower.io) and [Sass](http://sass-lang.org) plus the [SASS-Globbing Plugin](https://github.com/chriseppstein/sass-globbing).
 
 ## Get Paul
 
@@ -36,9 +36,9 @@ Paul follows a *single direction approach*. That means we have **one** main `app
 
 ## Documentation
 
-Actually there is no regular documentation, but all files contains **extensive annotations** and there is a README file within folder where appropriate. Hint: Dig into the `Gruntfile.js`. The comments in this file will probably gives you a rather comprehensive overview how it all works.
+Actually there is no regular documentation, but all files contains **extensive annotations**. Hint: Dig into the `Gruntfile.js`. The comments in this file will probably gives you a rather comprehensive overview how it all works.
 
-I also will add a `workflows.md` with some *real life* examples soon.
+I also will add a `workflows.md` with some *real life* examples soon and probably some wiki pages.
 
 ## Prepared components/modules
 
