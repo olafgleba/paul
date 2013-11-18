@@ -4,7 +4,7 @@
 
 ## Introduction
 
-*Paul* allows you to assemble libraries easily, starts a webserver and a livereload server to watch out for changes and run appropriate tasks like concatenation, minification, file copy, text pattern substitution and more. It provides easy maintainment of infinite project sections and comes with a HTML5 boilerplate to start with.
+The enviroment allows you to assemble libraries easily, starts a webserver and a livereload server to watch out for changes and run appropriate tasks like concatenation, minification, file copy, text pattern substitution and more. It provides easy maintainment of infinite project sections and comes with a HTML5 boilerplate to start with.
 
 Although it is highly configurable, the main attempt is **workflow simplification** and **staying focused** on your real work. Simply run `grunt` (or `grunt deploy`) on the console,  dig into coding your site and forget about the magic that happens behind.
 
