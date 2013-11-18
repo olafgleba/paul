@@ -1,4 +1,4 @@
-# Paul
+# Paul [![Build Status](https://travis-ci.org/olafgleba/paul.png)](https://travis-ci.org/olafgleba/paul)
 
 *Paul* is my personal frontend development environment and just reflects my approach to facilitate my daily work. It relies on libraries and extensions such as [Bower](http://bower.io), [Grunt](http://gruntjs.com), [Sass](http://sass-lang.org) and the [inuit.css](http://inuitcss.com/) CSS framework.
 
