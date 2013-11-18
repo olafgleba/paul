@@ -36,7 +36,7 @@ Paul follows a *single direction approach*. That means we have **one** main `app
 
 ## Documentation
 
-Actually there is no regular documentation, but all files contains **extensive annotations**. Hint: Dig into the `Gruntfile.js`. The comments in this file will probably gives you a rather comprehensive overview how it all works.
+Actually there is no regular documentation, but all files contains **extensive annotations**. Hint: Dig into the `Gruntfile.js`. The comments in this file will probably give you a rather comprehensive overview how it all works.
 
 I also will add a `workflows.md` with some *real life* examples soon and probably some wiki pages.
 
