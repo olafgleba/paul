@@ -7,9 +7,6 @@
     "name": "Olaf Gleba",
     "email": "og@olafgleba.de"
   },
-  "sections": [
-    "example"
-  ],
   "activeSection": {
     "name": "example",
     "css": {
