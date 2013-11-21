@@ -21,9 +21,8 @@ You must have installed the latest [Node.js](http://nodejs.org/), [Grunt](http:/
 
 ## Getting started
 
-1. Open the `Grundfile.js` and set your prefered browser (search for `$BROWSER` comment block)
-2. If you are on OS X execute `build-bower-components.command` and `build-node-modules.command` by double-click or run it from the console. I'll add Windows related scripts soon.
-3. Run `$ grunt` on the console
+1. If you are on OS X execute `build-bower-components.command` and `build-node-modules.command` by double-click or run it from the console. I'll add Windows related scripts soon.
+2. Run `$ grunt` on the console
 
 You're done. Enjoy development...
 
