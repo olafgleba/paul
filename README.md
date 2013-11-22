@@ -1,10 +1,10 @@
 # Paul [![Build Status](https://travis-ci.org/olafgleba/paul.png)](https://travis-ci.org/olafgleba/paul)
 
-*Paul* is my personal frontend development environment and just reflects my approach to facilitate my daily work. It relies on libraries and extensions such as [Bower](http://bower.io), [Grunt](http://gruntjs.com), [Sass](http://sass-lang.org) and the [inuit.css](http://inuitcss.com/) CSS framework.
+*Paul* is my current frontend development environment and just reflects my approach to facilitate my daily work. It relies on libraries and extensions such as [Bower](http://bower.io), [Grunt](http://gruntjs.com), [Sass](http://sass-lang.org) and the [inuit.css](http://inuitcss.com/) CSS framework.
 
 ## Introduction
 
-The enviroment allows you to assemble libraries easily, starts a webserver and a livereload server to watch out for changes and run appropriate tasks like concatenation, minification, file copy, text pattern substitution and more. It provides easy maintainment of infinite project sections and comes with a HTML5 boilerplate to start with.
+The enviroment allows you to assemble libraries easily, starts a webserver and a livereload server to watch out for changes and run appropriate tasks like concatenation, minification, file copy, text pattern substitution and more. It provides easy maintainment of infinite project sections and comes with some templates (HTML, meta, htaccess) to start with.
 
 Although it is highly configurable, the main attempt is **workflow simplification** and **staying focused** on your real work. Simply run `grunt` (or `grunt deploy`) on the console,  dig into coding your site and forget about the magic that happens behind.
 
@@ -30,8 +30,9 @@ You're done. Enjoy development...
 
 Paul follows a *single direction approach*. That means we have **one** main `app/` output folder for both, development and deployment. So the following rules are essential:
 
-* **All** of your source files lives within the `source/` root folder.
-* **Any** edit or add/remove solely takes place within the `source/` root folder only (**Never ever** put anything into the `app/` folder or edit files right there. This will break how Paul works: your files will be overwritten on the very next task execution).
+* **All** of your source files lives within the `source/` root folder
+* **Any** edit or add/remove solely takes place within the `source/` root folder only 
+* **Never ever** put anything into the `app/` folder or edit files right there. This will break how Paul works: your files will be overwritten on the very next task execution
 
 ## Documentation
 
