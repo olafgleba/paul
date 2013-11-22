@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Paul | Frontend development environment</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="Olaf Gleba, <og@olafgleba.de>" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link type="text/plain" rel="author" href="humans.txt">
+
+  <link rel="shortcut icon" href="icons/favicon.ico" type="image/x-icon" />
+
+  <!--[if (gt IE 8) | (IEMobile)]><!-->
+  <link rel="stylesheet" href="css/styles.min.css">
+  <!--<![endif]-->
+
+  <!--[if (lt IE 9) & (!IEMobile)]>
+  <link rel="stylesheet" href="css/dated.min.css">
+  <![endif]-->
+
+  <script src="libs/vendor/modernizr.min.js"></script>
+</head>
+
+<body id="totop" class="index">
+  <div class="page">
+    <header role="banner" class="tophead">
+      <h1>Paul</h1>
+      <h2><i>Paul</i> is my personal frontend development environment to facilitate my daily work. It relies on libraries and extensions such as <a href="http://bower.io">Bower</a>, <a href="http://gruntjs.com">Grunt</a>, <a href="http://sass-lang.org">Sass</a> and the <a href="http://inuitcss.com/">inuit.css</a> framework. </h2>
+    </header> <!-- /role[header] -->
+
+    <div role="main">
+      <h3>Introduction</h3>
+      <div>
+        <p><b>Paul</b> allows you to assemble libraries easily, starts a webserver and a livereload server to watch out for changes and run appropriate tasks like concatenation, minification on deploy, file copy, text pattern substitution and more. It provides easy maintainment of infinite project sections and comes with a HTML5 boilerplate to start with.</p>
+
+        <p>Although it is highly configurable, the main attempt is <b>workflow simplification</b> and <b>staying focused</b> on your real work. Simply run <code class="language-bash">$ grunt</code> (e.g. <code class="language-bash">$ grunt deploy</code>) on the console, dig into developing your site and forget about the magic that happens behind.</p>
+      </div>
+
+      <h3>Some of what Paul provides...</h3>
+      <div>
+        <ul class="inline-list inline-list--btn">
+          <li><span>Automatic CSS-Prefixing</span></li>
+          <li><span>HTML5 template</span></li>
+          <li><span>Automatic Banner append</span></li>
+          <li><span>Easy add/remove of bower plugins</span></li>
+          <li><span>Automatic custom Modernizr build</span></li>
+          <li><span>Dynamic text pattern substitution</span></li>
+          <li><span>Develop infinite page sections separately</span></li>
+          <li><span>Livereload(HTML), live injection(CSS)</span></li>
+          <li><span>Aware of css/js sourcemaps</span></li>
+          <li><span>Automatic build of plugin javascript</span></li>
+          <li><span>jQuery CDN and local fallback</span></li>
+          <li><span>SCSS setup with prepared inuit.css integration</span></li>
+          <li><span>Images minifying</span></li>
+          <li><span>Comes with some useful templates (humans.txt, robots.txt, htaccess etc.)</span></li>
+          <li><span>Simple workflow: <code class="language-bash">$ grunt</code> (development), <code class="language-bash">$ grunt-deploy</code> deployment)</span></li>
+        </ul>
+      </div>
+
+      <h3>Get Paul</h3>
+      <div>
+        <h4>Make a choice:</h4>
+        <ul class="inline-list inline-list--btn">
+          <li><span>$ git clone https://github.com/olafgleba/paul.git</span></li>
+          <li>or</li>
+          <li><a href="https://github.com/olafgleba/paul/archive/master.zip">Download latest Zip</a></li>
+        </ul>
+      </div>
+
+      <h3>Requirements</h3>
+      <div>
+        <p>You must have installed the latest <a href="http://nodejs.org/">Node.js</a>, <a href="http://gruntjs.com">Grunt</a>, <a href="http://bower.io">Bower</a> and <a href="http://sass-lang.org">SASS</a> plus the <a href="https://github.com/chriseppstein/sass-globbing">SASS-Globbing Plugin</a>.</p>
+      </div>
+
+      <h3 id="getstarted">Getting started</h3>
+      <div>
+        <ol>
+          <li>Execute <code class="language-bash">build-bower-components.command</code> and <code class="language-bash">build-node-modules.command</code> by double-click or run it from the console (OS X). I'll add Windows related scripts soon.</li>
+          <li>Run <code class="language-bash">$ grunt</code> on the console</li>
+        </ol>
+        <p><b>You're done</b>. Enjoy development...</p>
+      </div>
+
+      <h3>Usage of Paul</h3>
+      <div>
+        <h4>Rules:</h4>
+        <p>Paul follows a <i>single direction approach</i>. That means we have <b>one</b> main <code class="language-bash">app/</code> output folder for both, development and deployment. So the following rules are essential:</p>
+        <ul class="bullets bullets--text">
+          <li><b>All</b> of your source files lives within the <code class="language-bash">source/</code> root folder.</li>
+          <li><b>Any</b> edit or add/remove solely takes place within the <code class="language-bash">source/</code> root folder <b>only</b></li>
+          <li><b>Never</b> put anything into the <code class="language-bash">app/</code> folder or edit files right there. This will break how Paul works: your files will be overwritten on the very next task execution</li>
+        </ul>
+
+<!--         <p class="notice">NOTICE: <b>Never ever</b> put any of those files into the <code class="language-bash">app/</code> folder or edit them right there. This will break how things works - your files will be overwritten on the very next task execution. <b>Any</b> edit or add/remove of files solely takes place within the <code class="language-bash">source/</code> root folder <b>only</b>!</p> -->
+
+<!--         <h4>Hints:</h4>
+        <ul class="bullets bullets--text">
+          <li>All prepared plugins are installed as a bower component. To find out how to easily add/remove plugins, have a look at the <code class="language-bash">$CONCAT</code> comment block within the <code class="language-bash">Gruntfile.js</code>.</li>
+
+          <li>Most of the folder/file structure within the <code class="language-bash">source/scss/</code> folder just represents my opinionated way of how i organize my SASS files. Altough i recommend to give it a try, you are free to replace it anytime to implement your own approach.</li>
+
+          <li>Don't be confused: To avoid flaky file renaming tasks, the CSS and javascripts files always looks like <code class="language-bash">filename.min.suffix</code>. Regardless if they are actually minified (after deployment) or not (in regular development mode).</li>
+        </ul> -->
+      </div>
+
+      <h3>Documentation</h3>
+      <div>
+        <p>Actually there is no regular documentation, but all files contains extensive annotations. <b>Hint</b>: Dig into the <code class="language-bash">Gruntfile.js</code>. The comments in this file will probably gives you a rather comprehensive overview how <i>Paul</i> works.<p>
+
+        <p>I also will add a <code class="language-bash">workflows.md</code> with some <i>real life</i> examples soon.</p>
+      </div>
+
+      <h3>Prepared components/modules</h3>
+      <p>To ensure you always work with the most current component/module version, these files are not included in the project download actually. Installing them is fairly simple: execute both <code class="language-bash">*.command</code> bash scripts that comes with Paul and you're done (see above <a href="#getstarted">Get started with Paul</a>).
+      <div>
+        <h4>Bower</h4>
+        <ul class="inline-list">
+          <li><a href="https://github.com/ftlabs/fastclick">FastClick</a></li>
+          <li><a href="http://inuitcss.com/">inuit.css</a></li>
+          <li><a href="https://github.com/Modernizr/Modernizr">Modernizr</a></li>
+          <li><a href="https://github.com/components/jquery">jQuery</a></li>
+          <li><a href="http://gsgd.co.uk/sandbox/jquery/easing/">jQuery Plugin Easing</a></li>
+        </ul>
+
+        <h4>Grunt</h4>
+        <p>Requires installation of Grunt version >= 0.4.x</p>
+        <ul class="inline-list">
+          <li><a href="https://github.com/gruntjs/grunt-contrib-clean">grunt-contrib-clean</a></li>
+          <li><a href="https://github.com/gruntjs/grunt-contrib-copy">grunt-contrib-copy</a></li>
+          <li><a href="https://github.com/gruntjs/grunt-contrib-sass">grunt-contrib-sass</a></li>
+          <li><a href="https://github.com/gruntjs/grunt-contrib-imagemin">grunt-contrib-imagemin</a></li>
+          <li><a href="https://github.com/gruntjs/grunt-contrib-concat">grunt-contrib-concat</a></li>
+          <li><a href="https://github.com/gruntjs/grunt-contrib-uglify">grunt-contrib-uglify</a></li>
+          <li><a href="https://github.com/gruntjs/grunt-contrib-jshint">grunt-contrib-jshint</a></li>
+          <li><a href="https://github.com/gruntjs/grunt-contrib-watch">grunt-contrib-watch</a></li>
+          <li><a href="https://github.com/gruntjs/grunt-contrib-connect">grunt-contrib-connect</a></li>
+          <li><a href="https://github.com/Modernizr/grunt-modernizr">grunt-modernizr</a></li>
+          <li><a href="https://github.com/outaTiME/grunt-replace">grunt-replace</a></li>
+          <li><a href="https://github.com/jsoverson/grunt-open">grunt-open</a></li>
+          <li><a href="https://github.com/nDmitry/grunt-autoprefixer">grunt-autoprefixer</a></li>
+          <li><a href="https://github.com/t32k/grunt-csso">grunt-csso</a></li>
+          <li><a href="https://github.com/tkellen/node-matchdep">matchdep</a></li>
+          <li><a href="https://github.com/intesso/connect-livereload">connect-livereload</a></li>
+        </ul>
+      </div>
+
+      <h3>Support</h3>
+      <div>
+        <p>If you have any question, <a href="mailto:og@olafgleba.de">get in touch</a> with me. For bug reports, please use the project <a href="https://github.com/olafgleba/paul/issues">issue tracker</a>.</p>
+      </div>
+
+      <h3>Kudos to</h3>
+      <div>
+        <ul class="inline-list">
+          <li><a href="http://csswizardry.com/">Harry Roberts</a></li>
+          <li><a href="http://bower.io">The bower team</a></li>
+          <li><a href="http://gruntjs.com">The grunt devs</a></li>
+          <li><a href="http://sass-lang.org">Founder of Sass</a></li>
+        </ul>
+      </div>
+
+      <h3>Comparable projects</h3>
+      <div>
+        <ul class="block-list">
+          <li><a href="https://github.com/toddmotto/fireshell">FireShell</a> A project by Todd Motto with a fairly similar approach.</li>
+        </ul>
+      </div>
+
+      <h3>License stuff</h3>
+      <div>
+        <ul class="block-list">
+          <li>I throw it with a MIT License. So tweak it, rewrite it, enhance it, do whatever you like to do with it ;-). It's just my personal approach i like to share...</li>
+        </ul>
+      </div>
+
+    </div><!-- /role[main] -->
+
+    <footer role="contentinfo">
+
+        <h3>Me</h3>
+        <ul class="inline-list">
+          <li><a href="http://olafgleba.de/">Olaf Gleba</a></li>
+          <li><a href="mailto:og@olafgleba.de">og@olafgleba.de</a></li>
+          <li><a href="https://twitter.com/olafgleba">Twitter</a></li>
+          <li><a href="http://github.com/olafgleba/">Github</a></li>
+          <li><a href="http://github.com/olafgleba/paul">Github Paul Source</a></li>
+        </ul>
+
+    </footer><!-- /role[footer] -->
+  </div> <!-- /.page -->
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script>window.jQuery || document.write('libs/vendor/jquery.min.js"><\/script>');</script>
+  <script src="libs/vendor/plugins.min.js"></script>
+  <script src="libs/base.min.js"></script>
+</body>
+</html>
