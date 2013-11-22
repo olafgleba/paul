@@ -32,13 +32,13 @@ Paul follows a *single direction approach*. That means we have **one** main `app
 
 * **All** of your source files lives within the `source/` root folder
 * **Any** edit or add/remove solely takes place within the `source/` root folder only 
-* **Never ever** put anything into the `app/` folder or edit files right there. This will break how Paul works: your files will be overwritten on the very next task execution
+* **Never** put anything into the `app/` folder or edit files right there. This will break how Paul works: your files will be overwritten on the very next task execution
 
 ## Documentation
 
-Actually there is no regular documentation, but all files contains **extensive annotations**. Hint: Dig into the `Gruntfile.js`. The comments in this file will probably give you a rather comprehensive overview how it all works.
+Actually there is no regular documentation, but appropriate files contains extensive annotations. **Hint**: Dig into the `Gruntfile.js`. The comments in this file will probably give you a rather comprehensive overview how it all works.
 
-I also will add a `workflows.md` with some *real life* examples and more configuration details soon.
+I also will add a doc files with some *real life* examples and more configuration details soon.
 
 ## Prepared components/modules
 
