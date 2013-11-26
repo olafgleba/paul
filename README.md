@@ -28,7 +28,7 @@ You're done. Enjoy development...
 
 ## Documentation
 
-On the [Github project page](docs.html) you find some kind of documentation for the enviroment which describes the main parts of *Paul* and reflects some common **workflow examples**.
+On the [Github project page](http://olafgleba.github.io/paul/docs.html) you find some kind of documentation for the enviroment which describes the main parts of *Paul* and reflects some common **workflow examples**.
 
 ## Prepared components/modules
 
