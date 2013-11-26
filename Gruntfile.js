@@ -29,6 +29,8 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     /**
+     * $INC-PACKAGE
+     *
      * Read package.json and make it
      * available with the `pkg` variable
      */
@@ -36,6 +38,8 @@ module.exports = function(grunt) {
 
 
     /**
+     * $INC-LIBRARY
+     *
      * Read bower.json of choosen library and make it
      * available with the `library` variable
      */

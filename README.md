@@ -26,19 +26,9 @@ You must have installed the latest [Node.js](http://nodejs.org/), [Grunt](http:/
 
 You're done. Enjoy development...
 
-## Usage rules
-
-Paul follows a *single direction approach*. That means we have **one** main `app/` output folder for both, development and deployment. So the following rules are essential:
-
-* **All** of your source files lives within the `source/` root folder
-* **Any** edit or add/remove solely takes place within the `source/` root folder only 
-* **Never** put anything into the `app/` folder or edit files right there. This will break how Paul works: your files will be overwritten on the very next task execution
-
 ## Documentation
 
-Actually there is no regular documentation, but appropriate files contains extensive annotations. **Hint**: Dig into the `Gruntfile.js`. The comments in this file will probably give you a rather comprehensive overview how it all works.
-
-I also will add a doc files with some *real life* examples and more configuration details soon.
+On the [Github project page](docs.html) you find some kind of documentation for the enviroment which describes the main parts of *Paul* and reflects some common **workflow examples**.
 
 ## Prepared components/modules
 
