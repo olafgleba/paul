@@ -64,10 +64,10 @@
       <h3>Get Paul</h3>
       <div>
         <h4>Make a choice:</h4>
-        <ul class="inline-list inline-list--btn">
+        <ul class="inline-list inline-list--btn inline-list--btnBig">
           <li><span>$ git clone https://github.com/olafgleba/paul.git</span></li>
           <li>or</li>
-          <li><a href="https://github.com/olafgleba/paul/archive/master.zip">Download latest Zip</a></li>
+          <li><a href="https://github.com/olafgleba/paul/archive/master.zip">Download the ZIP</a></li>
         </ul>
       </div>
 
@@ -83,39 +83,17 @@
           <li>Run <code class="language-bash">$ grunt</code> on the console</li>
         </ol>
         <p><b>You're done</b>. Enjoy development...</p>
-      </div>
 
-      <h3>Usage of Paul</h3>
-      <div>
-        <h4>Rules:</h4>
-        <p>Paul follows a <i>single direction approach</i>. That means we have <b>one</b> main <code class="language-bash">app/</code> output folder for both, development and deployment. So the following rules are essential:</p>
-        <ul class="bullets bullets--text">
-          <li><b>All</b> of your source files lives within the <code class="language-bash">source/</code> root folder.</li>
-          <li><b>Any</b> edit or add/remove solely takes place within the <code class="language-bash">source/</code> root folder <b>only</b></li>
-          <li><b>Never</b> put anything into the <code class="language-bash">app/</code> folder or edit files right there. This will break how Paul works: your files will be overwritten on the very next task execution</li>
-        </ul>
-
-<!--         <p class="notice">NOTICE: <b>Never ever</b> put any of those files into the <code class="language-bash">app/</code> folder or edit them right there. This will break how things works - your files will be overwritten on the very next task execution. <b>Any</b> edit or add/remove of files solely takes place within the <code class="language-bash">source/</code> root folder <b>only</b>!</p> -->
-
-<!--         <h4>Hints:</h4>
-        <ul class="bullets bullets--text">
-          <li>All prepared plugins are installed as a bower component. To find out how to easily add/remove plugins, have a look at the <code class="language-bash">$CONCAT</code> comment block within the <code class="language-bash">Gruntfile.js</code>.</li>
-
-          <li>Most of the folder/file structure within the <code class="language-bash">source/scss/</code> folder just represents my opinionated way of how i organize my SASS files. Altough i recommend to give it a try, you are free to replace it anytime to implement your own approach.</li>
-
-          <li>Don't be confused: To avoid flaky file renaming tasks, the CSS and javascripts files always looks like <code class="language-bash">filename.min.suffix</code>. Regardless if they are actually minified (after deployment) or not (in regular development mode).</li>
-        </ul> -->
+        <p>I added some kind of <a class="btn" href="docs.html"><b>documentation</b></a> for the enviroment which describes the main parts of <i>Paul</i> and reflects some common <b>workflow examples</b>.<p>
       </div>
 
       <h3>Documentation</h3>
       <div>
-        <p>Actually there is no regular documentation, but all files contains extensive annotations. <b>Hint</b>: Dig into the <code class="language-bash">Gruntfile.js</code>. The comments in this file will probably gives you a rather comprehensive overview how <i>Paul</i> works.<p>
-
-        <p>I also will add a <code class="language-bash">workflows.md</code> with some <i>real life</i> examples soon.</p>
+        <p><a class="btn" href="docs.html">The main part of Paul</a><p>
       </div>
 
       <h3>Prepared components/modules</h3>
-      <p>To ensure you always work with the most current component/module version, these files are not included in the project download actually. Installing them is fairly simple: execute both <code class="language-bash">*.command</code> bash scripts that comes with Paul and you're done (see above <a href="#getstarted">Get started with Paul</a>).
+      <p>To ensure you always work with the most current component/module version, these files are not included in the project download actually. But installing them is fairly simple: execute both <code class="language-bash">*.command</code> bash scripts that comes with Paul and you're done (see above <a href="#getstarted">Get started with Paul</a>).
       <div>
         <h4>Bower</h4>
         <ul class="inline-list">
@@ -193,8 +171,6 @@
     </footer><!-- /role[footer] -->
   </div> <!-- /.page -->
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-  <script>window.jQuery || document.write('libs/vendor/jquery.min.js"><\/script>');</script>
   <script src="libs/vendor/plugins.min.js"></script>
   <script src="libs/base.min.js"></script>
 </body>

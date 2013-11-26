@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Documentation | Paul | Frontend development environment</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="Olaf Gleba, <og@olafgleba.de>" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link type="text/plain" rel="author" href="humans.txt">
+
+  <link rel="shortcut icon" href="icons/favicon.ico" type="image/x-icon" />
+
+  <!--[if (gt IE 8) | (IEMobile)]><!-->
+  <link rel="stylesheet" href="css/styles.min.css">
+  <!--<![endif]-->
+
+  <!--[if (lt IE 9) & (!IEMobile)]>
+  <link rel="stylesheet" href="css/dated.min.css">
+  <![endif]-->
+
+  <script src="libs/vendor/modernizr.min.js"></script>
+</head>
+
+<body id="totop" class="index">
+  <div class="page">
+    <header role="banner" class="tophead">
+      <h1>Paul Docs</h1>
+      <nav>
+        <ul class="inline-list">
+          <li><a href="#requirements">Requirements</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#approach">The single direction approach</a></li>
+          <li><a href="#source">The SOURCE folder</a></li>
+          <li><a href="#scss">The SCSS folder</a></li>
+          <li><a href="#scss">The Gruntfile.js</a></li>
+        </ul>
+        <p><b>Common workflows:</b></p>
+        <ul class="inline-list">
+          <li><a href="#addnewprojectsection">Add a new project section</a></li>
+          <li><a href="#switchngprojectsections">Switching between project sections</a></li>
+          <li><a href="#editbowerplugin">Add/remove a Bower plugin</a></li>
+          <li><a href="#editvendorfiles">Add a vendor stylesheet/javascript file</a></li>
+          <li><a href="#changecredits">Change project credits and metadata</a></li>
+          <li><a href="#removejavascriptlibrary">Remove javascript library inclusion</a></li>
+        </ul>
+      </nav>
+    </header> <!-- /role[header] -->
+
+    <div role="main">
+      <h2 id="requirements">Requirements</h2>
+      <div>
+        <ul class="inline-list">
+          <li><a href="http://nodejs.org/">Node.js</a></li>
+          <li><a href="http://gruntjs.com">Grunt</a></li>
+          <li><a href="http://bower.io">Bower</a></li>
+          <li><a href="http://sass-lang.org">SASS</a></li>
+          <li><a href="https://github.com/chriseppstein/sass-globbing">SASS-Globbing Plugin</a></li>
+        </ul>
+        <p>I won't expose how to install these libraries and extensions. Please have a look at the contributors documentation. </p>
+      </div>
+
+      <h2 id="setup">Setup</h2>
+      <div>
+        <p>This steps assumes you have successfully installed the required libraries and extensions (s. above).</p>
+
+        <ol>
+          <li>Clone the git repo <code class="language-bash">$ git clone https://github.com/olafgleba/paul.git</code> or <a class="btn" href="https://github.com/olafgleba/paul/archive/master.zip">download the zip</a> and extract it on your machine.</li>
+          <li>Navigate to the <code class="language-bash">build-node-modules.command</code> file, double-click it. A terminal window opens and installs Paul's node modules dependencies. Do the same with the <code class="language-bash">build-bower-components.command</code> file, which will install the prepared bower plugins (Both currently only executable on OS X).</li>
+          <li>Afterwards run <code class="language-bash">$ grunt</code> on the console now. The webserver and livereload server will start, get through all development tasks and opens a browser window with the index page of the project section<sup>1</sup>.</li>
+        </ol>
+
+        <p>At this point we are set to a <i>project section</i> named <b>example</b> (don't worry, we'll deal with that later).</p>
+
+        <p class="footnote"><sup>1</sup>) If the <code class="language-bash">$ grunt</code> task stops with the warning: <i>Unable to find application named 'Google Chrome Canary'</i>, open the <code class="language-bash">Grundfile.js</code>, go to the comment section <i>$BROWSER</i> and set your prefered browser for development. Restart the grunt task.</p>
+      </div>
+
+      <h2 id="approach">The 'single direction' approach</h2>
+      <div>
+        <p>Paul's workflow is based on a <i>single direction approach</i>. That means we have <b>one</b> main <code class="language-bash">app/</code> output folder for both, development and deployment. The <code class="language-bash">app/</code> folder may <b>never</b> be touched directly. Regardless what grunt task is running,- the content of this folder will change continiously.</p>
+
+        <p>Separation between output (<code class="language-bash">app/</code>) and building (<code class="language-bash">source/</code>) is very handy to let grunt do a lot of cumbersome work for us. It enables variable substitution to automate the inclusion of javascript, css paths, setting project meta data and more.</p>
+
+        <p>So, where do we put the real stuff to work with? Let's dig in the <code class="language-bash">source/</code> folder...</p>
+      </div>
+
+      <h2 id="source">The <code class="language-bash">source/</code> folder</h2>
+      <div>
+        <p>The <code class="language-bash">source/</code> folder contains two main branches: <code class="language-bash">scss/</code> and <code class="language-bash">sections/</code>. While the <code class="language-bash">scss/</code> folder contains the (S)CSS structure for any project section, within the <code class="language-bash">sections/</code> we organize our  <i>project sections</i> (with one folder each).</p>
+
+        <span><b>The source folder:</b></span>
+  <pre class="language-bash"><code>|-- source/
+    |-- scss/
+    |-- sections/</code></pre>
+      </div>
+
+      <h3>Right, but what are <i>project sections</i>?</h3>
+      <div>
+        <p>Consider a client project, which contains several sections for a <i>public website</i> to introduce the company, a <i>admin panel</i> for customer downloads, and a <i>microsite</i> the client wants to have for marketing reasons.</p>
+
+        <p>To get the lightest possible footprint for every section and respect different designs, segmenting these sections is rather useful to avoid loading CSS or/and javascript and other assets that are unused in a particular section.</p>
+
+        <span><b>Possibly project sections:</b></span>
+  <pre data-line="4-6" class="language-bash"><code>|-- source/
+    |-- scss/
+    |-- sections/
+        |-- website/
+        |-- admin/
+        |-- microsite/
+        ...</code></pre>
+
+        <ul>
+          <li>Line <b>4-6</b>: Based on the example scenario above, we have a <i>website</i>, <i>admin</i> and a <i>microsite</i> project section.</li>
+        </ul>
+
+        <p>A project section folder is <b>the only</b> folder that contain editable content! All HTML, images and all other assets must be placed here (except any CSS, s. <a href="#scss">The <code class="language-bash">scss/</code> folder</a>). Paul comes with one <i>example</i> project section. Let's have a look on the folder structure and some particular files.</p>
+
+        <span><b>Expanded "example" project section:</b></span>
+<pre data-line="4,7,11,14,18-20" class="language-bash"><code>|-- source/
+    ...
+    |-- sections/
+        |-- example/
+            |-- assets/  <- fonts, downloads etc.
+            |-- html/
+                -- index.html
+            |-- icons/
+                -- *.icon files / favicon
+            |-- img/
+                |-- source/
+                    -- README.md
+            |-- libs/
+                -- base.js
+                |-- vendor/
+                    -- README.md
+            |-- meta/
+                -- htaccess
+                -- humans.txt
+                -- robots.txt</code></pre>
+
+        <ul>
+          <li>Line <b>4</b>: The project section folder itself.</li>
+          <li>Line <b>7</b>: In the index.html you will notice some <code class="language-bash">@@</code> data. These are placeholders for variables that will substituted through grunt tasks.</li>
+          <li>Line <b>11</b>: All original images must be placed within the <code class="language-bash">img/source</code> folder. This is usefull because on <code class="language-bash">$grunt deploy</code> a new folder named <code class="language-bash">minified/</code> will dynamically added to the structure, which contains the compiled versions of our images.</li>
+          <li>Line <b>14</b>: The <code class="language-bash">base.js</code> is our main javascript file, where we handle calls on document.ready. <i>No plugin code lives here</i>!</li>
+          <li>Line <b>18-20</b>: The <code class="language-bash">meta/</code> folder contains some file templates you might want to use. The <code class="language-bash">htaccess</code> file is a modified copy of the HB5 htaccess file. All files these contains <i>variable declarations</i> which are substituted dynamically.</li>
+        </ul>
+      </div>
+
+      <h2 id="scss">The <code class="language-bash">scss/</code> folder</h2>
+      <div>
+        <p>The <code class="language-bash">scss/</code> folder contains my opinionated (S)CSS structure to build projects. To obtain a identical code base for all project sections, all CSS declaring and compiling is strictly separated from the design of a project section. To keep the focus i won't get into explaining the particular folder and file structure here. We need to add a <code class="language-bash">_[name-of-the-project-section]-configuration.scss</code> configuration file and a analogous subfolder within <code class="language-bash">scss/sections/</code> for every project section at least.</p>
+
+<pre class="language-bash" data-line="4,10,14-20"><code>|-- source/
+    |-- scss/
+        -- _bootstrap.scss
+        -- _example-configuration.scss
+        |-- abstracts/
+            |-- base/
+                -- _examples.scss
+            |-- extensions/
+                -- _ext_example.scss
+        |-- compile/
+            -- dated.scss
+            -- styles.scss
+        |-- sections/
+            |-- example/
+                -- _example.scss
+                |-- queries/
+                    -- _md.scss
+                |-- vendor/
+                    |-- overrides/
+                        -- _overrides.scss
+        |-- utilities/
+            -- _functions.scss
+            -- _mixins.scss</code></pre>
+
+        <ul>
+          <li>Line <b>4, 14-20</b>: A project section (here with the name: <i>example</i>) comprised this files at least.</li>
+          <li>Line <b>10</b>: The <code class="language-bash">compile/</code> folder contains the two stylesheets to compile. They handle with variable substitution and will produce real SCSS templates in the root of the <code class="language-bash">scss/</code> folder which will be the only one's to be compiled to be referenced in you HTML.</li>
+        </ul>
+      </div>
+
+      <h2 id="scss">The <code class="language-bash">Guntfile.js</code> file</h2>
+      <div>
+        <p>Here most of the magic happens. But instead of walk through every single task i encourage you to have a look at the <i>extensive annotions</i> within this file. The comments will probably gives you a rather comprehensive overview how <i>Paul</i> works.</p>
+      </div>
+
+      <h2>Common Workflows:</h2>
+      <div>
+      </div>
+
+      <h3 id="addnewprojectsection">Add a new project section</h3>
+      <div>
+        <ol>
+          <li>If applicable, stop grunt execution</li>
+          <li>Dig into the <code class="language-bash">source/sections</code> folder and add a new project section folder (with a subfolder structure equivalent to the <i>example</i> folder). <b>Hint:</b> Just copy the <i>example</i> folder and rename it. In this case you got all prepared HTML a.s.o. at one go.
+
+  <pre data-line="5" class="language-bash"><code>|-- source/
+    |-- scss/
+    |-- sections/
+        |-- example/
+        |-- [name-of-new-project-section]/
+        ...</code></pre>
+
+          </li>
+          <li>Go to the <code class="language-bash">source/scss</code> folder and:
+            <ul class="bullets">
+              <li>Add a new configuration file (line <b>5</b>) with the same naming scheme</li>
+              <li>Add a new section folder (Line <b>9</b>) containing the same subfolders as the <i>example</i> folder.</li>
+            </ul>
+
+<pre class="language-bash" data-line="5,9"><code>|-- source/
+    |-- scss/
+        ...
+        -- _example-configuration.scss
+        -- _[name-of-new-project-section]-configuration.scss
+        ...
+        |-- sections/
+            |-- example/
+            |-- [name-of-new-project-section]/
+        ...</code></pre>
+
+          </li>
+          <li>Open <code class="language-bash">package.json</code> in your editor</li>
+          <li>Within the <code class="language-bash">activeSection</code> directive replace the value of the <code class="language-bash">name</code> attribute with your new project section name (line <b>4</b>)
+
+<pre class="language-javascript" data-line="4"><code>{
+  ...
+  "activeSection": {
+    "name": "[name-of-new-project-section]",
+    ...
+}</code></pre>
+          </li>
+          <li>Start Paul by enter <code class="language-bash">$ grunt</code> on the console. <b>You're done</b>.</li>
+        </ol>
+
+      </div>
+
+      <h3 id="switchngprojectsections">Switching between project sections</h3>
+      <div>
+        <p>Switching between sections is as simply as changing the name attribute in our <code class="language-bash">package.json</code> file and restarting Grunt.</p>
+
+        <ol>
+          <li>If applicable, stop grunt execution</li>
+          <li>Change the project section name
+<pre class="language-javascript" data-line="4"><code>{
+  ...
+  "activeSection": {
+    "name": "[your-project-section-name]"
+    ...
+}</code></pre>
+          </li>
+          <li>Start Paul by enter <code class="language-bash">$ grunt</code> on the console. <b>You're done</b>.</li>
+        </ol>
+      </div>
+
+      <h3 id="editbowerplugin">Add/remove a Bower plugin</h3>
+      <div>
+        <p>You'll probably want to add/remove plugins to fit your project. After installing the desired plugin with bower (<code class="language-bash">$ bower install &lt;package&gt; --save</code>), just pick up the path to the main plugin file, open the <code class="language-bash">package.json</code> file and append it to the <i>plugins</i> hash (Line <b>9</b>) of the <i>activeSection</i> directive.</p>
+
+        <p>You even don't have to stop/start the grunt task, as the <i>package.json</i> file is recognized by the Grunt <i>watch</i> task on document save. The <code class="language-bash">plugins.js</code> file, which concatenate all plugins automatically, will be rebuild immediately.</p>
+
+        <p>To eliminate a bower plugin from concatenation, simply delete the path reference within the <i>plugins</i> directive within the <code class="language-bash">package.json</code>.</p>
+
+<pre class="language-javascript" data-line="9"><code>{
+  ...
+  "activeSection": {
+    ...
+    },
+    "plugins": [
+      "bower_components/fastclick/lib/fastclick.js",
+      "bower_components/jquery.easing/js/jquery.easing.js",
+      "bower_components/&lt;path&gt;/&lt;to&gt;/&lt;the&gt;/&lt;new&gt;/&lt;plugin&gt;"
+    ]
+    ...
+}</code></pre>
+      </div>
+
+      <h3 id="editvendorfiles">Add a vendor stylesheet/javascript file</h3>
+      <div>
+        <p>Arbitary stylesheets and javascript files are included on project section level. <i>Vendor stylesheets</i> get into the vendor folder within the corresponding section:</p>
+
+<pre class="language-bash" data-line="7"><code>|-- source/
+    |-- scss/
+        ...
+        |-- sections/
+            |-- [name-of-new-project-section]/
+                ...
+                |-- vendor/
+                    -- [your-vendor-stylesheet]
+        ...</code></pre>
+
+        <p>Line <b>7</b>: To make SASS aware of the vendor stylesheet, it's necessary to <b>change the suffix</b> of these files from <code class="language-bash">.css</code> to <code class="language-bash">.scss</code>.</p>
+
+        <p>Just place <i>vendor javascript files</i> in the correspoding folder as well:</p>
+
+<pre class="language-bash" data-line="7"><code>|-- source/
+    |-- sections/
+        |-- [name-of-new-project-section]/
+            ...
+            |-- libs/
+                |-- vendor/
+                    -- [your-vendor-javascript-file]</code></pre>
+
+        <p>Line <b>7</b>: All files placed within the vendor folder <b>will be concatenated</b> to the dynamically created <code class="language-bash">plugins.js</code> file <b>automatically</b>.</p>
+      </div>
+
+      <h3 id="changecredits">Change project credits and metadata</h3>
+      <div>
+        <p>Appropriate files contains dynamically inserted banners with some project credits and other meta information. We can change this on one spot within the <code class="language-bash">package.json</code> file.</p>
+
+        <p>Initially it's filled with Paul's meta data:</p>
+
+<pre class="language-javascript"><code>{
+  "name": "Paul",
+  "description": "Frontend development with Grunt, Sass, Bower and inuit.css",
+  "version": "1.0.0",
+  "homepage": "http://github.com/olafgleba.github.io/paul",
+  "author": {
+    "name": "Olaf Gleba",
+    "email": "og@olafgleba.de"
+  }
+  ...
+}</code></pre>
+
+      </div>
+
+      <h3 id="removejavascriptlibrary">Remove javascript library inclusion</h3>
+      <div>
+        <p>Sometimes there is no need for having a (relative) heavy javascript library such as jQuery. So, whenever it's not necessary, we should prohibit the inclusion.</p>
+
+          <ol>
+            <li>Open the <code class="language-bash">Gruntfile.js</code> and go to the <code class="language-bash">$INC-LIBRARY</code> comment block.</li>
+            <li><p>Change the value of the <i>library</i> variable from:</p>
+<pre class="language-javascript"><code>library: grunt.file.readJSON('bower_components/jquery/bower.json')</code></pre>
+<p>to</p>
+<pre class="language-javascript"><code>library: ""</code></pre>
+            </li>
+            <li>Delete all references within you HTML files</li>
+          </ol>
+      </div>
+
+      <div>
+        <p><a class="btn" href="index.html">Back to index page</a></p>
+      </div>
+
+    </div><!-- /role[main] -->
+
+    <footer role="contentinfo">
+
+        <h2>Me</h2>
+        <ul class="inline-list">
+          <li><a href="http://olafgleba.de/">Olaf Gleba</a></li>
+          <li><a href="mailto:og@olafgleba.de">og@olafgleba.de</a></li>
+          <li><a href="https://twitter.com/olafgleba">Twitter</a></li>
+          <li><a href="http://github.com/olafgleba/">Github</a></li>
+          <li><a href="http://github.com/olafgleba/paul">Github Paul Source</a></li>
+        </ul>
+
+    </footer><!-- /role[footer] -->
+  </div> <!-- /.page -->
+
+
+  <script src="libs/vendor/plugins.min.js"></script>
+  <script src="libs/base.min.js"></script>
+</body>
+</html>
