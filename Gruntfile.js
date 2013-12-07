@@ -409,7 +409,7 @@ module.exports = function(grunt) {
     sass: {
       options: {
         style: 'expanded',
-        noCache: false, /* [1] */
+        noCache: true, /* [1] */
         require: 'sass-globbing'
       },
       dev: {
