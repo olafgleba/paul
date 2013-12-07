@@ -6,7 +6,7 @@
 
 The enviroment allows you to assemble libraries easily, starts a webserver and a livereload server to watch out for changes and run appropriate tasks like concatenation, minification, file copy, text pattern substitution and more. It provides easy maintainment of infinite project sections and comes with some templates (HTML, meta, htaccess) to start with.
 
-Although it is highly configurable, the main attempt is **workflow simplification** and **staying focused** on your real work. Simply run `grunt` (or `grunt deploy`) on the console,  dig into coding your site and forget about the magic that happens behind.
+Although it is highly configurable, the main attempt is **workflow simplification** and **staying focused** on your real work. Simply run `$ grunt` (e.g. `$ grunt deploy`) on the console,  dig into coding your site and forget about the magic that happens behind.
 
 ## Requirements
 
@@ -16,7 +16,7 @@ You must have installed the latest [Node.js](http://nodejs.org/), [Grunt](http:/
 
 ### Make a choice:
 
-* Clone the git repo: `git clone https://github.com/olafgleba/paul.git`
+* Clone the git repo: `$ git clone https://github.com/olafgleba/paul.git`
 * [Download the zip](https://github.com/olafgleba/paul/archive/master.zip), extract it and have a go.
 
 ## Getting started
