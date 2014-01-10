@@ -22,6 +22,8 @@
   <link rel="stylesheet" href="css/dated.min.css">
   <![endif]-->
 
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,700">
+
   <script src="libs/vendor/modernizr.min.js"></script>
 </head>
 
@@ -38,7 +40,7 @@
           <li><a href="#scss">The SCSS folder</a></li>
           <li><a href="#gruntfile">The Gruntfile.js</a></li>
         </ul>
-        <p><b>Common workflows:</b></p>
+        <span><b>Common workflows:</b></span>
         <ul class="inline-list">
           <li><a href="#addnewprojectsection">Add a new project section</a></li>
           <li><a href="#switchngprojectsections">Switching between project sections</a></li>
@@ -89,7 +91,7 @@
 
       <h2 id="source">The <code class="language-bash">source/</code> folder</h2>
       <div>
-        <p>The <code class="language-bash">source/</code> folder contains two main branches: <code class="language-bash">scss/</code> and <code class="language-bash">sections/</code>. While the <code class="language-bash">scss/</code> folder contains the (S)CSS structure for any project section, within the <code class="language-bash">sections/</code> we organize our  <i>project sections</i> (with one folder each).</p>
+        <p>The <code class="language-bash">source/</code> folder contains two main branches: <code class="language-bash">scss/</code> and <code class="language-bash">sections/</code>. While the <code class="language-bash">scss/</code> folder contains the (S)CSS structure for any project section, within the <code class="language-bash">sections/</code> we organize our  <i>project sections</i> itself (with one folder each).</p>
 
         <span><b>The source folder:</b></span>
   <pre class="language-bash"><code>|-- source/
@@ -116,7 +118,7 @@
           <li>Line <b>4-6</b>: Based on the example scenario above, we have a <i>website</i>, <i>admin</i> and a <i>microsite</i> project section.</li>
         </ul>
 
-        <p>A project section folder is <b>the only</b> folder that contain editable content! All HTML, images and all other assets must be placed here (except any CSS, s. <a href="#scss">The <code class="language-bash">scss/</code> folder</a>). Paul comes with one <i>example</i> project section. Let's have a look on the folder structure and some particular files.</p>
+        <p>A project section folder is <b>the only</b> folder that contain editable content! All HTML, images and all other assets must be placed here (except any CSS, s. <a href="#scss">The scss/ folder</a>). Paul comes with one <i>example</i> project section. Let's have a look on the folder structure and some particular files.</p>
 
         <span><b>Expanded "example" project section:</b></span>
 <pre data-line="4,7,11,14,18-20" class="language-bash"><code>|-- source/
@@ -143,7 +145,7 @@
         <ul>
           <li>Line <b>4</b>: The project section folder itself.</li>
           <li>Line <b>7</b>: In the index.html you will notice some <code class="language-bash">@@</code> data. These are placeholders for variables that will substituted through grunt tasks.</li>
-          <li>Line <b>11</b>: All original images must be placed within the <code class="language-bash">img/source</code> folder. This is usefull because on <code class="language-bash">$grunt deploy</code> a new folder named <code class="language-bash">minified/</code> will dynamically added to the structure, which contains the compiled versions of our images.</li>
+          <li>Line <b>11</b>: All original images must be placed within the <code class="language-bash">img/source</code> folder. This is usefull because on <code class="language-bash">$ grunt deploy</code> a new folder named <code class="language-bash">minified/</code> will dynamically added to the structure, which contains the compiled versions of our images.</li>
           <li>Line <b>14</b>: The <code class="language-bash">base.js</code> is our main javascript file, where we handle calls on document.ready. <i>No plugin code lives here</i>!</li>
           <li>Line <b>18-20</b>: The <code class="language-bash">meta/</code> folder contains some file templates you might want to use. The <code class="language-bash">htaccess</code> file is a modified copy of the HB5 htaccess file. All files these contains <i>variable declarations</i> which are substituted dynamically.</li>
         </ul>
