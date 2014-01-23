@@ -444,19 +444,21 @@ module.exports = function(grunt) {
      * Grunt task scope: default, deploy
      */
     modernizr: {
-      devFile:    'bower_components/modernizr/modernizr.js',
-      outputFile: '<%= project.js.app.vendor %>/modernizr.min.js',
-      extra: {
-        load: false,
-        shiv: true,
-        cssclasses: true,
-        mq: true
-      },
-      uglify: true,
-      files: [
-        '<%= project.js.source.path %>/**/*.js',
-        '<%= scss.root %>/**/*.scss'
-      ]
+      dist: {
+        devFile:    'bower_components/modernizr/modernizr.js',
+        outputFile: '<%= project.js.app.vendor %>/modernizr.min.js',
+        extra: {
+          load: false,
+          shiv: true,
+          cssclasses: true,
+          mq: true
+        },
+        uglify: true,
+        files: [
+          ['<%= project.js.source.path %>/{,*/}*.js'],
+          ['<%= scss.root %>/{,*/}*.scss']
+        ]
+      }
     },
 
 
