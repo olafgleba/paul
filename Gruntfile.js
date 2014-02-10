@@ -241,11 +241,19 @@ module.exports = function(grunt) {
      * Open prefered Browser on defined port
      *
      * Grunt task scope: default
+     *
+     * 1. Optional (absolute) path to a editor project file
+     * (e.g. `/path/to/paul.sublime-project`, if you establish
+     * a project file while working with the Sublime Text Editor).
+     * By default it opens a `paul` folder window.
      */
     open : {
       dev: {
         path: 'http://127.0.0.1:<%= connect.options.port %>',
         app: '<%= project.browser %>'
+      },
+      editor: {
+        path: '.' /* [1] */
       }
     },
 
@@ -260,11 +268,11 @@ module.exports = function(grunt) {
     watch: {
       compile: {
         files: '<%= scss.root %>/compile/*.scss',
-        tasks: ['replace:scss', 'clean:css', 'sass:dev']
+        tasks: ['replace:scss', 'sass:dev']
       },
       sass: {
         files: '<%= scss.root %>/**/*.scss',
-        tasks: ['clean:css', 'sass:dev']
+        tasks: ['sass:dev']
       },
       plugins: {
         files: ['<%= project.js.source.vendor %>/**/*', 'package.json'],
@@ -276,15 +284,15 @@ module.exports = function(grunt) {
       },
       images: {
         files: '<%= project.src %>/img/source/**/*',
-        tasks: ['clean:images', 'copy:imagesSourceToApp']
+        tasks: ['copy:imagesSourceToApp']
       },
       assets: {
         files: '<%= project.src %>/assets/**/*',
-        tasks: ['clean:assets', 'copy:assetsSourceToApp']
+        tasks: ['copy:assetsSourceToApp']
       },
       icons: {
         files: '<%= project.src %>/icons/**/*',
-        tasks: ['clean:icons', 'copy:iconsSourceToApp']
+        tasks: ['copy:iconsSourceToApp']
       },
       html: {
         files: ['<%= project.src %>/html/**/*'],
@@ -301,6 +309,7 @@ module.exports = function(grunt) {
         files: [
           '<%= project.app %>/css/**/*.css',
           '<%= project.app %>/libs/**/*.js',
+          '<%= project.src %>/scss/**/*',
           '<%= project.src %>/img/source/**/*',
           '<%= project.src %>/assets/**/*',
           '<%= project.src %>/icons/**/*',
@@ -454,10 +463,12 @@ module.exports = function(grunt) {
           mq: true
         },
         uglify: true,
-        files: [
-          ['<%= project.js.source.path %>/{,*/}*.js'],
-          ['<%= scss.root %>/{,*/}*.scss']
-        ]
+        files: {
+          src: [
+            '<%= project.js.source.path %>/{,*/}*.js',
+            '<%= scss.root %>/{,*/}*.scss'
+          ]
+        }
       }
     },
 
