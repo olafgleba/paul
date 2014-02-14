@@ -740,11 +740,11 @@ module.exports = function(grunt) {
 
 
   /**
-   * $MATCHDEP
+   * $LOAD
    *
    * Dynamically load npm tasks
    */
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+  require('load-grunt-tasks')(grunt);
 
 
   /**

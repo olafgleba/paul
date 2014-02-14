@@ -36,12 +36,12 @@
     "connect-livereload": "~0.3.0",
     "grunt-contrib-connect": "~0.5.0",
     "grunt-contrib-sass": "~0.5.1",
-    "matchdep": "~0.3.0",
     "grunt-open": "~0.2.2",
     "grunt-autoprefixer": "~0.4.2",
     "grunt-csso": "~0.5.0",
     "grunt-replace": "~0.5.1",
     "grunt-contrib-copy": "~0.4.1",
-    "grunt-modernizr": "~0.5.1"
+    "grunt-modernizr": "~0.5.1",
+    "load-grunt-tasks": "~0.3.0"
   }
 }
