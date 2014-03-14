@@ -283,16 +283,20 @@ module.exports = function(grunt) {
         tasks: ['concat:base']
       },
       images: {
-        files: '<%= project.src %>/img/source/**/*',
-        tasks: ['copy:imagesSourceToApp']
+        files: '<%= project.src %>/img/source/{,*/}*.{jpg,jpeg,gif,png}',
+        tasks: ['clean:images', 'copy:imagesSourceToApp']
+      },
+      svg: {
+        files: '<%= project.src %>/img/source/{,*/}*.svg',
+        tasks: ['clean:svg', 'copy:imagesSVGSourceToApp']
       },
       assets: {
         files: '<%= project.src %>/assets/**/*',
-        tasks: ['copy:assetsSourceToApp']
+        tasks: ['clean:assets', 'copy:assetsSourceToApp']
       },
       icons: {
         files: '<%= project.src %>/icons/**/*',
-        tasks: ['copy:iconsSourceToApp']
+        tasks: ['clean:icons', 'copy:iconsSourceToApp']
       },
       html: {
         files: ['<%= project.src %>/html/**/*'],
@@ -307,9 +311,8 @@ module.exports = function(grunt) {
           livereload: true
         },
         files: [
-          '<%= project.app %>/css/**/*.css',
-          '<%= project.app %>/libs/**/*.js',
-          '<%= project.src %>/scss/**/*',
+          '<%= project.app %>/css/**/*',
+          '<%= project.app %>/libs/**/*',
           '<%= project.src %>/img/source/**/*',
           '<%= project.src %>/assets/**/*',
           '<%= project.src %>/icons/**/*',
@@ -376,7 +379,10 @@ module.exports = function(grunt) {
         src: ['<%= project.src %>/img/minified/']
       },
       images: {
-        src: ['<%= project.app %>/img/**/*']
+        src: ['<%= project.app %>/img/{,*/}*.{jpg,jpeg,gif,png}']
+      },
+      svg: {
+        src: ['<%= project.app %>/img/{,*/}*.svg']
       },
       assets: {
         src: ['<%= project.app %>/assets/**/*']
@@ -490,7 +496,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: '<%= project.src %>/img/source/',
-            src: ['**/*.{png,jpg,jpeg,gif,svg}'],
+            src: ['**/*.{png,jpg,jpeg,gif}'],
             dest: '<%= project.src %>/img/minified/'
           }
         ]
@@ -528,7 +534,17 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: '<%= project.src %>/img/source/',
-            src: ['**', '!README.md'],
+            src: ['**', '!README.md', '!*.svg'],
+            dest: '<%= project.app %>/img/'
+          }
+        ]
+      },
+      imagesSVGSourceToApp: {
+        files: [
+          {
+            expand: true,
+            cwd: '<%= project.src %>/img/source/',
+            src: ['*.svg', '!README.md'],
             dest: '<%= project.app %>/img/'
           }
         ]
@@ -757,22 +773,19 @@ module.exports = function(grunt) {
    */
   grunt.registerTask('default', [
     'jshint',
-    'modernizr',
+    'clean:app',
     'concat',
-    'clean:images',
-    'clean:minified',
-    'clean:assets',
-    'clean:icons',
-    'clean:css',
-    'clean:meta',
-    'clean:html',
     'replace:html',
     'replace:meta',
     'replace:scss',
     'copy:library',
+    'copy:iconsSourceToApp',
     'copy:imagesSourceToApp',
+    'copy:imagesSVGSourceToApp',
     'copy:assetsSourceToApp',
+    'modernizr',
     'sass:dev',
+    'autoprefixer',
     'connect',
     'open',
     'watch'
@@ -792,16 +805,17 @@ module.exports = function(grunt) {
   grunt.registerTask('deploy', [
     'clean:app',
     'clean:minified',
+    'concat',
+    'uglify:deploy',
     'replace:html',
     'replace:meta',
     'replace:scss',
     'copy:library',
-    'concat',
-    'uglify:deploy',
     'imagemin',
     'copy:imagesMinifiedToApp',
+    'copy:imagesSVGSourceToApp',
     'copy:assetsSourceToApp',
-    'copy:iconsSourceToApp',
+    'modernizr',
     'sass:deploy',
     'autoprefixer',
     'csso'
