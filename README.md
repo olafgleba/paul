@@ -60,7 +60,7 @@ Requires installation of Grunt version >= 0.4.x
 * [grunt-open](https://github.com/jsoverson/grunt-open)
 * [grunt-autoprefixer](https://github.com/nDmitry/grunt-autoprefixer)
 * [grunt-csso](https://github.com/t32k/grunt-csso)
-* [matchdep](https://github.com/tkellen/node-matchdep)
+* [load-grunt-tasks](https://github.com/sindresorhus/load-grunt-tasks)
 * [connect-livereload](https://github.com/intesso/connect-livereload)
 
 ## Support
