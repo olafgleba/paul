@@ -272,7 +272,7 @@ module.exports = function(grunt) {
       },
       sass: {
         files: '<%= scss.root %>/**/*.scss',
-        tasks: ['sass:dev']
+        tasks: ['sass:dev', 'autoprefixer', 'modernizr']
       },
       plugins: {
         files: ['<%= project.js.source.vendor %>/**/*', 'package.json'],
@@ -471,8 +471,8 @@ module.exports = function(grunt) {
         uglify: true,
         files: {
           src: [
-            '<%= project.js.source.path %>/{,*/}*.js',
-            '<%= scss.root %>/{,*/}*.scss'
+            '<%= project.js.source.path %>/**/*.js',
+            '<%= scss.root %>/**/*.scss'
           ]
         }
       }
