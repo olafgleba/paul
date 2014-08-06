@@ -1,6 +1,6 @@
 /**
  * Paul Gruntfile
- * @version 1.0.0
+ * @version 1.0.1
  * @author Olaf Gleba
  */
 
@@ -22,6 +22,8 @@ var mountFolder = function mountFolder(connect, pointer) {
  * Grunt module
  */
 module.exports = function(grunt) {
+
+  var svgo = require('imagemin-svgo');
 
   /**
    * Grunt config
@@ -113,7 +115,7 @@ module.exports = function(grunt) {
        * Set your prefered Browser
        * Could be: `Firefox`, `Google Chrome` also
        */
-      browser: 'Google Chrome Canary',
+      browser: 'Google Chrome',
 
       /**
        * $BANNER
@@ -272,7 +274,7 @@ module.exports = function(grunt) {
       },
       sass: {
         files: '<%= scss.root %>/**/*.scss',
-        tasks: ['sass:dev', 'autoprefixer', 'modernizr']
+        tasks: ['sass:dev', 'modernizr']
       },
       plugins: {
         files: ['<%= project.js.source.vendor %>/**/*', 'package.json'],
@@ -283,12 +285,8 @@ module.exports = function(grunt) {
         tasks: ['concat:base']
       },
       images: {
-        files: '<%= project.src %>/img/source/{,*/}*.{jpg,jpeg,gif,png}',
+        files: '<%= project.src %>/img/source/{,*/}*.{jpg,jpeg,gif,png,svg}',
         tasks: ['clean:images', 'copy:imagesSourceToApp']
-      },
-      svg: {
-        files: '<%= project.src %>/img/source/{,*/}*.svg',
-        tasks: ['clean:svg', 'copy:imagesSVGSourceToApp']
       },
       assets: {
         files: '<%= project.src %>/assets/**/*',
@@ -379,10 +377,7 @@ module.exports = function(grunt) {
         src: ['<%= project.src %>/img/minified/']
       },
       images: {
-        src: ['<%= project.app %>/img/{,*/}*.{jpg,jpeg,gif,png}']
-      },
-      svg: {
-        src: ['<%= project.app %>/img/{,*/}*.svg']
+        src: ['<%= project.app %>/img/**/*.{jpg,jpeg,gif,png,svg}']
       },
       assets: {
         src: ['<%= project.app %>/assets/**/*']
@@ -469,6 +464,7 @@ module.exports = function(grunt) {
           mq: true
         },
         uglify: true,
+        tests: ['csstransforms', 'csstransitions'],
         files: {
           src: [
             '<%= project.js.source.path %>/**/*.js',
@@ -485,18 +481,23 @@ module.exports = function(grunt) {
      * Grab all source images, minify them
      * and shove it to the appropriate app folder
      *
+     * Depends on imagemin-svgo` installed
+     *
      * Grunt task scope: deploy
      */
+
+
     imagemin: {
       deploy: {
         options: {
-          optimizationLevel: 7
+          optimizationLevel: 7,
+          use: [svgo()]
         },
         files: [
           {
             expand: true,
             cwd: '<%= project.src %>/img/source/',
-            src: ['**/*.{png,jpg,jpeg,gif}'],
+            src: ['**/*.{png,jpg,jpeg,gif,svg}'],
             dest: '<%= project.src %>/img/minified/'
           }
         ]
@@ -534,17 +535,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: '<%= project.src %>/img/source/',
-            src: ['**', '!README.md', '!*.svg'],
-            dest: '<%= project.app %>/img/'
-          }
-        ]
-      },
-      imagesSVGSourceToApp: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= project.src %>/img/source/',
-            src: ['*.svg', '!README.md'],
+            src: ['**', '!README.md'],
             dest: '<%= project.app %>/img/'
           }
         ]
@@ -781,11 +772,9 @@ module.exports = function(grunt) {
     'copy:library',
     'copy:iconsSourceToApp',
     'copy:imagesSourceToApp',
-    'copy:imagesSVGSourceToApp',
     'copy:assetsSourceToApp',
     'modernizr',
     'sass:dev',
-    'autoprefixer',
     'connect',
     'open',
     'watch'
@@ -813,7 +802,6 @@ module.exports = function(grunt) {
     'copy:library',
     'imagemin',
     'copy:imagesMinifiedToApp',
-    'copy:imagesSVGSourceToApp',
     'copy:assetsSourceToApp',
     'modernizr',
     'sass:deploy',
