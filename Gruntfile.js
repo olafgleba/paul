@@ -1,6 +1,6 @@
 /**
  * Paul Gruntfile
- * @version 1.0.1
+ * @version 1.0.2
  * @author Olaf Gleba
  */
 
@@ -23,7 +23,21 @@ var mountFolder = function mountFolder(connect, pointer) {
  */
 module.exports = function(grunt) {
 
+  /**
+   * $LOAD
+   *
+   * Dynamically load npm tasks
+   */
+  require('jit-grunt')(grunt);
+
+
+  /**
+   * Include plugins.
+   *
+   * `imagemin-svgo`: Used as option within the `imagemin`task.
+   */
   var svgo = require('imagemin-svgo');
+
 
   /**
    * Grunt config
@@ -115,7 +129,7 @@ module.exports = function(grunt) {
        * Set your prefered Browser
        * Could be: `Firefox`, `Google Chrome` also
        */
-      browser: 'Google Chrome',
+      browser: 'Firefox',
 
       /**
        * $BANNER
@@ -285,7 +299,7 @@ module.exports = function(grunt) {
         tasks: ['concat:base']
       },
       images: {
-        files: '<%= project.src %>/img/source/{,*/}*.{jpg,jpeg,gif,png,svg}',
+        files: '<%= project.src %>/img/source/**/*.{jpg,jpeg,gif,png,svg}',
         tasks: ['clean:images', 'copy:imagesSourceToApp']
       },
       assets: {
@@ -419,13 +433,10 @@ module.exports = function(grunt) {
     sass: {
       options: {
         style: 'expanded',
-        noCache: true, /* [1] */
+        noCache: false, /* [1] */
         require: 'sass-globbing'
       },
       dev: {
-        options: {
-          sourcemap: true
-        },
         files : {
           '<%= project.app %>/css/<%= scss.comp.base %>': '<%= scss.root %>/<%= scss.src.base %>',
           '<%= project.app %>/css/<%= scss.comp.fallback %>': '<%= scss.root %>/<%= scss.src.fallback %>'
@@ -433,7 +444,7 @@ module.exports = function(grunt) {
       },
       deploy : {
         options: {
-          sourcemap: false,
+          sourcemap: 'none',
           noCache: true
         },
         files : {
@@ -746,20 +757,13 @@ module.exports = function(grunt) {
   }); // eol grunt.initConfig
 
 
-  /**
-   * $LOAD
-   *
-   * Dynamically load npm tasks
-   */
-  require('load-grunt-tasks')(grunt);
-
 
   /**
    * $DEFAULT
    *
    * Run this task by enter `$ grunt` on the
    * console to start development. This starts
-   * the localwebser, open a browser and prepares
+   * the local webserver, open a browser and prepares
    * the application folder right away.
    */
   grunt.registerTask('default', [

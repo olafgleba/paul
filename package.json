@@ -25,24 +25,26 @@
     "type": "MIT",
     "url": "https://github.com/olafgleba/paul/blob/master/LICENSE-MIT"
   },
-  "dependencies": {},
+  "dependencies": {
+    "imagemin-svgo": "^2.x.x"
+  },
   "devDependencies": {
-    "grunt": "~0.4.0",
-    "grunt-contrib-imagemin": "~0.3.0",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-uglify": "~0.2.7",
-    "grunt-contrib-jshint": "~0.7.2",
-    "grunt-contrib-clean": "~0.5.0",
-    "connect-livereload": "~0.3.0",
-    "grunt-contrib-connect": "~0.5.0",
-    "grunt-contrib-sass": "~0.5.1",
-    "grunt-open": "~0.2.2",
-    "grunt-autoprefixer": "~0.4.2",
-    "grunt-csso": "~0.5.0",
-    "grunt-replace": "~0.5.1",
-    "grunt-contrib-copy": "~0.4.1",
-    "grunt-modernizr": "~0.5.1",
-    "load-grunt-tasks": "~0.3.0"
+    "connect-livereload": "^0.x.x",
+    "grunt": "^0.4.x",
+    "grunt-autoprefixer": "^1.x.x",
+    "grunt-contrib-clean": "^0.x.x",
+    "grunt-contrib-concat": "^0.x.x",
+    "grunt-contrib-connect": "^0.x.x",
+    "grunt-contrib-copy": "^0.x.x",
+    "grunt-contrib-imagemin": "^0.x.x",
+    "grunt-contrib-jshint": "^0.x.x",
+    "grunt-contrib-sass": "^0.x.x",
+    "grunt-contrib-uglify": "^0.x.x",
+    "grunt-contrib-watch": "^0.x.x",
+    "grunt-csso": "^0.x.x",
+    "grunt-modernizr": "^0.x.x",
+    "grunt-open": "^0.x.x",
+    "grunt-replace": "^0.x.x",
+    "jit-grunt": "^0.x.x"
   }
 }
