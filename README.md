@@ -37,7 +37,7 @@ To ensure you always work with the most current component/module version, these 
 ### Bower
 
 * [FastClick](https://github.com/ftlabs/fastclick)
-* [inuit.css](http://inuitcss.com/)
+* [inuitcss](http://inuitcss.com/)
 * [Modernizr](https://github.com/Modernizr/Modernizr)
 * [jQuery](https://github.com/components/jquery)
 * [jQuery Plugin Easing](http://gsgd.co.uk/sandbox/jquery/easing/)
@@ -60,7 +60,7 @@ Requires installation of Grunt version >= 0.4.x
 * [grunt-open](https://github.com/jsoverson/grunt-open)
 * [grunt-autoprefixer](https://github.com/nDmitry/grunt-autoprefixer)
 * [grunt-csso](https://github.com/t32k/grunt-csso)
-* [load-grunt-tasks](https://github.com/sindresorhus/load-grunt-tasks)
+* [jit-grunt](https://github.com/shootaroo/jit-grunt)
 * [connect-livereload](https://github.com/intesso/connect-livereload)
 
 ## Support
